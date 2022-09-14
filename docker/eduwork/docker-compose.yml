@@ -1,0 +1,13 @@
+version: '3'
+services:
+  db:
+    container_name: eduwork_db
+    image: mysql:8.0.25
+    command: --default-authentication-plugin=mysql_native_password
+    env_file:
+      - db.env
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./init:/home
+    ports:
+      - 3306:3306
