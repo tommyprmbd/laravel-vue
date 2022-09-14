@@ -1,14 +1,8 @@
-# ignore everything
-/*
+# ignore these files and folders
+/docker/eduwork/*.env
+/docker/data/mysql/*
+/docker/init/*
 
-# except these files
-!*.gitignore
-!*.md
+# but keep these
 !/docker/data/mysql/.gitignore
 !/docker/init/.gitignore
-
-# except these folders
-!/docker
-
-# but, keep ignore these subfolder
-/docker/eduwork/*.env
