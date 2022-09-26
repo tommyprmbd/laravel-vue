@@ -1,9 +1,0 @@
-UPDATE `tb_obat` SET `stok` = '10' WHERE `id_obat` = '1'; 
-
-UPDATE `tb_obat` SET `harga` = '13.000' WHERE `nama` = 'Aciclovir 400 mg 10 Tablet'; 
-
-UPDATE `tb_obat` SET `nama`='Dexteem Plus 10 Tablet',`harga`='2.500',`stok`='5' WHERE `id_obat` = '9'; 
-
-DELETE FROM `tb_obat` WHERE `nama` = 'Movfor (Molnupiravir) 200mg 10 kapsul'; 
-
-DELETE FROM `tb_obat` WHERE `id_obat` = '6'; 
