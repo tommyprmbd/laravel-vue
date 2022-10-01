@@ -1,0 +1,8 @@
+
+-------   UPDATE  ----------
+UPDATE cabang SET no_telepon = "021-6563-3130" WHERE cabang. id_cabang = 3;
+memperbaharui no telepon dari tabel cabang, dimana id_cabang ke 3 yang di update.
+
+-------   DELETE  ----------
+DELETE FROM cabang WHERE id_cabang = 11;
+menghapus salah satu cabang dari tabel cabang yang dimana id_cabang nya = 11
