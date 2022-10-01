@@ -1,0 +1,15 @@
+
+
+1. SELECT nama_karyawan FROM karyawan ORDER BY nama_karyawan DESC;
+   menampilkan nama_karyawan dari abjad terakhir hingga pertama (z-a)
+
+2. SELECT nama_karyawan FROM karyawan ORDER BY nama_karyawan ASC;
+   menampilkan nama_karyawan dari abjad pertama hingga terakhir (a-z)
+
+   jika dalam case angka maka konsepnya sama.
+
+3. SELECT * FROM barang WHERE nama_barang LIKE "pa%";
+   menampilkan semua data di tabel barang yang dimana nama_barang seperti yg memiliki kata "pa"    (panadol,paracetamol dll)
+
+4. SELECT id_barang, SUM(jumlah_order) as total FROM orders_details GROUP BY id_barang;
+   menjumlahkan jumlah_order berdasarkan id_barang dari tabel orders_details
