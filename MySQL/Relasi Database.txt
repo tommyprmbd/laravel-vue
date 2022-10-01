@@ -1,0 +1,9 @@
+"one to one"	 
+dimana satu orders memiliki satu pembayaran
+
+"one to many"
+dimana satu cabang memiliki banyak karyawan
+
+"many to many"
+dimana satu orders bisa memiliki banyak barang
+dimana satu barang bisa di pesan banyak orders
