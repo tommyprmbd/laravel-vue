@@ -13,12 +13,12 @@
 </head>
 <body>
     <form>
-            <table border="2" cellspacing="1">
-                <tr>
-                    <th>NO</th>
-                    <th>NAMA</th>
-                    <th>KELAS</th>
-                </tr>
+        <table border="2" cellspacing="1">
+            <tr>
+                <th>NO</th>
+                <th>NAMA</th>
+                <th>KELAS</th>
+            </tr>
     
             <?php  for ($no = 1, $i=1, $a=10; $i<=10, $a>=1; $i++, $a--) { ?>
         
@@ -28,9 +28,8 @@
                 <td><?php echo "Kelas ke $a"; ?></td>
             </tr>
 
-            <?php $no++; } ?>
-    
-            </table>
-        </form>
+            <?php $no++; } ?>    
+        </table>
+    </form>
 </body>
 </html>
