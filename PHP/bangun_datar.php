@@ -63,7 +63,7 @@ echo "Rumus  : L = (panjang x lebar) <br>";
 echo "Panjang = 3 cm <br>";
 echo "Lebar = 3 cm <br>";
 $total = $panjang * $lebar;
-echo "Hitung : (8 x 16) <br>";
+echo "Hitung : (3 x 3) <br>";
 echo "Hasil = $total cm²";
 
 echo "<br>";
