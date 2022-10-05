@@ -1,0 +1,38 @@
+10+1 macam query (Select, Where)
+
+SELECT
+
+1. SELECT * FROM `obat`
+untuk menampilkan seluruh data yang ada di tabel obat
+
+2. SELECT nama_obat, stok FROM `obat`;
+untuk menampilkan seluruh data pada nama obat dan stok yang ada di tabel obat
+
+WHERE
+
+3. SELECT * FROM `obat` WHERE stok = 30;
+untuk menampilkan seluruh data yang stoknya 30 di tabel obat
+
+4. SELECT * FROM `obat` WHERE stok > 30;
+Untuk menampilkan seluruh data yang stoknya lebih dari 30 di tabel obat
+
+5. SELECT * FROM `obat` WHERE stok < 30;
+Untuk menampilkan seluruh data yang stoknya kurang dari 30 di tabel obat
+
+6. SELECT * FROM `obat` WHERE stok >= 30;
+Untuk menampilkan seluruh data yang stoknya lebih dari 30 dan sama dengan 30 di tabel obat
+
+7. SELECT * FROM `obat` WHERE stok <= 30;
+Untuk menampilkan seluruh data yang stoknya kurang dari 30 dan sama dengan 30 di tabel obat
+
+8. SELECT * FROM `obat` WHERE stok <> 30;
+Untuk menampilkan seluruh data yang stoknya tidak bernilai 30 di tabel obat
+
+9. SELECT * FROM `obat` WHERE stok BETWEEN 20 AND 40;
+Untuk menampilkan seluruh data yang stoknya diantara 20 sampai 40 di tabel obat
+
+10. SELECT * FROM `detail_pembuat` WHERE domisili LIKE "b%";
+Untuk menampilkan seluruh data yang domisilinya memiliki huruf depan "b" di tabel detail pembuat
+
+11. SELECT * FROM `detail_pembuat` WHERE domisili IN ("Bandung","Jakarta");
+Untuk menampilkan seluruh data yang domisilinya berada di Bandung dan Jakarta di tabel detail pembuat
