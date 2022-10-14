@@ -1,4 +1,4 @@
-10+1 macam query (Select, Where)
+10+1 macam query
 
 SELECT
 
