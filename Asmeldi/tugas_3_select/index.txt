@@ -1,0 +1,43 @@
+penjelasan select
+disini saya akan menjelaskan beberapa ekseskusi nampilan data pakai perintah SELECT
+
+saya ingi mengeksekusi beberapa table yaitu
+
+- table detail_pembuat
+
+    sql : SELECT * FROM `detail_pembuat`
+
+    artinya: 
+    1.  jika saya ketik * sebelum FROM maka saya meminta untuk menampilkan semua 
+        field yang ada di table detail_pembuat dan
+    2.  setelah FROM saya tulis nama table tujuan nya untuk memilih table mana yang ingin
+        di ekseskusi.
+    3.  jika saya tidak mau menampilkan semua field dalam table detail_pembuat maka tanda * saya 
+        ganti dengan nama field yang ingin saya tampilkan misalkan id , contoh perintah nya :
+        SELECT id FROM `detail_pembuat`.
+    4. mengenai WHERE atau kondisi , jika saya mau menampilkan tahun nya diatas 2005 maka 
+       perintah sql nya:
+       SELECT * FROM `detail_pembuat` 
+       WHERE tahun > 2005
+    5. selain menampilkan diatas tahun 2005 saya juga ingin menampilkan tahun 2005 kebawah
+       dan juga ingin menampilkan tahun 2005 maka perintah sql nya
+       SELECT * FROM `detail_pembuat` 
+       WHERE tahun >= 2005
+    6. selain menampilkan perintah di atas saya juga ingin menampilkan dibawah tahun 2012 supaya data yang
+       muncul dibawah tahun 2012 maka perintah sql nya
+       SELECT * FROM `detail_pembuat` 
+       WHERE tahun < 20012
+
+- table obat
+    7.  pada table obat saya ingin menampilkan stock obat yang lebih dari 25 maka perintah sql nya
+         SELECT * FROM `obat` 
+         WHERE stok > 25
+    8.  saya juga ingin menampilkan nama obat yang ada di table obat
+         SELECT nama_obat FROM `obat` 
+    9.  saya ingin menampilkan tahun kadaluarsa yang sama dengan tahun 2024
+        SELECT * FROM `obat` 
+        WHERE tahun_kadaluarsa = 2024
+    10 . selain query diatas saya juga ingin menampilkan tahun tahun kadaluarsa tahun 2026 
+        kebawah dan juga ingin memunculkan tahun 2026  maka perintah sql nya
+       SELECT * FROM `obat` 
+       WHERE tahun_kadaluarsa <= 2026
