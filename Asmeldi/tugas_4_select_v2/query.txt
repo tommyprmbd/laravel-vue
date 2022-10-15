@@ -47,3 +47,60 @@ WHERE `id` = '1'
 
 DELETE FROM `obat`
 WHERE `id` = '1'
+
+
+// right Join and left Join
+
+note 
+JOIN 
+    data yang ditampilkan obat.id_pembuat = pembuat.id_pembuat sama 2 punya hubungan/relasi
+
+RIGHT JOIN 
+    example = obat.id_pembuat = pembuat.id_pembuat
+                   kiri              kanan
+
+    jika lebih mengacu table sebelah kanan, jika table sebelah kanan punya relasi atau pun tidak
+    punya relasi ke table sebelah kiri data -data  dari table sebelah kanan akan tetap ditampilkan semua
+    
+
+LEFT JOIN
+    example = obat.id_pembuat = pembuat.id_pembuat
+                   kiri              kanan
+
+    jika lebih mengacu table sebelah kiri, jika table sebelah kiri punya relasi atau pun tidak
+    punya relasi ke table sebelah kanan data - data  dari table sebelah kiri akan tetap ditampilkan semua
+if (id == ambigous){
+    SELECT obat.id ,nama_obat, pembuat.id_pembuat,  nama_perushaan, alamat, izin_perusahaan, no_telp
+    FROM `obat`
+    join pembuat ON obat.id_pembuat = pembuat.id_pembuat 
+    ORDER by id_pembuat ASC
+
+}else{
+    SELECT id, nama_obat
+    FROM `obat`
+    join pembuat ON obat.id_pembuat= pembuat.id
+    ORDER by id_pembuat ASC
+}
+
+SELECT obat.id ,nama_obat, pembuat.id_pembuat,  nama_perushaan
+FROM `obat`
+LEFT JOIN pembuat ON obat.id_pembuat = pembuat.id_pembuat 
+ORDER by id_pembuat ASC
+
+SELECT obat.id ,nama_obat, pembuat.id_pembuat,  nama_perushaan
+FROM `obat`
+RIGHT JOIN pembuat ON obat.id_pembuat = pembuat.id_pembuat 
+ORDER by id_pembuat ASC
+
+
+SELECT obat.id ,nama_obat, pembuat.id_pembuat,  nama_perushaan
+FROM `obat`
+JOIN pembuat ON obat.id_pembuat = pembuat.id_pembuat 
+WHERE alamat LIKE '%Jakarta%' And no_telp is NOT Null
+ORDER by id_pembuat ASC
+
+SELECT obat.id ,nama_obat, pembuat.id_pembuat,  nama_perushaan
+FROM `obat`
+JOIN pembuat ON obat.id_pembuat = pembuat.id_pembuat 
+WHERE nama_obat LIKE '%Nyeri Sendi%' And no_telp is NOT Null
+ORDER by id_pembuat ASC
