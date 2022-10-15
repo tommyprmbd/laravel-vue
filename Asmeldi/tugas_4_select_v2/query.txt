@@ -1,0 +1,38 @@
+
+SELECT * FROM `obat` ORDER BY tahun_kadaluarsa DESC 
+    memunculkan data besar ke kecil
+
+SELECT * FROM `obat` WHERE tahun_kadaluarsa >=2022  ORDER BY tahun_kadaluarsa ASC 
+    memunculkan data  kecil ke besar
+
+SELECT * FROM `obat`  ORDER BY tahun_kadaluarsa ASC 
+
+
+SELECT * FROM `obat` WHERE tahun_kadaluarsa LIKE '%2022%' 
+    memunculkan data  tahun_kadaluarsa yang ada tahun 2022
+
+SELECT * FROM `obat` WHERE nama_obat LIKE '%amoxilin%'
+    memunculkan data  tahun_kadaluarsa yang ada tahun 2022
+
+SELECT nama_obat, SUM(stok) as total FROM `obat`GROUP BY nama_obat
+
+SELECT id_pembuat, SUM(stok) as total FROM `obat`GROUP BY id_pembuat
+
+SELECT tahun_kadaluarsa, 
+SUM(stok) as total 
+FROM `obat`
+WHERE tahun_kadaluarsa >=2022
+GROUP BY tahun_kadaluarsa
+ORDER BY tahun_kadaluarsa DESC
+
+SELECT tahun_kadaluarsa, 
+SUM(stok) as total 
+FROM `obat`
+GROUP BY tahun_kadaluarsa
+ORDER BY tahun_kadaluarsa ASC
+
+SELECT tahun_kadaluarsa, 
+SUM(stok) as total 
+FROM `obat`
+GROUP BY tahun_kadaluarsa
+ORDER BY tahun_kadaluarsa ASC
