@@ -36,3 +36,14 @@ SUM(stok) as total
 FROM `obat`
 GROUP BY tahun_kadaluarsa
 ORDER BY tahun_kadaluarsa ASC
+
+
+//update query in mysql
+
+UPDATE `obat` SET nama_obat = 'Asma'
+WHERE `id` = '1'
+
+//delete query in mysql
+
+DELETE FROM `obat`
+WHERE `id` = '1'

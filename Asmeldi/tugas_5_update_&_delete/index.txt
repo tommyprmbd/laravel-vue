@@ -1,0 +1,36 @@
+//update query in mysql
+
+UPDATE `obat` SET nama_obat = 'Asma'
+WHERE `id` = '1'
+
+UPDATE `pembeli` SET name = 'RIO Syahputra'
+WHERE `id` = '3'
+
+UPDATE `pembuat` SET no_telp = '081312345678'
+WHERE `id` = '9'
+
+UPDATE `transanksi` SET tanggal_berdiri_perusahaan = '2013-7-26'
+WHERE `id` = '8'
+
+UPDATE `transanksi` SET no_transanksi = '898956332'
+WHERE `id` = '2'
+
+
+
+
+//delete query in mysql
+
+DELETE FROM `obat`
+WHERE `id` = '1'
+
+DELETE FROM `transanksi`
+WHERE `id` = '2'
+
+DELETE FROM `pembuat`
+WHERE `id` = '4'
+
+DELETE FROM `pembeli`
+WHERE `id` = '3'
+
+DELETE FROM `detail_pembuat`
+WHERE `id` = '4'
