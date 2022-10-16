@@ -1,0 +1,16 @@
+MySQL (Delete & Update)
+
+1. UPDATE `pembeli` SET `nama`='Max' WHERE id = 1;
+Untuk mengubah data nama di tabel pembeli yang memiliki id 1.
+
+2. UPDATE `pembeli` SET `alamat`='Jalan Sriwijaya No. 22' WHERE id = 2;
+Untuk mengubah data alamat di tabel pembeli yang memiliki id 2.
+
+3. UPDATE `pembeli` SET `no_telp`='082367672000' WHERE id = 3;
+Untuk mengubah data nomor telepon di tabel pembeli yang memiliki id 3.
+
+4. UPDATE `pembeli` SET `nama`='Rick' WHERE id = 3;
+Untuk mengubah data nama di tabel pembeli yang memiliki id 3.
+
+5. DELETE FROM `pembeli` WHERE id = 11;
+Untuk menghapus data di tabel pembeli yang memiliki id 11.
