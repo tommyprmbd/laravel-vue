@@ -16,14 +16,10 @@ $data = json_decode($array, True);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Array</title>
     <style>
-        *{
-            margin: 0;
-            padding: 0;
-        }
         .judul{
             width: 100%;
             background-color: orange;
-            padding: 15px;
+            padding: 15px 0 15px 0;
             text-align: center;
         }
         .container{
@@ -35,6 +31,10 @@ $data = json_decode($array, True);
         .tr:nth-child(odd){
             background-color: #ddd;
         }
+        .th{
+            background-color: black;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -42,7 +42,7 @@ $data = json_decode($array, True);
     <div class="container">
     <table border="1" cellpadding="15" cellspacing="0" >
         <thead>
-            <tr>
+            <tr class="th">
                 <th>No.</th>
                 <th>Nama</th>
                 <th>Tanggal Lahir</th>
