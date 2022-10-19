@@ -1,0 +1,132 @@
+1. tampilkan kode produk, nama produk, harga, dan suplier ? 
+   
+    SELECT produk.kode_produk, produk.nama_produk, produk.harga, supplier.nama
+    FROM produk
+    JOIN supplier ON produk.supplier_id = supllier.id;
+
+2. tampilkan nama pelanggan,jenis kelamin, telepon, alamat dengan kondisi yang alamatnya ada di bandung ? 
+   jawaban : 
+   
+    SELECT pelanggan.nama, pelanggan.jenis_kelamin, pelanggan.telepon, pelanggan.alamat
+    FROM pelanggan
+    WHERE alamat LIKE '%Bandung%';
+
+4.  tampilkan tanggal penjualan, keterangan dan nama pelanggan ? 
+   jawaban : 
+   
+    SELECT penjualan.tanggal, penjualan.keterangan, pelanggan.nama
+    FROM penjualan
+    JOIN pelanggan ON penjualan.pelanggan_id = pelanggan.id;
+
+4. tampilkan tanggal penjualan keterangan 
+   dan nama pelanggan dengan kondisi yang melakukan transanksi pada bulan september ? 
+   jawaban : 
+
+    SELECT penjualan.tanggal, penjualan.keterangan, pelanggan.nama
+    FROM penjualan
+    JOIN pelanggan ON penjualan.pelanggan_id = pelanggan.id
+    WHERE MONTH(penjualan.tanggal) = '09'
+    AND YEAR(penjualan.tanngal) = '2018';
+
+
+5. tampilkan id penjualan, tanggal penjualan, produk id, kuantitas dan nama produk? 
+   jawaban : 
+
+    SELECT penjualan.id as penjualan_id, penjualan.tanggal, produk.id as produk_id, penjualan_detail.kuantitas, produk.nama_produk
+    FROM penjualan
+    JOIN penjualan_detail ON penjualan.id = penjualan_detail.penjualan_id
+    JOIN produk ON produk.id = penjualan_detail.produk_id;
+
+
+6. tampilkan id penjualan, tanggal penjualan, produk id, kuantitas dan nama produk dengan kondisi yang mealkukan transanksi di bulan agustus? 
+   jawaban : 
+
+    SELECT penjualan.id as penjualan_id, penjualan.tanggal, produk.id as produk_id, penjualan_detail.kuantitas, produk.nama_produk
+    FROM penjualan
+    JOIN penjualan_detail ON penjualan.id = penjualan_detail.penjualan_id
+    JOIN produk ON produk.id = penjualan_detail.produk_id
+    WHERE MONTH(penjualan.tanggal) = '08'
+    AND YEAR(penjualan.tanngal) = '2018';
+
+7. tampilkan tanggal penjualan, keterangan, nama pelanggan, total, dan metode pembayaran ? 
+   jawaban : 
+
+    SELECT  penjualan.tanggal, penjualan.keterangan,  pelanggan.nama_pelanggan, penjualan.total, pembayaran.metode
+    FROM penjualan
+    JOIN pelanggan ON pelanggan.id = penjualan.peanggan_id
+    JOIN pembayaran ON pembayaran.penjualan_id = penjualan.id;
+
+8. tampilkan tanggal penjualan, keterangan, nama pelanggan, total, dan metode pembayaran dengan kondisi tanggal bayarnya di bulan september ? 
+   jawaban : 
+
+    SELECT  penjualan.tanggal, penjualan.keterangan,  pelanggan.nama_pelanggan, penjualan.total, pembayaran.metode
+    FROM penjualan
+    JOIN pelanggan ON pelanggan.id = penjualan.peanggan_id
+    JOIN pembayaran ON pembayaran.penjualan_id = penjualan.id
+    WHERE MONTH(penjualan.tanggal) = '09'
+    AND YEAR(penjualan.tanngal) = '2018';
+
+9. tampilkan metode pembayaran dan hitung total group by dari metode ? 
+   jawaban : 
+
+    SELECT metode, SUM(total) as total
+    FROM pembayaran
+    GROUP BY metode;
+
+
+10. tampilkan tanggal bayar dan total pada table pembayaran yang dikelompokkan berdasarkan tanggal bayarnya? 
+   jawaban : 
+
+    SELECT  penjualan.tanggal, SUM(penjualan.total) as total,  
+    FROM penjualan
+    GROUP BY penjualan.tanggal;
+
+11. tampilkan data penjualan yang belum melakukan pembayaran? 
+   jawaban : 
+
+    SELECT  *
+    FROM penjualan
+    JOIN pembayaran ON penjualan.id = pembayaran.penjualan_id
+    WHERE pembayaran.tanggal_bayar is NULL;
+
+
+12. tampilkan pelanggan yang belum pernah melakukan transanksi? 
+   jawaban : 
+
+    SELECT  penjualan.tanggal, penjualan.keterangan,  pelanggan.nama_pelanggan, penjualan.total, pembayaran.metode
+    FROM penjualan
+    JOIN pelanggan ON pelanggan.id = penjualan.peanggan_id
+    JOIN pembayaran ON pembayaran.penjualan_id = penjualan.id
+    WHERE MONTH(penjualan.tanggal) = '09'
+    AND YEAR(penjualan.tanngal) = '2018';
+
+13. tampilkan pelanggan yang pernah melakukan transanksi? 
+   jawaban : 
+
+    SELECT  penjualan.tanggal, penjualan.keterangan,  pelanggan.nama_pelanggan, penjualan.total, pembayaran.metode
+    FROM penjualan
+    JOIN pelanggan ON pelanggan.id = penjualan.peanggan_id
+    JOIN pembayaran ON pembayaran.penjualan_id = penjualan.id
+    WHERE MONTH(penjualan.tanggal) = '09'
+    AND YEAR(penjualan.tanngal) = '2018';
+
+13. tampilkan data penjualan yang melakukan pembayaran di bulan agustus? 
+   jawaban : 
+
+    SELECT  penjualan.tanggal, penjualan.keterangan,  pelanggan.nama_pelanggan, penjualan.total, pembayaran.metode
+    FROM penjualan
+    JOIN pelanggan ON pelanggan.id = penjualan.peanggan_id
+    JOIN pembayaran ON pembayaran.penjualan_id = penjualan.id
+    WHERE MONTH(penjualan.tanggal) = '09'
+    AND YEAR(penjualan.tanngal) = '2018';
+
+
+14. tampilkan pelanggan yang melakukan transanksi  dimana produk tersebut adalah supplier? 
+   jawaban : 
+
+    SELECT  penjualan.tanggal, penjualan.keterangan,  pelanggan.nama_pelanggan, penjualan.total, pembayaran.metode
+    FROM penjualan
+    JOIN pelanggan ON pelanggan.id = penjualan.peanggan_id
+    JOIN pembayaran ON pembayaran.penjualan_id = penjualan.id
+    WHERE MONTH(penjualan.tanggal) = '09'
+    AND YEAR(penjualan.tanngal) = '2018';
