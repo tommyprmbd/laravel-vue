@@ -53,3 +53,5 @@ echo "Tinggi = $tt <br>";
 echo "Luas Trapesium <br>";
 echo "(($at + $b) * $tt)/2 = $lt";
 echo "<hr>";
+
+?>
