@@ -1,0 +1,72 @@
+looping For
+
+<?php 
+    for ($i=0 ; $i < 10 ; $i++ ){
+        echo "ini loopingan ke $i<br>";
+    }
+    for ($i=10 ; $i > 10 ; $i-- ){
+        echo "ini loopingan ke $i<br>";
+    }
+?>
+
+
+looping While
+
+perulangan yang bisa digunakan jika belum jelas perulanganya
+
+<?php 
+
+    $ulang1 = 0;
+    $ulang2 = 20;
+
+    while($ulang1 < 10){
+        echo "ini loopingan ke $ulang1<br>";
+        $ulang1++;
+    }
+    while($ulang2 > 0){
+        echo "ini loopingan ke $ulang2<br>";
+        $ulang2--;
+    }
+?>
+
+looping do While
+
+perulangan yang bisa digunakan jika belum jelas perulanganya
+
+<?php 
+
+    $ulang1 = 0;
+    $ulang2 = 20;
+
+    do{
+        echo "ini loopingan ke $ulang1<br>";
+        $ulang1++;
+    }while($ulang1 < 10){
+        
+    }
+    do{
+        echo "ini loopingan ke $ulang2<br>";
+        $ulang2--;
+    }while($ulang2 > 0){
+        
+    }
+?>
+
+looping Foreach sama dengan looping for namun digunakan untuk mencetak array
+
+<?php 
+    $dataKelas = [
+        "kelas 1",
+        "kelas 2",
+        "kelas 3",
+        "kelas 4",
+        "kelas 5"
+    ];
+
+    echo "<h5>nama kelas</h5>";
+    echo "<ul>";
+    Foreach($dataKelas as $dk){
+        echo "<ul>$dk</ul>";
+    }
+    echo "</ul>";
+?>
