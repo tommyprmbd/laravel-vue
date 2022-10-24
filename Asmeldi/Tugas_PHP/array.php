@@ -25,7 +25,7 @@
 
     <nav class="navbar navbar-light bg-warning">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="position: relative; left: 50px;">Navbar</a>
+            <a class="navbar-brand" href="#" style="position: relative; left: 50px;">Daftar Nilai</a>
         </div>
     </nav>
 
@@ -45,7 +45,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $no = 1; foreach ($data as $d) {
+                    <?php $no = 1;
+                    foreach ($data as $d) {
 
                         // make logic for column score(nilai)
                         if ($d['nilai'] > 85) {
