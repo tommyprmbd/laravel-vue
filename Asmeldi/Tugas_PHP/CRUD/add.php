@@ -1,103 +1,117 @@
 <html>
+
 <head>
 	<title>Add Buku</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 </head>
 
 <?php
-	include_once("connect.php");
-    $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbit");
-    $pengarang = mysqli_query($mysqli, "SELECT * FROM pengarang");
-    $katalog = mysqli_query($mysqli, "SELECT * FROM katalog");
+include_once("connect.php");
+$penerbit = mysqli_query($mysqli, "SELECT * FROM penerbit");
+$pengarang = mysqli_query($mysqli, "SELECT * FROM pengarang");
+$katalog = mysqli_query($mysqli, "SELECT * FROM katalog");
 ?>
- 
+
 <body>
 	<a href="index.php">Go to Home</a>
-	<br/><br/>
- 
-	<form action="add.php" method="post" name="form1">
-		<table width="25%" border="0">
-			<tr> 
-				<td>ISBN</td>
-				<td><input type="text" name="isbn"></td>
-			</tr>
-			<tr> 
-				<td>Judul</td>
-				<td><input type="text" name="judul"></td>
-			</tr>
-			<tr> 
-				<td>Tahun</td>
-				<td><input type="text" name="tahun"></td>
-			</tr>
-			<tr> 
-				<td>Penerbit</td>
-				<td>
-					<select name="id_penerbit">
-						<?php 
-						    while($penerbit_data = mysqli_fetch_array($penerbit)) {         
-						    	echo "<option value='".$penerbit_data['id_penerbit']."'>".$penerbit_data['nama_penerbit']."</option>";
-						    }
-						?>
-					</select>
-				</td>
-			</tr>
-			<tr> 
-				<td>Pengarang</td>
-				<td>
-					<select name="id_pengarang">
-						<?php 
-						    while($pengarang_data = mysqli_fetch_array($pengarang)) {         
-						    	echo "<option value='".$pengarang_data['id_pengarang']."'>".$pengarang_data['nama_pengarang']."</option>";
-						    }
-						?>
-					</select>
-				</td>
-			</tr>
-			<tr> 
-				<td>Katalog</td>
-				<td>
-					<select name="id_katalog">
-						<?php 
-						    while($katalog_data = mysqli_fetch_array($katalog)) {         
-						    	echo "<option value='".$katalog_data['id_katalog']."'>".$katalog_data['nama']."</option>";
-						    }
-						?>
-					</select>
-				</td>
-			</tr>
-			<tr> 
-				<td>Qty Stok</td>
-				<td><input type="text" name="qty_stok"></td>
-			</tr>
-			<tr> 
-				<td>Harga Pinjam</td>
-				<td><input type="text" name="harga_pinjam"></td>
-			</tr>
-			<tr> 
-				<td></td>
-				<td><input type="submit" name="Submit" value="Add"></td>
-			</tr>
-		</table>
-	</form>
-	
-	<?php
-	 
-		// Check If form submitted, insert form data into users table.
-		if(isset($_POST['Submit'])) {
-			$isbn = $_POST['isbn'];
-			$judul = $_POST['judul'];
-			$tahun = $_POST['tahun'];
-			$id_penerbit = $_POST['id_penerbit'];
-			$id_pengarang = $_POST['id_pengarang'];
-			$id_katalog = $_POST['id_katalog'];
-			$qty_stok = $_POST['qty_stok'];
-			$harga_pinjam = $_POST['harga_pinjam'];
-			
-			include_once("connect.php");
+	<br /><br />
 
-			$result = mysqli_query($mysqli, "INSERT INTO `buku` (`isbn`, `judul`, `tahun`, `id_penerbit`, `id_pengarang`, `id_katalog`, `qty_stok`, `harga_pinjam`) VALUES ('$isbn', '$judul', '$tahun', '$id_penerbit', '$id_pengarang', '$id_katalog', '$qty_stok', '$harga_pinjam');");
-			
-			header("Location:index.php");
-		}
+	<div class="container">
+		<div class="row">
+			<form action="add.php" method="post" name="form1">
+				<div class="mb-3 col-lg-2">
+					<label for="Isbn" class="form-label">ISBN</label>
+					<input type="text" class="form-control" name="isbn" id="isbn">
+				</div>
+				<div class="mb-3 col-lg-6">
+					<label for="judul" class="form-label">Judul</label>
+					<input type="text" class="form-control" name="judul" id="judul">
+				</div>
+				<div class="mb-3 col-lg-6">
+					<label for="tahun" class="form-label">Tahun</label>
+					<input type="text" class="form-control" name="tahun" id="tahun">
+				</div>
+				<div class="mb-3 col-lg-6">
+					<label for="penerbit" class="form-label">Penerbit</label>
+					<select class="form-select" aria-label="Default select example" name="id_penerbit" id="id_penerbit">
+						<?php
+						while ($penerbit_data = mysqli_fetch_array($penerbit)) {
+							echo "<option value='" . $penerbit_data['id_penerbit'] . "'>" . $penerbit_data['nama_penerbit'] . "</option>";
+						}
+						?>
+					</select>
+				</div>
+				<div class="mb-3 col-lg-6">
+					<label for="pegarang" class="form-label">Pengarang</label>
+					<select class="form-select" aria-label="Default select example" name="id_pengarang" id="id_pengarang">
+						<?php
+						while ($pengarang_data = mysqli_fetch_array($pengarang)) {
+							echo "<option value='" . $pengarang_data['id_pengarang'] . "'>" . $pengarang_data['nama_pengarang'] . "</option>";
+						}
+						?>
+					</select>
+				</div>
+				<div class="mb-3 col-lg-6">
+					<label for="katalog" class="form-label">Katalog</label>
+					<select class="form-select" aria-label="Default select example" name="id_katalog" id="id_katalog">
+						<?php
+						while ($katalog_data = mysqli_fetch_array($katalog)) {
+							echo "<option value='" . $katalog_data['id_katalog'] . "'>" . $katalog_data['nama'] . "</option>";
+						}
+						?>
+					</select>
+				</div>
+				<div class="mb-3 col-lg-6">
+					<label for="qty_stok" class="form-label">Qty Stok</label>
+					<input type="text" class="form-control" name="qty_stok" id="qty_stok">
+				</div>
+				<div class="mb-3 col-lg-6">
+					<label for="harga_pinjam" class="form-label">Harga Pinjam</label>
+					<input type="text" class="form-control" name="harga_pinjam" id="harga_pinjam">
+				</div>
+				<input type="submit" name="Submit" value="Add">
+			</form>
+		</div>
+	</div>
+
+	<?php
+
+	// Check If form submitted, insert form data into users table.
+	if (isset($_POST['Submit'])) {
+		$isbn = $_POST['isbn'];
+		$judul = $_POST['judul'];
+		$tahun = $_POST['tahun'];
+		$id_penerbit = $_POST['id_penerbit'];
+		$id_pengarang = $_POST['id_pengarang'];
+		$id_katalog = $_POST['id_katalog'];
+		$qty_stok = $_POST['qty_stok'];
+		$harga_pinjam = $_POST['harga_pinjam'];
+
+		include_once("connect.php");
+
+		$result = mysqli_query($mysqli, "INSERT INTO `buku` (`isbn`, `judul`, `tahun`, `id_penerbit`, `id_pengarang`, `id_katalog`, `qty_stok`, `harga_pinjam`) VALUES ('$isbn', '$judul', '$tahun', '$id_penerbit', '$id_pengarang', '$id_katalog', '$qty_stok', '$harga_pinjam');");
+
+		header("Location:index.php");
+	}
 	?>
+
+
+	<!-- Optional JavaScript; choose one of the two! -->
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+	<!-- Option 2: Separate Popper and Bootstrap JS -->
+	<!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
 </body>
+
 </html>
