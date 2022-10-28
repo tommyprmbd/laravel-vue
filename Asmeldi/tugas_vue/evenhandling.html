@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app" v-if="status == 'A'">
+        <button @click="count++">Add 1</button>
+        <p>Count is: {{ count }}</p>
+        <br>
+        <br>
+        <hr>
+        <!-- `greet` is the name of the method defined above -->
+        <button @click="greet">Greet</button>
+        <br>
+        <br>
+        <hr>
+        <button @click="say('hello')">Say hello</button>
+        <button @click="say('bye')">Say bye</button>
+        <br>
+        <br>
+        <hr>
+        <!-- using $event special variable -->
+        <button  @click="warn('Form cannot be submitted yet.', $event)">
+            Submit
+        </button>
+        
+        <!-- using inline arrow function -->
+        <button @click="(event) => warn('Form cannot be submitted yet.', event)">
+            Submit
+        </button>
+        <br>
+        <br>
+        <hr>
+       
+    </div>
+
+    <script type="module">
+        import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
+        createApp({
+            data() {
+                return {
+                    count: 0,
+                    status: 'A',
+                    name: 'Vue.js'
+                }
+            },
+            methods: {
+                greet(event) {
+                    // `this` inside methods points to the current active instance
+                    alert(`Hello ${this.name}!`)
+                    // `event` is the native DOM event
+                    if (event) {
+                        alert(event.target.tagName)
+                    }
+                },
+                say(message) {
+                    alert(message)
+                },
+                warn(message, event) {
+                    // now we have access to the native event
+                    if (event) {
+                        event.preventDefault()
+                    }
+                    alert(message)
+                }
+            }
+        }).mount('#app')
+    </script>
+
+
+</body>
+
+</html>

@@ -1,61 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <div id="app" v-if="status === 'A'">
-        <br>
-        <br>
-        {{ message }}
-        <br>
-        <br>
-        <li  v-for="murid in siswa">
-            Nama:  {{ murid.nama }} <br>
-            Kelas: {{ murid.kelas }} <br>
-            Jurusan: {{ murid.jurusan }} <br>
-            <hr>
-        </li>
-    </div>
+ <div id="app" v-if="status == 'A'">
+    <br>
+    <br>
+    {{ message }}
+    <br>
+    <br>
+    <li v-for="murid in siswa">
+        Nama: {{ murid.nama }} <br>
+        Kelas: {{ murid.kelas }} <br>
+        Jurusan: {{ murid.jurusan }} <br>
+        <hr>
+    </li>,
     
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</div>
 
+<script type="module">
+    import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
 
-    <script>
-    const { createApp } = Vue
-
-        createApp({
-            data() {
-                return {
-                    siswa: [
-                        {                         
-                            nama: 'budi',
-                            kelas: 'XII-A',
-                            jurusan: 'RPL' 
-                        }, 
-                        {                             
-                            nama: 'andi',
-                            kelas: 'XII-B',
-                            jurusan: 'TKJ' 
-                        },
-                        {
-                            nama: 'caca',
-                            kelas: 'XII-A',
-                            jurusan: 'RPL'
-                        },
-                        {
-                            nama: 'Asmeldi',
-                            kelas: 'XII-A',
-                            jurusan: 'TKJ'
-                        }
-                    ],
-                    message: 'Hello mass , ini tugas vue saya mengenai basic component vue.js!'
-                }
+    createApp({
+        data() {
+            return {
+                message: 'Hello mass , ini tugas vue saya mengenai basic component vue.js!',
+                status: 'A',
+                siswa: [
+                    {
+                        nama: 'budi',
+                        kelas: 'XII-A',
+                        jurusan: 'RPL'
+                    },
+                    {
+                        nama: 'andi',
+                        kelas: 'XII-B',
+                        jurusan: 'TKJ'
+                    },
+                    {
+                        nama: 'caca',
+                        kelas: 'XII-A',
+                        jurusan: 'RPL'
+                    },
+                    {
+                        nama: 'Asmeldi',
+                        kelas: 'XII-A',
+                        jurusan: 'TKJ'
+                    }
+                ]
             }
-        }).mount('#app')
-    </script>
+        }
+    }).mount('#app')
+</script>
+
+
 </body>
+
 </html>
