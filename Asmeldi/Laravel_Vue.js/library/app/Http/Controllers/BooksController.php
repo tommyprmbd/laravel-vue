@@ -14,6 +14,12 @@ class BooksController extends Controller
      */
     public function index()
     {
+        // $allBooks = books::with(['publisher', 'author', 'catalog'])->get();
+        $allBooks = books::with(['publisher'])->get();
+        // $allBooks = books::with(['author'])->get();
+        // $allBooks = books::with(['catalog'])->get();
+
+        return $allBooks;
         return view('Admin.Book.index');
     }
 

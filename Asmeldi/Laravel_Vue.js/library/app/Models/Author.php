@@ -15,4 +15,9 @@ class Author extends Model
         'phone_number',
         'adress',
     ];
+
+    public function books()
+    {
+        return $this->hasMany('App\Models\books', 'author_id');
+    }
 }
