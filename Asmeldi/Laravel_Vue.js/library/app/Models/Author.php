@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Author extends Model
 {
     use HasFactory;
+    protected $table = 'authors';
+    protected $fillable = [
+        'name',
+        'email',
+        'phone_number',
+        'adress',
+    ];
 }
