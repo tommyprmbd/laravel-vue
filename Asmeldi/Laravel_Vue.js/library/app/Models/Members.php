@@ -14,4 +14,5 @@ class Members extends Model
     {
         return $this->hasOne('App\Models\User', 'member_id');
     }
+   
 }

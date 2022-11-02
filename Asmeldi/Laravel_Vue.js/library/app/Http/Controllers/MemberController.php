@@ -14,9 +14,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $member = Members::with('user')->get();
+        // $member = Members::with('user')->get();
 
-        return $member;
+        // return $member;
         return view('Admin.Member.index');
     }
 
