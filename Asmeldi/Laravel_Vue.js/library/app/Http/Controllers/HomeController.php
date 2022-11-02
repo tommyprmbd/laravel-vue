@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\books;
 use Illuminate\Support\Facades\DB;
 use App\Models\Members;
+use App\Models\Catalog;
+
 use App\Models\transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -95,13 +98,14 @@ class HomeController extends Controller
             ->where('transaction_details.qty', '>', '1')
             ->get();
 
-        // //no13
-        // $data13 = Members::select('members.id', 'members.name', 'members.phone_number', 'members.adress', 'members.gender',  'transactions.date_start', 'transactions.date_end', 'transaction_details.qty', 'books.title', 'books.price as harga_pinjam')
-        //     ->join('transactions', 'transactions.member_id', '=', 'members.id')
-        //     ->join('transaction_details', 'transactions.id', '=', 'transaction_details.transaction_id')
-        //     ->join('books', 'transaction_details.book_id', '=', 'books.id')
-        //     ->get();
-        // //no14
+        //no13
+        $count = DB::raw('transaction_details.qty * books.price as total_price');
+        $data13 = Members::select('members.id', 'members.name', 'members.phone_number', 'members.adress', 'members.gender',  'transactions.date_start', 'transactions.date_end', 'transaction_details.qty as qty_trans', 'books.id as id_book', 'books.title', 'books.price as harga_pinjam', $count)
+            ->join('transactions', 'transactions.member_id', '=', 'members.id')
+            ->join('transaction_details', 'transactions.id', '=', 'transaction_details.transaction_id')
+            ->join('books', 'transaction_details.book_id', '=', 'books.id')
+            ->get();
+        //no14
         $data14 = Members::select('members.id', 'members.name', 'members.phone_number', 'members.adress', 'members.gender',  'transactions.date_start', 'transactions.date_end', 'transaction_details.qty', 'books.title',  'catalogs.name as name_penerbit', 'authors.name as name_pengarang', 'catalogs.name as name_catalog')
             ->join('transactions', 'transactions.member_id', '=', 'members.id')
             ->join('transaction_details', 'transactions.id', '=', 'transaction_details.transaction_id')
@@ -109,9 +113,16 @@ class HomeController extends Controller
             ->join('catalogs', 'books.catalog_id', '=', 'catalogs.id')
             ->join('authors', 'books.author_id', '=', 'authors.id')
             ->get();
+        //no15
+        $data15 = books::select('catalogs.id as id_catalog', 'catalogs.name as Name_catalog', 'books.title as judul')
+            ->join('catalogs', 'catalogs.id', '=', 'books.catalog_id')
+            ->get();
+        //no16
+        $data16 = books::select('books.*')
+            ->leftJoin('publishers', 'books.publisher_id', '=', 'publishers.id')
+            ->get();
 
-            
-        return $data14;
+        return $data16;
         return view('home');
     }
 }
