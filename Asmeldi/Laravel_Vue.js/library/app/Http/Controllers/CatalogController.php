@@ -27,7 +27,8 @@ class CatalogController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('Admin.Catalog.create');
     }
 
     /**
@@ -38,7 +39,19 @@ class CatalogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $this->validate($request, [
+            'name' => ['required', 'min:8', 'max:30'],
+        ]);
+
+        // cara pertama
+        // $catalog = new Catalog;
+        // $catalog->name = $request->name;
+        // $catalog->save();
+
+        //cara kedua
+        Catalog::create($request->all());
+
+        return redirect('catalogs');
     }
 
     /**
@@ -60,7 +73,7 @@ class CatalogController extends Controller
      */
     public function edit(Catalog $catalog)
     {
-        //
+        return view('Admin.Catalog.edit', compact('catalog'));
     }
 
     /**
@@ -72,7 +85,13 @@ class CatalogController extends Controller
      */
     public function update(Request $request, Catalog $catalog)
     {
-        //
+        $validate = $this->validate($request, [
+            'name' => ['required', 'min:8', 'max:30'],
+        ]);
+
+        $catalog->update($request->all());
+
+        return redirect('catalogs');
     }
 
     /**
@@ -83,6 +102,7 @@ class CatalogController extends Controller
      */
     public function destroy(Catalog $catalog)
     {
-        //
+        $catalog->delete();
+        return redirect('catalogs');
     }
 }
