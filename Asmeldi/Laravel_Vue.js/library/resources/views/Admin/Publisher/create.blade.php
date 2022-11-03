@@ -20,27 +20,22 @@
                         <form action="{{ url('publishers') }}" method="post">
                             @csrf
                             <div class="card-body">
+
                                 <div class="form-group">
                                     <label for="exampleInputName">Name</label>
                                     <input type="text" class="form-control" name="name" id="name"
                                         placeholder="Enter email" required="">
                                 </div>
-                            </div>
-                            <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email</label>
                                     <input type="email" class="form-control" name="email" id="email"
                                         placeholder="Enter email" required="">
                                 </div>
-                            </div>
-                            <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputPhoneNumber">Phone Number</label>
                                     <input type="text" class="form-control" name="phone_number" id="phone_number"
                                         placeholder="Enter Phone Number" required="">
                                 </div>
-                            </div>
-                            <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputPhoneNumber">Adress</label>
                                     <input type="text" class="form-control" name="adress" id="adress"

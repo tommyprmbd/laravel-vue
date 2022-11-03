@@ -13,7 +13,6 @@ class Publisher extends Model
         'email',
         'phone_number',
         'adress',
-
     ];
     public function books()
     {
