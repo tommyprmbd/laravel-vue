@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::get('/books', [App\Http\Controllers\BooksController::class, 'index']);
-Route::get('/members', [App\Http\Controllers\MemberController::class, 'index']);
+// Route::get('/members', [App\Http\Controllers\MemberController::class, 'index']);
 
 // ROUTE CRUD CATALOG
 Route::get('/catalogs', [App\Http\Controllers\CatalogController::class, 'index']);
@@ -42,5 +42,10 @@ Route::delete('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::cl
 
 
 // Route Resource 
-Route::resource( '/publishers', App\Http\Controllers\PublisherController::class);
+Route::resource('/publishers', App\Http\Controllers\PublisherController::class);
 Route::resource('/authors', App\Http\Controllers\AuthorController::class);
+Route::resource('/members', App\Http\Controllers\MemberController::class);
+
+Route::get('/api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
+Route::get('/api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
+Route::get('/api/members', [App\Http\Controllers\MemberController::class, 'api']);

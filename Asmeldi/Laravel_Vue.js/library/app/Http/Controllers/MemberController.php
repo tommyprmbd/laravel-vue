@@ -23,7 +23,14 @@ class MemberController extends Controller
         // return $member;
         return view('Admin.Member.index');
     }
+    public function api()
+    {
+        $members = Members::with('user')->get();
+        $dataTables = datatables()->of($members)->addIndexColumn();
 
+        // return $Author;
+        return $dataTables->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +38,6 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -42,7 +48,18 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validate = $this->validate($request, [
+            'name' => ['required', 'min:8', 'max:30'],
+            'gender' => ['required'],
+            'phone_number' => ['required', 'min:12', 'max:13'],
+            'adress' => ['required', 'min:20', 'max:100'],
+            'email' => ['required', 'min:8', 'max:30'],
+        ]);
+
+        Members::create($request->all());
+
+        return redirect('members');
     }
 
     /**

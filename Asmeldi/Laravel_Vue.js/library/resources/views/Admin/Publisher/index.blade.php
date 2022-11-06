@@ -30,34 +30,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($publishers as $key => $publisher)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $publisher->name }}</td>
-                                    <td>{{ $publisher->email }}</td>
-                                    <td>{{ $publisher->phone_number }}</td>
-                                    <td>{{ $publisher->adress }}</td>
-                                    <td style="display: flex; flex-direction: row; " class="pl-2">
-                                        {{-- <a href="{{ url('publishers/' . $publisher->id . '/edit') }}"
-                                            class="btn btn-sm btn-warning">
-                                            Edit
-                                        </a> --}}
-                                        {{-- <form action="{{ url('publishers', ['id' => $publisher->id]) }}" method="post">
-                                            @csrf
-                                            @method('delete')
-                                            <input type="submit" class="btn btn-danger btn-sm" value="delete"
-                                                onclick="return confirm('Are you sure')">
-                                        </form> --}}
 
-                                        <a href="#" @click="editData({{ $publisher }})" class="btn btn-default">
-                                            Edit
-                                        </a>
-                                        <a href="#" @click="deleteData({{ $publisher->id }})" class="btn btn-default">
-                                            Delete
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -69,7 +42,7 @@
         <div class="modal fade" id="modal-default">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form method="post" :action="actionUrl" autocomplete="off">
+                    <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
                         <div class="modal-header">
                             <h4 class="modal-title">Form Add/Edit Publisher</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -117,7 +90,7 @@
 
 
 @section('js')
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         var controller = new Vue({
             el: '#controller',
             data: {
@@ -151,7 +124,7 @@
                 },
             }
         });
-    </script>
+    </script> --}}
 
     <!-- DataTables  & Plugins -->
     <script src="/assets/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -167,24 +140,112 @@
     <script src="/assets/plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="/assets/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-    {{-- datatables --}}
+
     <script type="text/javascript">
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+        var actionUrl = '{{ url('publishers') }}';
+        var apiUrl = '{{ url('api/publishers') }}';
+
+        var columns = [
+
+            {
+                data: 'DT_RowIndex',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                data: 'name',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                data: 'email',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                data: 'phone_number',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                data: 'adress',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                render: function(index, row, data, meta) {
+                    return `
+                            <a href="#" onclick="controller.editData(event, ${meta.row})"
+                                class="btn btn-sm btn-warning">
+                                Edit
+                            </a>
+                            <a href="#" onclick="controller.deleteData(event,${data.id})"
+                                class="btn btn-sm btn-danger">
+                                Delete
+                            </a>`;
+                },
+                orderable: false,
+                width: '210px',
+                class: 'text-center'
+            },
+        ];
+
+        var controller = new Vue({
+            el: '#controller',
+            data: {
+                datas: [], // menampung semua data author
+                data: {}, // untuk bagian crud
+                actionUrl, //
+                apiUrl,
+                editStatus: false, //
+            },
+            mounted: function() {
+                this.datatables();
+            },
+            methods: {
+                datatables() {
+                    const _this = this;
+                    _this.table = $('#example1').DataTable({
+                        ajax: {
+                            url: _this.apiUrl,
+                            type: 'GET',
+                        },
+                        columns: columns
+                    }).on('xhr', function() {
+                        _this.datas = _this.table.ajax.json().data;
+                    });
+
+                },
+                addData(data) {
+                    this.data = {};
+                    this.editStatus = false;
+                    $('#modal-default').modal();
+                },
+                editData(event, row) {
+                    this.data = this.datas[row];
+                    this.editStatus = true;
+                    $('#modal-default').modal();
+                },
+                deleteData(event, id) {
+                    if (confirm("Are you sure")) {
+                        $(event.target).parents('tr').remove();
+                        axios.post(this.actionUrl + '/' + id, {
+                            _method: 'DELETE'
+                        }).then(response => {
+                            alert('data delete');
+                        })
+                    }
+                },
+                submitForm(event, id) {
+                    event.preventDefault();
+                    const _this = this;
+                    var actionUrl = !this.editStatus ? this.actionUrl : this.actionUrl + '/' + id;
+                    axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
+                        $('#modal-default').modal('hide');
+                        _this.table.ajax.reload();
+                    });
+                }
+            },
         });
     </script>
 @endsection

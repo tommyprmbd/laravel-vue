@@ -18,11 +18,17 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $publishers = Publisher::with('books')->get();
 
-        return view('Admin.Publisher.index', compact('publishers'));
+        return view('Admin.Publisher.index');
     }
+    public function api()
+    {
+        $publishers = Publisher::with('books')->get();
+        $dataTables = datatables()->of($publishers)->addIndexColumn();
 
+        // return $Author;
+        return $dataTables->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *

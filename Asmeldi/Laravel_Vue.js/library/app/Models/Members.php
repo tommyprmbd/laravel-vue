@@ -9,10 +9,16 @@ class Members extends Model
 {
     use HasFactory;
 
-
+    protected $table = 'members';
+    protected $fillable = [
+        'name',
+        'gender',
+        'phone_number',
+        'adress',
+        'email',
+    ];
     public function user()
     {
         return $this->hasOne('App\Models\User', 'member_id');
     }
-   
 }
