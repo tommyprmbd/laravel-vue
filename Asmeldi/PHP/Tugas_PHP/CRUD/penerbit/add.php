@@ -12,10 +12,10 @@
 </head>
 
 <?php
-include_once("/xampp/htdocs/Tugas_PHP/CRUD/connect.php");
+include_once("../connect.php");
 $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbit");
 ?>
-<?php $project_location = "http://localhost/Tugas_PHP/CRUD";
+<?php $project_location = "/Tugas_PHP/CRUD";
 $url = $project_location; ?>
 
 <body>
@@ -61,7 +61,7 @@ $url = $project_location; ?>
 		$alamat = $_POST['alamat'];
 
 
-		include_once("/xampp/htdocs/Tugas_PHP/CRUD/connect.php");
+		include_once("../connect.php");
 
 		$result = mysqli_query($mysqli, "INSERT INTO `penerbit` (`id_penerbit`, `nama_penerbit`, `email`, `telp`, `alamat`) VALUES ('$id_penerbit', '$nama_penerbit', '$email', '$telp', '$alamat');");
 

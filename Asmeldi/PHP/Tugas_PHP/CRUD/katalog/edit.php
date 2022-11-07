@@ -12,7 +12,7 @@
 </head>
 
 <?php
-include_once("/xampp/htdocs/Tugas_PHP/CRUD/connect.php");
+include_once("../connect.php");
 $id_katalog = $_GET['id_katalog'];
 
 $katalog = mysqli_query($mysqli, "SELECT * FROM katalog WHERE id_katalog='$id_katalog'");
@@ -22,7 +22,7 @@ while ($katalog_data = mysqli_fetch_array($katalog)) {
 	$nama = $katalog_data['nama'];
 }
 ?>
-<?php $project_location = "http://localhost/Tugas_PHP/CRUD";
+<?php $project_location = "/Tugas_PHP/CRUD";
 $url = $project_location; ?>
 
 <body>
@@ -55,7 +55,7 @@ $url = $project_location; ?>
 		$nama = $_POST['nama'];
 
 
-		include_once("/xampp/htdocs/Tugas_PHP/CRUD/connect.php");
+		include_once("../connect.php");
 
 		$result = mysqli_query($mysqli, "UPDATE katalog SET nama = '$nama' WHERE id_katalog = '$id_katalog'");
 

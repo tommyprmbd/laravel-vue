@@ -1,5 +1,5 @@
 <?php
-include_once("/xampp/htdocs/Tugas_PHP/CRUD/connect.php");
+include_once("../connect.php");
 
 $id_katalog = $_GET['id_katalog'];
 

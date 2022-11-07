@@ -12,7 +12,7 @@
 </head>
 
 <?php
-include_once("/xampp/htdocs/Tugas_PHP/CRUD/connect.php");
+include_once("../connect.php");
 $id_penerbit = $_GET['id_penerbit'];
 
 $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbit WHERE id_penerbit='$id_penerbit'");
@@ -24,7 +24,7 @@ while ($penerbit_data = mysqli_fetch_array($penerbit)) {
 	$telp = $penerbit_data['telp'];
 	$alamat = $penerbit_data['alamat'];
 }
-?><?php $project_location = "http://localhost/Tugas_PHP/CRUD";
+?><?php $project_location = "/Tugas_PHP/CRUD";
 	$url = $project_location; ?>
 
 <body>

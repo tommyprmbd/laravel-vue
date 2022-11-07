@@ -1,5 +1,5 @@
 <?php
-include_once("/xampp/htdocs/Tugas_PHP/CRUD/connect.php");
+include_once("../connect.php");
 $pengarang = mysqli_query($mysqli, "SELECT *  FROM pengarang 
                                         -- LEFT JOIN  pengarang ON pengarang.id_pengarang = buku.id_pengarang
                                         -- LEFT JOIN  penerbit ON penerbit.id_penerbit = buku.id_penerbit
@@ -21,7 +21,7 @@ $pengarang = mysqli_query($mysqli, "SELECT *  FROM pengarang
 </head>
 
 <body>
-    <?php $project_location = "http://localhost/Tugas_PHP/CRUD";
+    <?php $project_location = "/Tugas_PHP/CRUD";
     $url = $project_location; ?>
     <nav class="navbar navbar-light bg-info">
         <div class="container-fluid">

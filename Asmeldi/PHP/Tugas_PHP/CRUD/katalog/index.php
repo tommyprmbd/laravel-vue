@@ -18,7 +18,7 @@ $Katalog = mysqli_query($mysqli, "SELECT * FROM katalog");
 
 <body>
 
-    <?php $project_location = "http://localhost/Tugas_PHP/CRUD";
+    <?php $project_location = "/Tugas_PHP/CRUD";
     $url = $project_location; ?>
     <nav class="navbar navbar-light bg-info">
         <div class="container-fluid">

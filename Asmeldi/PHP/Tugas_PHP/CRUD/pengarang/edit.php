@@ -12,7 +12,7 @@
 </head>
 
 <?php
-include_once("/xampp/htdocs/Tugas_PHP/CRUD/connect.php");
+include_once("../connect.php");
 $id_pengarang = $_GET['id_pengarang'];
 
 $pengarang = mysqli_query($mysqli, "SELECT * FROM pengarang WHERE id_pengarang='$id_pengarang'");
@@ -24,7 +24,7 @@ while ($pengarang_data = mysqli_fetch_array($pengarang)) {
 	$telp = $pengarang_data['telp'];
 	$alamat = $pengarang_data['alamat'];
 }
-?><?php $project_location = "http://localhost/Tugas_PHP/CRUD";
+?><?php $project_location = "/Tugas_PHP/CRUD";
 	$url = $project_location; ?>
 
 <body>
@@ -70,7 +70,7 @@ while ($pengarang_data = mysqli_fetch_array($pengarang)) {
 		$telp = $_POST['telp'];
 		$alamat = $_POST['alamat'];
 
-		include_once("/xampp/htdocs/Tugas_PHP/CRUD/connect.php");
+		include_once("../connect.php");
 
 		$result = mysqli_query($mysqli, "UPDATE pengarang SET nama_pengarang = '$nama_pengarang', email = '$email', telp = '$telp', alamat = '$alamat' WHERE id_pengarang = '$id_pengarang'");
 
