@@ -6,7 +6,7 @@
 
 <?php
 	include_once("connect.php");
-	$buku = mysqli_query($mysqli, "SELECT * FROM buku")
+	$buku = mysqli_query($mysqli, "SELECT * FROM buku");
     $penerbit = mysqli_query($mysqli, "SELECT * FROM penerbit");
     $pengarang = mysqli_query($mysqli, "SELECT * FROM pengarang");
     $katalog = mysqli_query($mysqli, "SELECT * FROM katalog");
