@@ -23,10 +23,17 @@ class BooksController extends Controller
         // $allBooks = books::with(['author'])->get();
         // $allBooks = books::with(['catalog'])->get();
 
-        // return $allBooks;
-        return view('Admin.Book.index');
+        $books = books::all();
+        return view('Admin.Book.index', compact('books'));
     }
+    public function api()
+    {
+        $books = books::all();
 
+        // return $Author;
+        // json_encode berfungsi merubah json menjadi sting
+        return json_encode($books);
+    }
     /**
      * Show the form for creating a new resource.
      *
