@@ -22,6 +22,7 @@
                                 <th class="text-center">Phone Number</th>
                                 <th class="text-center">Adress</th>
                                 <th class="text-center">Email</th>
+                                <th class="text-center">Created at</th>
                                 <th class="col-2">Action</th>
                             </tr>
                         </thead>
@@ -140,6 +141,11 @@
             },
             {
                 data: 'email',
+                class: 'text-center',
+                orderable: true
+            },
+            {
+                data: 'tanggal_buat',
                 class: 'text-center',
                 orderable: true
             },

@@ -124,7 +124,7 @@
                         }
                     });
                 },
-                addData(data) {
+                addData() {
                     this.book = {};
                     this.editStatus = false;
                     $('#modal-default').modal();

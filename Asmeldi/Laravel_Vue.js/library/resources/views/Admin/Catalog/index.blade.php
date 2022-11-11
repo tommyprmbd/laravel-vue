@@ -27,8 +27,8 @@
                                 <td>{{ $key + 1 }}</td>
                                 <td>{{ $Catalog->name }}</td>
                                 <td class="text-center">{{ count($Catalog->books) }}</td>
-                                <td class="text-center">{{ date('H:i:s  d/m/Y', strtotime($Catalog->created_at)) }}</td>
-                                <td class="text-center">{{ date('H:i:s  d/m/Y', strtotime($Catalog->updated_at)) }}</td>
+                                <td class="text-center">{{ DateFormat($Catalog->created_at) }}</td>
+                                <td class="text-center">{{ DateFormat($Catalog->updatedt_at) }}</td>
                                 <td style="display: flex; flex-direction: row; " class="pl-2">
                                     <a href="{{ url('catalogs/' . $Catalog->id . '/edit') }}"
                                         class="btn btn-sm btn-warning">

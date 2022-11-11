@@ -24,7 +24,11 @@ class PublisherController extends Controller
     public function api()
     {
         $publishers = Publisher::with('books')->get();
-        $dataTables = datatables()->of($publishers)->addIndexColumn();
+        $dataTables = datatables()->of($publishers)
+            ->addColumn('tanggal_buat', function ($author) {
+                return DateFormat($author->created_at);
+            })
+            ->addIndexColumn();
 
         // return $Author;
         return $dataTables->make(true);

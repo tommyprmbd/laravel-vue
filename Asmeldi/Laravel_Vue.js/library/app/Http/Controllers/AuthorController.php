@@ -30,7 +30,17 @@ class AuthorController extends Controller
     public function api()
     {
         $Authors = Author::with('books')->get();
-        $dataTables = datatables()->of($Authors)->addIndexColumn();
+
+        // foreach ($Authors as $key => $author) {
+        //     $author->tanggal_buat = DateFormat($author->created_at);
+        //     $author->updated = DateFormat($author->updated_at);
+        // }
+        //yajra datatable
+
+        $dataTables = datatables()->of($Authors)
+            ->addColumn('tanggal_buat', function ($author) {
+                return DateFormat($author->created_at);
+            })->addIndexColumn();
 
         // return $Author;
         return $dataTables->make(true);

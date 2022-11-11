@@ -26,7 +26,11 @@ class MemberController extends Controller
     public function api()
     {
         $members = Members::with('user')->get();
-        $dataTables = datatables()->of($members)->addIndexColumn();
+        $dataTables = datatables()->of($members)
+            ->addColumn('tanggal_buat', function ($author) {
+                return DateFormat($author->created_at);
+            })
+            ->addIndexColumn();
 
         // return $Author;
         return $dataTables->make(true);
