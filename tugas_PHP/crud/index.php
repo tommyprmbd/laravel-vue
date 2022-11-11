@@ -14,45 +14,46 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </head>
  
-<body>
+<body style="background-color: #F3F9F9;">
 
 <center>
-    <a href="index.php">Buku</a> |
-    <a href="penerbit/penerbit.php">Penerbit</a> |
-    <a href="pengarang/pengarang.php">Pengarang</a> |
-    <a href="katalog/katalog.php">Katalog</a>
-    <hr>
+    <a class='btn btn-primary mt-3 mr-3' href="index.php">Buku</a>
+    <a class='btn btn-primary mt-3 mr-3' href="penerbit/penerbit.php">Penerbit</a>
+    <a class='btn btn-primary mt-3 mr-3' href="pengarang/pengarang.php">Pengarang</a>
+    <a class='btn btn-primary mt-3' href="katalog/katalog.php">Katalog</a>
+    <hr style=" background-color: grey;">
 </center>
-
-<a href="add.php">Add New Buku</a><br/><br/>
- 
-    <table class="table" width='80%' border=1>
+<div class="container">
+    <a class='btn btn-primary' href="add.php">Add New Buku</a><br/><br/>
+     
+    <table class="table " width='80%' border=1>
  
     <tr>
-        <th>ISBN</th> 
-        <th>Judul</th> 
-        <th>Tahun</th> 
-        <th>Pengarang</th>
-        <th>Penerbit</th>
-        <th>Katalog</th>
-        <th>Stok</th>
-        <th>Harga Pinjam</th>
-        <th>Aksi</th>
+        <th style="text-align: center;">ISBN</th> 
+        <th style="text-align: center;">Judul</th> 
+        <th style="text-align: center;">Tahun</th> 
+        <th style="text-align: center;">Pengarang</th>
+        <th style="text-align: center;">Penerbit</th>
+        <th style="text-align: center;">Katalog</th>
+        <th style="text-align: center;">Stok</th>
+        <th style="text-align: center;">Harga Pinjam</th>
+        <th style="text-align: center;">Aksi</th>
     </tr>
     <?php  
         while($buku_data = mysqli_fetch_array($buku)) {         
             echo "<tr>";
-            echo "<td>".$buku_data['isbn']."</td>";
-            echo "<td>".$buku_data['judul']."</td>";
-            echo "<td>".$buku_data['tahun']."</td>";    
-            echo "<td>".$buku_data['nama_pengarang']."</td>";    
-            echo "<td>".$buku_data['nama_penerbit']."</td>";    
-            echo "<td>".$buku_data['nama_katalog']."</td>";    
-            echo "<td>".$buku_data['qty_stok']."</td>";    
-            echo "<td>".$buku_data['harga_pinjam']."</td>";    
-            echo "<td><a class='btn btn-primary' href='edit.php?isbn=$buku_data[isbn]'>Edit</a> | <a class='btn btn-danger' href='delete.php?isbn=$buku_data[isbn]'>Delete</a></td></tr>";        
+            echo "<td style='text-align: center;'>".$buku_data['isbn']."</td>";
+            echo "<td style='text-align: center;'>".$buku_data['judul']."</td>";
+            echo "<td style='text-align: center;'>".$buku_data['tahun']."</td>";    
+            echo "<td style='text-align: center;'>".$buku_data['nama_pengarang']."</td>";    
+            echo "<td style='text-align: center;'>".$buku_data['nama_penerbit']."</td>";    
+            echo "<td style='text-align: center;'>".$buku_data['nama_katalog']."</td>";    
+            echo "<td style='text-align: center;'>".$buku_data['qty_stok']."</td>";    
+            echo "<td style='text-align: center;'>".$buku_data['harga_pinjam']."</td>";    
+            echo "<td style='text-align: center;'><a class='btn btn-primary' href='edit.php?isbn=$buku_data[isbn]'>Edit</a> | <a class='btn btn-danger' href='delete.php?isbn=$buku_data[isbn]'>Delete</a></td></tr>";        
         }
     ?>
     </table>
+</div>
 </body>
 </html>

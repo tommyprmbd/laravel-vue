@@ -10,33 +10,34 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </head>
  
-<body>
+<body style="background-color: #F3F9F9;">
 
 <center>
-    <a href="../index.php">Buku</a> |
-    <a href="../penerbit/penerbit.php">Penerbit</a> |
-    <a href="../pengarang/pengarang.php">Pengarang</a> |
-    <a href="../katalog/katalog.php">Katalog</a>
-    <hr>
+    <a class='btn btn-primary mt-3 mr-3' href="../index.php">Buku</a>
+    <a class='btn btn-primary mt-3 mr-3' href="../penerbit/penerbit.php">Penerbit</a>
+    <a class='btn btn-primary mt-3 mr-3' href="../pengarang/pengarang.php">Pengarang</a>
+    <a class='btn btn-primary mt-3' href="../katalog/katalog.php">Katalog</a>
+    <hr style=" background-color: grey;">
 </center>
-
-<a href="add.php">Add New Katalog</a><br/><br/>
- 
+<div class = "container">
+    <a class='btn btn-primary mt-1' href="add.php">Add New Katalog</a><br/><br/>
+     
     <table class="table" width='80%' border=1>
- 
+
     <tr>
-        <th>ID</th> 
-        <th>Nama Katalog</th>
-        <th>Aksi</th>
+        <th style="text-align: center;">ID</th> 
+        <th style="text-align: center;">Nama Katalog</th>
+        <th style="text-align: center;">Aksi</th>
     </tr>
     <?php  
         while($katalog_data = mysqli_fetch_array($katalog)) {         
             echo "<tr>";
-            echo "<td>".$katalog_data['id_katalog']."</td>";
-            echo "<td>".$katalog_data['nama']."</td>";  
-            echo "<td><a class='btn btn-primary' href='edit.php?id_katalog=$katalog_data[id_katalog]'>Edit</a> | <a class='btn btn-danger' href='delete.php?id_katalog=$katalog_data[id_katalog]'>Delete</a></td></tr>";        
+            echo "<td style='text-align: center;'>".$katalog_data['id_katalog']."</td>";
+            echo "<td style='text-align: center;'>".$katalog_data['nama']."</td>";  
+            echo "<td style='text-align: center;'><a class='btn btn-primary' href='edit.php?id_katalog=$katalog_data[id_katalog]'>Edit</a> | <a class='btn btn-danger' href='delete.php?id_katalog=$katalog_data[id_katalog]'>Delete</a></td></tr>";        
         }
     ?>
     </table>
+</div>
 </body>
 </html>

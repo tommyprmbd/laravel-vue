@@ -9,23 +9,25 @@
     $katalog = mysqli_query($mysqli, "SELECT * FROM katalog");
 ?>
  
-<body>
+<body style="background-color: #F3F9F9;">
 	<div class="container mt-5">
-		<a class='btn btn-primary' href="katalog.php">Go to Home</a>
-		<div class="row mt-3">
-			<form action="add.php" method="post" name="form1">
+		<center>
+			<a class='btn btn-primary' href="katalog.php">Go to Home</a>
+			<div class="row mt-3">
+				<form action="add.php" method="post" name="form1">
 
-				<div class="mb-3 col-lg-2">
-					<label for="id" class="form-label">ID</label>
-					<input type="text" class="form-control" name="id_katalog" id="id_katalog">
-				</div>
-				<div class="mb-3 col-lg-2">
-					<label for="nama" class="form-label">Nama Katalog</label>
-					<input type="text" class="form-control" name="nama" id="nama">
-				</div>
-				<input type="submit" class='btn btn-primary' name="Submit" value="Add">
-			</form>
-		</div>
+					<div class="mb-3 col-lg-2">
+						<label for="id" class="form-label">ID</label>
+						<input type="text" class="form-control" name="id_katalog" id="id_katalog">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="nama" class="form-label">Nama Katalog</label>
+						<input type="text" class="form-control" name="nama" id="nama">
+					</div>
+					<input type="submit" class='btn btn-primary' name="Submit" value="Add">
+				</form>
+			</div>
+		</center>
 	</div>
 	
 	<?php

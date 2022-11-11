@@ -17,22 +17,24 @@
     }
 ?>
  
-<body>
+<body style="background-color: #F3F9F9;">
 	<div class="container mt-4">
-		<a class='btn btn-primary' href="katalog.php">Go to Home</a>
-		<div class="row mt-3">
-			<form action="edit.php?id_katalog=<?php echo $id_katalog; ?>" method="POST">
-				<div class="mb-3 col-lg-2">
-					<label for="id" class="form-label">ID</label>
-					<input type="text" class="form-control" value="<?php echo $id_katalog; ?>">
-				</div>
-				<div class="mb-3 col-lg-2">
-					<label for="nama" class="form-label">Nama Pengarang</label>
-					<input type="text" class="form-control" name="nama" id="nama" value="<?php echo $nama; ?>">
-				</div>
-				<input type="submit" class='btn btn-primary' name="update" value="Update">
-			</form>
-		</div>
+		<center>
+			<a class='btn btn-primary' href="katalog.php">Go to Home</a>
+			<div class="row mt-3">
+				<form action="edit.php?id_katalog=<?php echo $id_katalog; ?>" method="POST">
+					<div class="mb-3 col-lg-2">
+						<label for="id" class="form-label">ID</label>
+						<input type="text" class="form-control" value="<?php echo $id_katalog; ?>">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="nama" class="form-label">Nama Pengarang</label>
+						<input type="text" class="form-control" name="nama" id="nama" value="<?php echo $nama; ?>">
+					</div>
+					<input type="submit" class='btn btn-primary' name="update" value="Update">
+				</form>
+			</div>
+		</center>
 	</div>
 	
 	<?php

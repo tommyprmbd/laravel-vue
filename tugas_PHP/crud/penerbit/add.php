@@ -9,35 +9,37 @@
 	$penerbit = mysqli_query($mysqli, "SELECT * FROM penerbit");
 ?>
  
-<body>
+<body style="background-color: #F3F9F9;">
 	<div class="container mt-5">
-		<a class='btn btn-primary' href="penerbit.php">Go to Home</a>
-		<div class="row mt-3">
-			<form action="add.php" method="post" name="form1">
+		<center>
+			<a class='btn btn-primary' href="penerbit.php">Go to Home</a>
+			<div class="row mt-3">
+				<form action="add.php" method="post" name="form1">
 
-				<div class="mb-3 col-lg-2">
-					<label for="id" class="form-label">ID</label>
-					<input type="text" class="form-control" name="id_penerbit" id="id_penerbit">
-				</div>
-				<div class="mb-3 col-lg-2">
-					<label for="nama" class="form-label">Nama Penerbit</label>
-					<input type="text" class="form-control" name="nama_penerbit" id="nama_penerbit">
-				</div>
-				<div class="mb-3 col-lg-2">
-					<label for="email" class="form-label">Email</label>
-					<input type="text" class="form-control" name="email" id="email">
-				</div>
-				<div class="mb-3 col-lg-2">
-					<label for="telp" class="form-label">Telp</label>
-					<input type="text" class="form-control" name="telp" id="telp">
-				</div>
-				<div class="mb-3 col-lg-2">
-					<label for="alamat" class="form-label">Alamat</label>
-					<input type="text" class="form-control" name="alamat" id="alamat">
-				</div>
-				<input type="submit" class='btn btn-primary' name="Submit" value="Add">
-			</form>
-		</div>
+					<div class="mb-3 col-lg-2">
+						<label for="id" class="form-label">ID</label>
+						<input type="text" class="form-control" name="id_penerbit" id="id_penerbit">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="nama" class="form-label">Nama Penerbit</label>
+						<input type="text" class="form-control" name="nama_penerbit" id="nama_penerbit">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="email" class="form-label">Email</label>
+						<input type="text" class="form-control" name="email" id="email">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="telp" class="form-label">Telp</label>
+						<input type="text" class="form-control" name="telp" id="telp">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="alamat" class="form-label">Alamat</label>
+						<input type="text" class="form-control" name="alamat" id="alamat">
+					</div>
+					<input type="submit" class='btn btn-primary' name="Submit" value="Add">
+				</form>
+			</div>
+		</center>
 	</div>
 	
 	<?php

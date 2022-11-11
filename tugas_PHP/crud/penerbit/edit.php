@@ -20,34 +20,36 @@
     }
 ?>
 
-<body>
+<body style="background-color: #F3F9F9;">
 	<div class="container mt-4">
-		<a class='btn btn-primary' href="penerbit.php">Go to Home</a>
-		<div class="row mt-3">
-			<form action="edit.php?id_penerbit=<?php echo $id_penerbit; ?>" method="POST">
-				<div class="mb-3 col-lg-2">
-					<label for="id" class="form-label">ID</label>
-					<input type="text" class="form-control" value="<?php echo $id_penerbit; ?>">
-				</div>
-				<div class="mb-3 col-lg-2">
-					<label for="nama" class="form-label">Nama Penerbit</label>
-					<input type="text" class="form-control" name="nama_penerbit" id="nama_penerbit" value="<?php echo $nama_penerbit; ?>">
-				</div>
-				<div class="mb-3 col-lg-2">
-					<label for="email" class="form-label">Email</label>
-					<input type="text" class="form-control" name="email" id="email" value="<?php echo $email; ?>">
-				</div>
-				<div class="mb-3 col-lg-2">
-					<label for="telp" class="form-label">Telp</label>
-					<input type="text" class="form-control" name="telp" id="telp" value="<?php echo $telp; ?>">
-				</div>
-				<div class="mb-3 col-lg-2">
-					<label for="alamat" class="form-label">Alamat</label>
-					<input type="text" class="form-control" name="alamat" id="alamat" value="<?php echo $alamat; ?>">
-				</div>
-				<input type="submit" class='btn btn-primary' name="update" value="Update">
-			</form>
-		</div>
+		<center>
+			<a class='btn btn-primary' href="penerbit.php">Go to Home</a>
+			<div class="row mt-3">
+				<form action="edit.php?id_penerbit=<?php echo $id_penerbit; ?>" method="POST">
+					<div class="mb-3 col-lg-2">
+						<label for="id" class="form-label">ID</label>
+						<input type="text" class="form-control" value="<?php echo $id_penerbit; ?>">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="nama" class="form-label">Nama Penerbit</label>
+						<input type="text" class="form-control" name="nama_penerbit" id="nama_penerbit" value="<?php echo $nama_penerbit; ?>">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="email" class="form-label">Email</label>
+						<input type="text" class="form-control" name="email" id="email" value="<?php echo $email; ?>">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="telp" class="form-label">Telp</label>
+						<input type="text" class="form-control" name="telp" id="telp" value="<?php echo $telp; ?>">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="alamat" class="form-label">Alamat</label>
+						<input type="text" class="form-control" name="alamat" id="alamat" value="<?php echo $alamat; ?>">
+					</div>
+					<input type="submit" class='btn btn-primary' name="update" value="Update">
+				</form>
+			</div>
+		</center>
 	</div>
 
 	

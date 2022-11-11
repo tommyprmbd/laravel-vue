@@ -26,66 +26,68 @@
     }
 ?>
  
-<body>
+<body style="background-color: #F3F9F9;">
 	<div class="container mt-4">
-		<a href="index.php">Go to Home</a>
-		<div class="row mt-4">
-			<form action="edit.php?isbn=<?php echo $isbn; ?>" method="post">
+		<center>
+			<a class='btn btn-primary' href="index.php">Go to Home</a>
+			<div class="row mt-4">
+				<form action="edit.php?isbn=<?php echo $isbn; ?>" method="post">
 
-				<div class="mb-3 col-lg-2">
-					<label for="Isbn" class="form-label">ISBN</label>
-					<input type="text" class="form-control" value="<?php echo $isbn; ?>">
-				</div>
-				<div class="mb-3 col-lg-6">
-					<label for="judul" class="form-label">Judul</label>
-					<input type="text" class="form-control" name="judul" id="judul" value="<?php echo $judul; ?>">
-				</div>
-				<div class="mb-3 col-lg-6">
-					<label for="tahun" class="form-label">Tahun</label>
-					<input type="text" class="form-control" name="tahun" id="tahun" value="<?php echo $tahun; ?>">
-				</div>
-				<div class="mb-3 col-lg-6">
-					<label for="penerbit" class="form-label">Penerbit</label>
-					<select class="form-select" aria-label="Default select example" name="id_penerbit" id="id_penerbit">
-						<?php
-						while ($penerbit_data = mysqli_fetch_array($penerbit)) {
-							echo "<option " . ($penerbit_data['id_penerbit'] == $id_penerbit ? 'selected' : '') . " value='" . $penerbit_data['id_penerbit'] . "'>" . $penerbit_data['nama_penerbit'] . "</option>";
-						}
-						?>
-					</select>
-				</div>
-				<div class="mb-3 col-lg-6">
-					<label for="pegarang" class="form-label">Pengarang</label>
-					<select class="form-select" aria-label="Default select example" name="id_pengarang" id="id_pengarang">
-						<?php
-						while ($pengarang_data = mysqli_fetch_array($pengarang)) {
-							echo "<option " . ($pengarang_data['id_pengarang'] == $id_pengarang ? 'selected' : '') . " value='" . $pengarang_data['id_pengarang'] . "'>" . $pengarang_data['nama_pengarang'] . "</option>";
-						}
-						?>
-					</select>
-				</div>
-				<div class="mb-3 col-lg-6">
-					<label for="katalog" class="form-label">Katalog</label>
-					<select class="form-select" aria-label="Default select example" name="id_katalog" id="id_katalog">
-						<?php
-						while ($katalog_data = mysqli_fetch_array($katalog)) {
-							echo "<option " . ($katalog_data['id_katalog'] == $id_katalog ? 'selected' : '') . " value='" . $katalog_data['id_katalog'] . "'>" . $katalog_data['nama'] . "</option>";
-						}
-						?>
-					</select>
-				</div>
-				<div class="mb-3 col-lg-6">
-					<label for="qty_stok" class="form-label">Qty Stok</label>
-					<input type="text" class="form-control" name="qty_stok" id="qty_stok" value="<?php echo $qty_stok; ?>">
-				</div>
-				<div class="mb-3 col-lg-6">
-					<label for="harga_pinjam" class="form-label">Harga Pinjam</label>
-					<input type="text" class="form-control" name="harga_pinjam" id="harga_pinjam" value="<?php echo $harga_pinjam; ?>">
-				</div>
-				<input type="submit" class='btn btn-primary' name="update" value="Update">
+					<div class="mb-3 col-lg-2">
+						<label for="Isbn" class="form-label">ISBN</label>
+						<input type="text" class="form-control" value="<?php echo $isbn; ?>">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="judul" class="form-label">Judul</label>
+						<input type="text" class="form-control" name="judul" id="judul" value="<?php echo $judul; ?>">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="tahun" class="form-label">Tahun</label>
+						<input type="text" class="form-control" name="tahun" id="tahun" value="<?php echo $tahun; ?>">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="penerbit" class="form-label">Penerbit</label>
+						<select class="form-select" aria-label="Default select example" name="id_penerbit" id="id_penerbit">
+							<?php
+							while ($penerbit_data = mysqli_fetch_array($penerbit)) {
+								echo "<option " . ($penerbit_data['id_penerbit'] == $id_penerbit ? 'selected' : '') . " value='" . $penerbit_data['id_penerbit'] . "'>" . $penerbit_data['nama_penerbit'] . "</option>";
+							}
+							?>
+						</select>
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="pegarang" class="form-label">Pengarang</label>
+						<select class="form-select" aria-label="Default select example" name="id_pengarang" id="id_pengarang">
+							<?php
+							while ($pengarang_data = mysqli_fetch_array($pengarang)) {
+								echo "<option " . ($pengarang_data['id_pengarang'] == $id_pengarang ? 'selected' : '') . " value='" . $pengarang_data['id_pengarang'] . "'>" . $pengarang_data['nama_pengarang'] . "</option>";
+							}
+							?>
+						</select>
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="katalog" class="form-label">Katalog</label>
+						<select class="form-select" aria-label="Default select example" name="id_katalog" id="id_katalog">
+							<?php
+							while ($katalog_data = mysqli_fetch_array($katalog)) {
+								echo "<option " . ($katalog_data['id_katalog'] == $id_katalog ? 'selected' : '') . " value='" . $katalog_data['id_katalog'] . "'>" . $katalog_data['nama'] . "</option>";
+							}
+							?>
+						</select>
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="qty_stok" class="form-label">Qty Stok</label>
+						<input type="text" class="form-control" name="qty_stok" id="qty_stok" value="<?php echo $qty_stok; ?>">
+					</div>
+					<div class="mb-3 col-lg-6">
+						<label for="harga_pinjam" class="form-label">Harga Pinjam</label>
+						<input type="text" class="form-control" name="harga_pinjam" id="harga_pinjam" value="<?php echo $harga_pinjam; ?>">
+					</div>
+					<input type="submit" class='btn btn-primary' name="update" value="Update">
 
-			</form>
-		</div>
+				</form>
+			</div>
+		</center>
 	</div>
 	
 	<?php
