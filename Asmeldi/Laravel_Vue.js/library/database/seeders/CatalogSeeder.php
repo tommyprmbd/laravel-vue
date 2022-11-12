@@ -17,7 +17,7 @@ class CatalogSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $Catalog = new Catalog();
 
             $Catalog->name = $faker->name;

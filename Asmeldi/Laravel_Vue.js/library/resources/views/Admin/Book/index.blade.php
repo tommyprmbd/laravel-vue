@@ -108,7 +108,6 @@
             },
             mounted: function() {
                 this.get_books();
-                console.log(this.get_books());
             },
             methods: {
                 get_books() {
@@ -151,7 +150,7 @@
             computed: {
                 filteredList() {
                     return this.books.filter(book => {
-                        return book.title.toLowerCase().include(this.searchtoLowerCase())
+                        return book.title.toLowerCase().include(this.searchtoLowerCase());
                     })
                 }
             }

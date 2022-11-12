@@ -117,11 +117,29 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('members') }}"
-                                class="nav-link {{ request()->is('members') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-user"></i>
+                            <a href="{{ url('books') }}"
+                                class="nav-link {{ request()->is('books') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-book"></i>
                                 <p>
-                                    Member
+                                    Book
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('data_master') }}"
+                                class="nav-link {{ request()->is('data_master') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>
+                                    Data Master
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('catalogs') }}"
+                                class="nav-link {{ request()->is('catalogs') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-table"></i>
+                                <p>
+                                    Catalog
                                 </p>
                             </a>
                         </li>
@@ -144,24 +162,14 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('catalogs') }}"
-                                class="nav-link {{ request()->is('catalogs') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-table"></i>
+                            <a href="{{ url('members') }}"
+                                class="nav-link {{ request()->is('members') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-user"></i>
                                 <p>
-                                    Catalog
+                                    Member
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('books') }}"
-                                class="nav-link {{ request()->is('books') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    Book
-                                </p>
-                            </a>
-                        </li>
-
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

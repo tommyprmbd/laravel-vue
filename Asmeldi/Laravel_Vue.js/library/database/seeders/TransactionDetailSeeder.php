@@ -17,7 +17,7 @@ class TransactionDetailSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             $transactionDetail = new transactionDetail();
 
             $transactionDetail->transaction_id = rand(1, 200);
