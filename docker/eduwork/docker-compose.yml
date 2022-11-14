@@ -24,7 +24,7 @@ services:
 
   php:
     container_name: eduwork_php
-    image: php:7.4-fpm-alpine
+    image: peron:php8-fpm
     volumes:
       - ./../../:/var/www/html
     networks:
