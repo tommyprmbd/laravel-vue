@@ -24,9 +24,7 @@ services:
 
   php:
     container_name: eduwork_php
-    build: 
-      context: ./
-      dockerfile: Dockerfile
+    image: peron:php8-fpm
     volumes:
       - ./../../:/var/www/html
     networks:
