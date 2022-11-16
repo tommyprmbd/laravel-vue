@@ -108,15 +108,17 @@
             },
             mounted: function() {
                 this.get_books();
+                // console.log(this.get_books());
             },
             methods: {
                 get_books() {
                     const _this = this;
                     $.ajax({
-                        url: apiUrl,
+                        url: '{{ url('api/books') }}',
                         method: 'GET',
                         success: function(data) {
                             _this.books = JSON.parse(data);
+                            // console.log(_this.books);
                         },
                         error: function(xhr, thrownError) {
                             alert(xhr.status + "\n" + xhr.responseText + "\n" + thrownError);

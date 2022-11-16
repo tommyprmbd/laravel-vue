@@ -6,11 +6,20 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    {{-- <a href="{{ url('/members/create') }}" class="btn btn-sm btn-primary pull-right">Create New
-                        Publisher</a> --}}
-                    <a href="#" @click="addData()" class="btn btn-default">
-                        Add Publisher
-                    </a>
+                    <div class="row">
+                        <div class="col-md-10"> <a href="#" @click="addData()" class="btn btn-default">
+                                Add Publisher
+                            </a>
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-control" name="gender">
+                                <option value="0">Semua Jenis Kelamin</option>
+                                <option value="l">Laki-Laki</option>
+                                <option value="p">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">
@@ -223,6 +232,17 @@
                     });
                 }
             },
+        });
+    </script>
+    <script type="text/javascript">
+        $('select[name=gender]').on('change', function() {
+            gender = $('select[name=gender]').val();
+            if (gender == 0) {
+                controller.table.ajax.url(apiUrl).load();
+            } else {
+                controller.table.ajax.url(apiUrl + '?gender=' + gender).load();
+
+            }
         });
     </script>
 @endsection

@@ -18,21 +18,30 @@ class MemberController extends Controller
      */
     public function index()
     {
+
         // $member = Members::with('user')->get();
 
         // return $member;
+        // return $dataTables->make(true);
         return view('Admin.Member.index');
     }
-    public function api()
+    public function api(Request $request)
     {
-        $members = Members::with('user')->get();
-        $dataTables = datatables()->of($members)
-            ->addColumn('tanggal_buat', function ($author) {
-                return DateFormat($author->created_at);
+        if ($request->gender) {
+            $datas = Members::with('user')->where('gender', $request->gender)->get();
+        } else {
+            $datas = Members::with('user')->get();
+        }
+        $dataTables = datatables()->of($datas)->addIndexColumn();
+
+
+        // $members = Members::with('user')->get();
+        $dataTables = datatables()->of($datas)
+            ->addColumn('tanggal_buat', function ($datas) {
+                return DateFormat($datas->created_at);
             })
             ->addIndexColumn();
 
-        // return $Author;
         return $dataTables->make(true);
     }
     /**

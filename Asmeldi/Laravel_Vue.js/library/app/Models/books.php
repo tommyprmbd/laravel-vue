@@ -22,4 +22,12 @@ class books extends Model
     {
         return $this->belongsTo('App\Models\Catalog', 'catalog_id');
     }
+    public function details()
+    {
+        return $this->hasMany('App\Models\transactionDetail', 'book_id');
+    }
+    // public function transaction()
+    // {
+    //     return $this->belongsToMany('App\Models\transaction')->withPivot(['id']);
+    // }
 }

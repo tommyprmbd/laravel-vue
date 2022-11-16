@@ -22,7 +22,7 @@ class BooksController extends Controller
         // $allBooks = books::with(['publisher'])->get();
         // $allBooks = books::with(['author'])->get();
         // $allBooks = books::with(['catalog'])->get();
-
+        // $apiBooks = $this->api();
         $books = books::all();
         return view('Admin.Book.index', compact('books'));
     }
@@ -30,7 +30,6 @@ class BooksController extends Controller
     {
         $books = books::all();
 
-        // return $Author;
         // json_encode berfungsi merubah json menjadi sting
         return json_encode($books);
     }

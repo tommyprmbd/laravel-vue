@@ -25,12 +25,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 // Route::get('/members', [App\Http\Controllers\MemberController::class, 'index']);
 
 // ROUTE CRUD CATALOG
-Route::get('/catalogs', [App\Http\Controllers\CatalogController::class, 'index']);
-Route::get('/catalogs/create', [App\Http\Controllers\CatalogController::class, 'create']);
-Route::post('/catalogs', [App\Http\Controllers\CatalogController::class, 'store']);
-Route::get('/catalogs/{catalog}/edit', [App\Http\Controllers\CatalogController::class, 'edit']);
-Route::put('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'update']);
-Route::delete('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'destroy']);
+// Route::get('/catalogs', [App\Http\Controllers\CatalogController::class, 'index']);
+// Route::get('/catalogs/create', [App\Http\Controllers\CatalogController::class, 'create']);
+// Route::post('/catalogs', [App\Http\Controllers\CatalogController::class, 'store']);
+// Route::get('/catalogs/{catalog}/edit', [App\Http\Controllers\CatalogController::class, 'edit']);
+// Route::put('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'update']);
+// Route::delete('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'destroy']);
 
 // ROUTE CRUD PUBLISHER
 // Route::get('/publishers', [App\Http\Controllers\PublisherController::class, 'index']);
@@ -42,13 +42,17 @@ Route::delete('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::cl
 
 
 // Route Resource 
+Route::resource('/catalogs', App\Http\Controllers\CatalogController::class);
 Route::resource('/publishers', App\Http\Controllers\PublisherController::class);
 Route::resource('/authors', App\Http\Controllers\AuthorController::class);
 Route::resource('/members', App\Http\Controllers\MemberController::class);
 Route::resource('/books', App\Http\Controllers\BooksController::class);
 Route::resource('/data_master', App\Http\Controllers\DataMasterController::class);
+Route::resource('/transanction', App\Http\Controllers\DatapeminjamanController::class);
 
 Route::get('/api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
 Route::get('/api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
 Route::get('/api/members', [App\Http\Controllers\MemberController::class, 'api']);
 Route::get('/api/books', [App\Http\Controllers\BooksController::class, 'api']);
+Route::get('/api/transanction', [App\Http\Controllers\DatapeminjamanController::class, 'api']);
+Route::get('/transanction/{transaction}/detail', [App\Http\Controllers\DatapeminjamanController::class, 'details']);
