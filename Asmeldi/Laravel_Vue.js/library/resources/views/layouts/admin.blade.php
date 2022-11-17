@@ -146,15 +146,17 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('transanction') }}"
-                                class="nav-link {{ request()->is('transanction') ? 'active' : '' }}">
-                                <i class="nav-icon fas fa fa-american-sign-language-interpreting"></i>
-                                <p>
-                                    Peminjaman
-                                </p>
-                            </a>
-                        </li>
+                        @role('petugas')
+                            <li class="nav-item">
+                                <a href="{{ url('transanction') }}"
+                                    class="nav-link {{ request()->is('transanction') ? 'active' : '' }}">
+                                    <i class="nav-icon fas fa fa-american-sign-language-interpreting"></i>
+                                    <p>
+                                        Peminjaman
+                                    </p>
+                                </a>
+                            </li>
+                        @endrole
                         <li class="nav-item">
                             <a href="{{ url('books') }}"
                                 class="nav-link {{ request()->is('books') ? 'active' : '' }}">

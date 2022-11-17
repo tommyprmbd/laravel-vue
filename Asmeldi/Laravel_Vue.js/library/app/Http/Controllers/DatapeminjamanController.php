@@ -24,24 +24,28 @@ class DatapeminjamanController extends Controller
      */
     public function index()
     {
-        $trans = transaction::get();
+        if (auth()->user()->role('petugas')) {
+            $trans = transaction::get();
 
-        $active = [];
-        $nonActive = [];
-        $DateStart = [];
-        $DateEnd = [];
-        foreach ($trans as $tran) {
-            if ($tran->status == 1) {
-                $active[] = $tran->status;
-            } else {
-                $nonActive[] = $tran->status;
+            $active = [];
+            $nonActive = [];
+            $DateStart = [];
+            $DateEnd = [];
+            foreach ($trans as $tran) {
+                if ($tran->status == 1) {
+                    $active[] = $tran->status;
+                } else {
+                    $nonActive[] = $tran->status;
+                }
             }
-        }
 
-        $active = count($active);
-        $nonActive = count($nonActive);
-        // return $DateStart;
-        return view('Admin.Peminjaman.index', compact('trans', 'active', 'nonActive'));
+            $active = count($active);
+            $nonActive = count($nonActive);
+            // return $DateStart;
+            return view('Admin.Peminjaman.index', compact('trans', 'active', 'nonActive'));
+        } else {
+            return abort('403');
+        }
     }
     public function api(Request $request)
     {

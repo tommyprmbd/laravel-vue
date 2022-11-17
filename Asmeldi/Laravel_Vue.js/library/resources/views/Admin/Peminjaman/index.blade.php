@@ -1,63 +1,70 @@
 @extends('layouts.admin')
 @section('header', 'Peminjaman')
 
-@section('content')
-    <div class="" id="controller">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-8"> <a href="#" @click="addData()" class="btn btn-default">
-                                Add Transaction
-                            </a>
-                        </div>
-                        <div class="col-md-2">
-                            <select class="form-control" name="active">
-                                <option value="">Status</option>
-                                <option value="1">Active</option>
-                                <option value="0">Non Active</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select class="form-control" name="tanggals">
 
-                                <option value="">Tanngal Pinjam</option>
-                                @foreach ($trans as $t)
-                                    <option value="{{ $t->date_start }}">{{ $t->date_start }}</option>
-                                @endforeach
+{{-- @can('index peminjaman') --}}
+@role('petugas')
+    @section('content')
+        <div class="" id="controller">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-8"> <a href="#" @click="addData()" class="btn btn-default">
+                                    Add Transaction
+                                </a>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control" name="active">
+                                    <option value="">Status</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Non Active</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <select class="form-control" name="tanggals">
 
-                            </select>
+                                    <option value="">Tanngal Pinjam</option>
+                                    @foreach ($trans as $t)
+                                        <option value="{{ $t->date_start }}">{{ $t->date_start }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+
                         </div>
 
                     </div>
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th style="width: 10px">#</th>
+                                    <th class="text-center">Tanggal Pinjam</th>
+                                    <th class="text-center">Tanggal Kembali</th>
+                                    <th class="text-center">Nama Peminjam</th>
+                                    <th class="text-center">Lama Pinjam(Hari)</th>
+                                    <th class="text-center">Total Buku</th>
+                                    <th class="text-center">Total Bayar</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="col-2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                </div>
-                <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
-                        <thead>
-                            <tr>
-                                <th style="width: 10px">#</th>
-                                <th class="text-center">Tanggal Pinjam</th>
-                                <th class="text-center">Tanggal Kembali</th>
-                                <th class="text-center">Nama Peminjam</th>
-                                <th class="text-center">Lama Pinjam(Hari)</th>
-                                <th class="text-center">Total Buku</th>
-                                <th class="text-center">Total Bayar</th>
-                                <th class="text-center">Status</th>
-                                <th class="col-2">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
+
         </div>
+    @endsection
+@endrole
+{{-- @endcan --}}
 
 
-    </div>
-@endsection
 @section('js')
 
 

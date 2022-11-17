@@ -56,3 +56,6 @@ Route::get('/api/members', [App\Http\Controllers\MemberController::class, 'api']
 Route::get('/api/books', [App\Http\Controllers\BooksController::class, 'api']);
 Route::get('/api/transanction', [App\Http\Controllers\DatapeminjamanController::class, 'api']);
 Route::get('/transanction/{transaction}/detail', [App\Http\Controllers\DatapeminjamanController::class, 'details']);
+
+//test spatie
+Route::get('/Admin', [App\Http\Controllers\AdminController::class, 'dashboard']);
