@@ -1,0 +1,36 @@
+1. menampilkan id_obat dari tabel obat
+SELECT id_obat FROM OBAT;
+
+2. menampilkan id_obat, nm_obat, stok_obat dari tabel obat dan memfilter data yang di inginkan
+SELECT id_obat, nm_obat, stok_obat FROM obat WHERE stok_obat >1000;
+
+3. menambah data tabel pasien
+INSERT INTO pasien  VALUES ('012','Heru','1998-09-01');
+
+4. menghapus data dari tabel pasien menggunakan id_pasien
+DELETE FROM pasien WHERE id_pasien = 011;
+
+5. update data dari tabel pasien
+UPDATE pasien SET id_pasien = 111 WHERE id_pasien = 012;
+
+6. operasi matematika dari tabel obat
+SELECT nm_obat, (harga_obat * stok_obat) as total FROM obat;
+
+7. describe nama tabel; berfungsi melihat deskripsi tipe data dan nama data pada tabel
+DESCRIBE pasien;
+
+8. INNER JOIN menggabungkan 2 tabel berelasi, kode yang atas sebagai tampilannya dan kode yang bawah sebagai kode relasinya
+SELECT obat.id_obat, obat.harga_obat, transaksi.jumlah_transaksi
+FROM obat
+INNER JOIN transaksi ON obat.id_obat = transaksi.id_obat;
+
+9. GROUPING + aritmatika
+select id_pasien, id_obat, sum(jumlah_transaksi) as jml_transaksi
+from
+	transaksi
+where
+	id_pasien = '001'
+group by id_pasien, id_obat;
+
+10. ORDER BY mengurutkan data yang sesuai
+select * from obat where stok_obat > 2000 order by stok_obat;
