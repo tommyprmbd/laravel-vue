@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama', 50);
             $table->string('email', 50);
-            $table->char('gender', 1);
+            $table->char('phone', 13);
             $table->text('address');
             $table->timestamps();
         });
