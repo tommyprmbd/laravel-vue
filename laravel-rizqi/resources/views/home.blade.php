@@ -1,8 +1,9 @@
 @extends('layouts.admin')
-@section('title', 'Halaman Admin')
+@section('title', 'Halaman Home')
+@section('header', 'Home')
 
 @section('content')
-    <div class="container-fluid">
-        <h1>Ini adalah Halaman Admin</h1>
+    <div class="container">
+        <h3>Ini adalah Halaman Home</h3>
     </div>
 @endsection
