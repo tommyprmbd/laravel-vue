@@ -9,7 +9,7 @@
         <div class="col-12">
         <div class="card">
         <div class="card-header">
-        <h3 class="card-title">Responsive Hover Table</h3>
+        <h3 class="card-title">Daftar Catalogs</h3>
         <div class="card-tools">
         <div class="input-group input-group-sm" style="width: 150px;">
         <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -23,51 +23,34 @@
         </div>
         
         <div class="card-body table-responsive p-0">
-        <table class="table table-hover text-nowrap">
-        <thead>
-        <tr>
-        <th>ID</th>
-        <th>User</th>
-        <th>Date</th>
-        <th>Status</th>
-        <th>Reason</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-        <td>183</td>
-        <td>John Doe</td>
-        <td>11-7-2014</td>
-        <td><span class="tag tag-success">Approved</span></td>
-        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-        </tr>
-        <tr>
-        <td>219</td>
-        <td>Alexander Pierce</td>
-        <td>11-7-2014</td>
-        <td><span class="tag tag-warning">Pending</span></td>
-        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-        </tr>
-        <tr>
-        <td>657</td>
-        <td>Bob Doe</td>
-        <td>11-7-2014</td>
-        <td><span class="tag tag-primary">Approved</span></td>
-        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-        </tr>
-        <tr>
-        <td>175</td>
-        <td>Mike Doe</td>
-        <td>11-7-2014</td>
-        <td><span class="tag tag-danger">Denied</span></td>
-        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-        </tr>
-        </tbody>
+        <table class="table table-bordered table-sm table-hover text-nowrap">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Nama</th>
+                    <th>Title Books</th>
+                    <th class="text-center">Total Books</th>
+                    <th class="text-center">Created At</th>
+                </tr>
+            </thead>
+            <tbody>
+               @foreach ($catalogs as $catalog)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $catalog->nama }}</td>
+                    <td>
+                        @foreach ($catalog->books as $dataBook)
+                            - {{ $dataBook->title }} <br>
+                        @endforeach
+                    </td>
+                    <td class="text-center">{{ count($catalog->books) }}</td>
+                    <td class="text-center">{{ date('d M Y', strtotime($catalog->created_at ))}}</td>
+                </tr>
+               @endforeach
+            </tbody>
         </table>
         </div>
-        
         </div>
-        
         </div>
         </div>
 </div>
