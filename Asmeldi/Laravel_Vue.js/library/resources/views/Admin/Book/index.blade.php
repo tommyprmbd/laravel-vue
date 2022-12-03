@@ -12,7 +12,7 @@
                     <form id="cariBuku" method="get" v-cloak>
                         @csrf
 
-                        <input type="text" v-model="searchString" class="form-control" autocomplete="off"
+                        <input type="text" v-model="searchString" class="form-control " autocomplete="off"
                             placeholder="search">
                     </form>
                 </div>
