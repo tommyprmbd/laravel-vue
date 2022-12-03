@@ -33,7 +33,8 @@ class BooksController extends Controller
         $Catalog = collect(Catalog::get());
         return view('Admin.Book.index', compact('books', 'publisher', 'Author', 'Catalog'));
     }
-    public function api()
+
+    public function api(Request $request)
     {
         $books = books::all();
 

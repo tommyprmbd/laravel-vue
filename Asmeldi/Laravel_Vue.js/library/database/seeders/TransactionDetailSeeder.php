@@ -20,10 +20,9 @@ class TransactionDetailSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $transactionDetail = new transactionDetail();
 
-            $transactionDetail->transaction_id = rand(1, 200);
+            $transactionDetail->transaction_id = rand(1, 20);
             $transactionDetail->qty = rand(1, 200);
-            $transactionDetail->book_id = rand(1, 200);
-
+            $transactionDetail->book_id = rand(1, 20);
 
             $transactionDetail->save();
         }

@@ -9,12 +9,12 @@
         <div class="row">
             <div class="col-md-5 offset-md-3">
                 <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">
-                            <i class="fas fa-search"></i>
-                        </span>
-                    </div>
-                    <input type="text" class="form-control" autocomplete="off" placeholder="search">
+                    <form id="cariBuku" method="get" v-cloak>
+                        @csrf
+
+                        <input type="text" v-model="searchString" class="form-control" autocomplete="off"
+                            placeholder="search">
+                    </form>
                 </div>
             </div>
             <div class="col-md-2">
@@ -76,28 +76,28 @@
                                 <label for="exampleInputPhoneNumber">Publisher</label>
                                 <select class="form-control select2" style="width: 100%;" name="publisher_id"
                                     id="publisher_id">
-                                    <option selected="selected">@{{ book.name_publisher }}</option>
                                     @foreach ($publisher as $publisherx)
-                                        <option value="{{ $publisherx->id }}">{{ $publisherx->name }}</option>
+                                        <option :selceted="book.piblisher_id == {{ $publisherx->id }}"
+                                            value="{{ $publisherx->id }}">{{ $publisherx->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPhoneNumber">Author</label>
                                 <select class="form-control select2" style="width: 100%;" name="author_id" id="author_id">
-                                    <option>@{{ book.name_author }}</option>
                                     @foreach ($Author as $Authorx)
-                                        <option value="{{ $Authorx->id }}">{{ $Authorx->name }}</option>
+                                        <option :selceted="book.piblisher_id == {{ $Authorx->id }}"
+                                            value="{{ $Authorx->id }}">
+                                            {{ $Authorx->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputPhoneNumber">Catalog</label>
                                 <select class="form-control select2" style="width: 100%;" name="catalog_id" id="catalog_id">
-                                    <option selected="selected">@{{ book.name_catalog }}</option>
-
                                     @foreach ($Catalog as $Catalogx)
-                                        <option value="{{ $Catalogx->id }}">{{ $Catalogx->name }}</option>
+                                        <option :selceted="book.piblisher_id == {{ $Catalogx->id }}"
+                                            value="{{ $Catalogx->id }}">{{ $Catalogx->name }}</option>
                                     @endforeach
 
                                 </select>
@@ -143,6 +143,7 @@
                 actionUrl,
                 apiUrl,
                 data: {},
+                searchString: "",
             },
             mounted: function() {
                 this.get_books()
@@ -185,6 +186,7 @@
                     var actionUrl = !this.editStatus ? this.actionUrl : this.actionUrl + '/' + id;
                     axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
                         $('#modal-default').modal('hide');
+                        window.location.reload();
                     });
                 },
                 numberWithSpace(x) {
@@ -194,13 +196,41 @@
             },
             computed: {
                 filteredList() {
-                    return this.books.filter(book => {
-                        return book.title.toLowerCase().includes(this.search.toLowerCase())
+                    var search_array = this.books,
+                        searchString = this.searchString;
+
+                    if (!searchString) {
+                        return this.books.filter(book => {
+                            return book.title.toLowerCase().includes(this.search.toLowerCase())
+                        })
+                    }
+                    searchString = searchString.trim().toLowerCase();
+
+                    search_array = search_array.filter(item => {
+                        if (item.title.toLowerCase().indexOf(searchString) !== -1) {
+                            return item;
+                        }
                     })
+
+                    // Return an array with the filtered data.
+                    return search_array;
                 }
             }
         });
     </script>
+
+    <script type="text/javascript">
+        $('select[name=cariBuku]').on('change', function() {
+            cariBuku = $('select[name=cariBuku]').val();
+            if (cariBuku == 0) {
+                controller.table.ajax.url(apiUrl).load();
+            } else {
+                controller.table.ajax.url(apiUrl + '?cariBuku=' + cariBuku).load();
+
+            }
+        });
+    </script>
+
     {{-- datatables --}}
 
 @endsection

@@ -23,10 +23,10 @@ class bookSeeder extends Seeder
             $books->isbn = $faker->randomNumber(8);
             $books->title = $faker->name;
             $books->year = rand(2010, 2022);
-            $books->publisher_id = rand(1, 200);
-            $books->author_id = rand(1, 200);
-            $books->catalog_id = rand(1, 200);
-            $books->qty = rand(1, 200);
+            $books->publisher_id = rand(1, 20);
+            $books->author_id = rand(1, 20);
+            $books->catalog_id = rand(1, 20);
+            $books->qty = rand(1, 20);
             $books->price = rand(10000, 200000);
 
             $books->save();

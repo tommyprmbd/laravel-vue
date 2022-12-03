@@ -163,7 +163,7 @@
         var data_donat = '{!! json_encode($data_donut) !!}';
         var label_donat = '{!! json_encode($label_donut) !!}';
         var data_bar = '{!! json_encode($data_bar) !!}';
-
+        console.log(label_donat, data_donat);
         $(function() {
             //-------------
             //- DONUT CHART -
@@ -188,6 +188,7 @@
                 data: donutData,
                 options: donutOptions
             })
+
             //-------------
             //- BAR CHART -
             //-------------

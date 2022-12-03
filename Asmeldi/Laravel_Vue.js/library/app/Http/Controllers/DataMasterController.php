@@ -32,6 +32,8 @@ class DataMasterController extends Controller
 
         $data_donut = books::select(DB::raw("COUNT(publisher_id) as total"))->groupBy('publisher_id')->pluck('total');
         $label_donut = Publisher::orderBy('publishers.id', 'asc')->join('books', 'publisher_id', '=', 'publishers.id')->groupBy('name')->pluck('name');
+        // dd($label_donut);
+
         $label_bar = ['Peminjaman', 'pengembalian'];
         $data_bar = [];
         foreach ($label_bar as $key => $value) {

@@ -21,7 +21,7 @@ class TransactionSeeder extends Seeder
         for ($i = 0; $i < 20; $i++) {
             $transaction = new transaction();
 
-            $transaction->member_id = rand(1, 200);
+            $transaction->member_id = rand(1, 20);
             $transaction->date_start = date('Y-m-d');
             $transaction->date_end = date('Y-m-d');
 
