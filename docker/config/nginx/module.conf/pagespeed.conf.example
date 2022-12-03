@@ -1,0 +1,36 @@
+pagespeed on;
+pagespeed FileCachePath /var/nginx/ngx_pagespeed_cache/;
+
+# Optimize Caching
+pagespeed EnableFilters canonicalize_javascript_libraries;
+pagespeed EnableFilters extend_cache;
+pagespeed ForceCaching on;
+pagespeed EnableFilters local_storage_cache;
+
+# Minimize Round Trip Times
+pagespeed EnableFilters combine_css;
+pagespeed EnableFilters flatten_css_imports;
+pagespeed EnableFilters inline_google_font_css;
+pagespeed EnableFilters insert_dns_prefetch;
+
+# Minimize Request Overhead
+
+# Minimize Payload Size
+pagespeed EnableFilters collapse_whitespace;
+pagespeed EnableFilters elide_attributes;
+pagespeed EnableFilters rewrite_javascript;
+pagespeed EnableFilters prioritize_critical_css;
+pagespeed EnableFilters dedup_inlined_images;
+pagespeed EnableFilters remove_comments;
+pagespeed EnableFilters remove_quotes;
+pagespeed EnableFilters rewrite_style_attributes,rewrite_css;
+pagespeed EnableFilters trim_urls;
+
+# Optimize Browser Rendering
+pagespeed EnableFilters convert_meta_tags;
+pagespeed EnableFilters defer_javascript;
+pagespeed EnableFilters hint_preload_subresources;
+pagespeed EnableFilters inline_preview_images;
+pagespeed EnableFilters resize_mobile_images;
+pagespeed EnableFilters lazyload_images;
+pagespeed EnableFilters responsive_images,resize_images;
