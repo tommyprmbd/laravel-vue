@@ -77,7 +77,7 @@
                                 <select class="form-control select2" style="width: 100%;" name="publisher_id"
                                     id="publisher_id">
                                     @foreach ($publisher as $publisherx)
-                                        <option :selceted="book.piblisher_id == {{ $publisherx->id }}"
+                                        <option :selected="book.publisher_id == {{ $publisherx->id }}"
                                             value="{{ $publisherx->id }}">{{ $publisherx->name }}</option>
                                     @endforeach
                                 </select>
@@ -86,7 +86,7 @@
                                 <label for="exampleInputPhoneNumber">Author</label>
                                 <select class="form-control select2" style="width: 100%;" name="author_id" id="author_id">
                                     @foreach ($Author as $Authorx)
-                                        <option :selceted="book.piblisher_id == {{ $Authorx->id }}"
+                                        <option :selected="book.author_id == {{ $Authorx->id }}"
                                             value="{{ $Authorx->id }}">
                                             {{ $Authorx->name }}</option>
                                     @endforeach
@@ -96,7 +96,7 @@
                                 <label for="exampleInputPhoneNumber">Catalog</label>
                                 <select class="form-control select2" style="width: 100%;" name="catalog_id" id="catalog_id">
                                     @foreach ($Catalog as $Catalogx)
-                                        <option :selceted="book.piblisher_id == {{ $Catalogx->id }}"
+                                        <option :selected="book.catalog_id == {{ $Catalogx->id }}"
                                             value="{{ $Catalogx->id }}">{{ $Catalogx->name }}</option>
                                     @endforeach
 
@@ -211,8 +211,8 @@
                             return item;
                         }
                     })
-  
-                    
+
+
                     // Return an array with the filtered data.
                     return search_array;
                 }
