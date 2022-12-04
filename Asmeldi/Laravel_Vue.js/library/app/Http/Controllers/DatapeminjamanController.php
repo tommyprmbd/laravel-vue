@@ -85,15 +85,15 @@ class DatapeminjamanController extends Controller
                 return array_sum(array_column($total_buku, 'qty'));
             })
             ->addColumn('total_bayar', function ($datas) {
-                // dd($datas->transactiondetils);
+                $total_buku = [];
                 foreach ($datas->transactiondetils as $tranDetail) {
                     $harga = $tranDetail->books->price;
                     $qty = $tranDetail->qty;
-                    $totalbuku[] = $harga * $qty;
+                    $total_buku[] = $harga * $qty;
                 }
-                $totalHarga = array_sum($totalbuku);
+                $totalHarga = array_sum($total_buku);
 
-                return $totalHarga;
+                return array_sum($total_buku);
             })
             ->addColumn('action', function ($datas) {
                 return '

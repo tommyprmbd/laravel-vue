@@ -24,10 +24,9 @@ class TransactionSeeder extends Seeder
             $transaction->member_id = rand(1, 20);
             $transaction->date_start = date('Y-m-d');
             $transaction->date_end = date('Y-m-d');
+            $transaction->status = '1';
 
             $transaction->save();
-            
         }
-
     }
 }

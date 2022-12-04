@@ -40,7 +40,7 @@ class DataMasterController extends Controller
             $data_bar[$key]['label'] = $label_bar[$key];
             $data_bar[$key]['backgroundColor'] = $key == 0 ? 'rgba(60,141,188,0.9)' : 'rgba(210,214,222.3)';
             $data_month = [];
-            foreach (range(1, 6) as $month) {
+            foreach (range(1, 12) as $month) {
                 if ($key == 0) {
                     $data_month[] = transaction::select(DB::raw("COUNT(*) as total"))->whereMonth('date_start', $month)->first()->total;
                 } else {

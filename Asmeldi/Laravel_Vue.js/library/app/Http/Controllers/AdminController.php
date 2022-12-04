@@ -20,7 +20,7 @@ class AdminController extends Controller
         // $user = auth()->user();
 
 
-        // $user = User::where('id', 2)->first();
+        // $user = User::where('id', 1)->first();
         // $user->assignRole('petugas');
         // $user->removeRole('petugas');
 

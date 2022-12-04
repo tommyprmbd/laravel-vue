@@ -211,7 +211,8 @@
                             return item;
                         }
                     })
-
+  
+                    
                     // Return an array with the filtered data.
                     return search_array;
                 }

@@ -194,7 +194,9 @@
             //-------------
 
             var areaChartData = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'july', 'Agus', 'September',
+                    'Oktober', 'november', 'Desember'
+                ],
                 datasets: JSON.parse(data_bar)
             }
             var barChartCanvas = $('#barChart').get(0).getContext('2d')
