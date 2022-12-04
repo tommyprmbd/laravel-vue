@@ -24,7 +24,7 @@ class DatapeminjamanController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->role('petugas')) {
+        if (auth()->user()->can('index peminjaman')) {
             $trans = transaction::get();
 
             $active = [];

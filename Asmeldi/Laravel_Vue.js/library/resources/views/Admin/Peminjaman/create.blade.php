@@ -2,8 +2,7 @@
 @section('header', 'Edit trans')
 
 @section('content')
-    <section class="content">
-    @section('content')
+    @role('petugas')
         <section class="content">
             {{-- this is modal  data author --}}
             <div class="" id="controller">
@@ -16,8 +15,7 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form class="form-horizontal" action="{{ url('transanction/') }}" autocomplete="off"
-                                method="post">
+                            <form class="form-horizontal" action="{{ url('transanction/') }}" autocomplete="off" method="post">
                                 @csrf
 
                                 <div class="card-body">
@@ -64,8 +62,8 @@
                                         <div class="col-sm-9">
                                             <div class="select2-purple">
                                                 <select class="select2" multiple="multiple" name="buku[]" id="buku[]"
-                                                    data-placeholder="Select The Books"
-                                                    data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                                    data-placeholder="Select The Books" data-dropdown-css-class="select2-purple"
+                                                    style="width: 100%;">
 
                                                     @foreach ($books as $b)
                                                         <option value="{{ $b->id }}">{{ $b->title }}</option>
@@ -90,8 +88,9 @@
             </div>
             {{-- end modal --}}
         </section>
-    @endsection
+    @endrole
 @endsection
+
 
 @section('js')
     <script type="text/javascript">

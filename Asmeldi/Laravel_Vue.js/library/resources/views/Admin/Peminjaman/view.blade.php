@@ -2,8 +2,7 @@
 @section('header', 'Edit trans')
 
 @section('content')
-    <section class="content">
-    @section('content')
+    @role('petugas')
         <section class="content">
             {{-- this is modal  data author --}}
             <div class="" id="controller">
@@ -113,8 +112,9 @@
             </div>
             {{-- end modal --}}
         </section>
-    @endsection
+    @endrole
 @endsection
+
 
 @section('js')
     <script type="text/javascript">

@@ -2,8 +2,7 @@
 @section('header', 'Edit trans')
 
 @section('content')
-    <section class="content">
-    @section('content')
+    @can('index peminjaman')
         <section class="content">
             {{-- this is modal  data author --}}
             <div class="" id="controller">
@@ -16,8 +15,8 @@
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
-                            <form class="form-horizontal" action="{{ url('transanction/' . $trans->id) }}"
-                                autocomplete="off" method="post">
+                            <form class="form-horizontal" action="{{ url('transanction/' . $trans->id) }}" autocomplete="off"
+                                method="post">
                                 {{ method_field('PUT') }}
                                 @csrf
 
@@ -127,8 +126,9 @@
             </div>
             {{-- end modal --}}
         </section>
-    @endsection
+    @endcan
 @endsection
+
 
 @section('js')
     <script type="text/javascript">
