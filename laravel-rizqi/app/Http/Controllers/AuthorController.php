@@ -14,7 +14,10 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        return view('admin.author.index');
+        // jika hanya 1 tabel tanpa relasi bisa pakai dibawah ini
+        // $author = Author::all();
+        $author = Author::with('books')->get();
+        return view('admin.author.index', compact('author'));
     }
 
     /**

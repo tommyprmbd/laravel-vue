@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalog;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -26,7 +27,7 @@ class CatalogController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.catalog.create');
     }
 
     /**
@@ -37,7 +38,20 @@ class CatalogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // add data : buat di controller, Model, Route dan tampilan di View
+
+        // cara pertama untuk tambah data ke database
+        // $catalog = new Catalog;
+        // $catalog->nama = $request->nama;
+        // $catalog->save();
+
+        // cara kedua
+        $validatedCatalog = $request->validate([
+            'nama' => ['required'],
+        ]);
+        Catalog::create($request->all());
+
+        return redirect('catalog');
     }
 
     /**
@@ -57,9 +71,12 @@ class CatalogController extends Controller
      * @param  \App\Models\Catalog  $catalog
      * @return \Illuminate\Http\Response
      */
+
+     //  update data : buat file edit.blade, buat routesnya diberi id dibelakangnya, dan isi method edit dgn menampilkan halaman dan mengambil data catalog
+    //  lalu untuk mengirim data ke databasenya tambahkan @method('PUT') di file edit didalam form, dengan  <form action="/catalog/{{ $catalog->id }}" method="post">, membuat route ke public funtion update, lalu isi dengan $catalog->update($request->all());
     public function edit(Catalog $catalog)
     {
-        //
+        return view('admin.catalog.edit', compact('catalog'));
     }
 
     /**
@@ -71,9 +88,14 @@ class CatalogController extends Controller
      */
     public function update(Request $request, Catalog $catalog)
     {
-        //
-    }
+        $validatedCatalog = $request->validate([
+            'nama' => ['required'],
+        ]);
+        $catalog->update($request->all());
 
+        return redirect('catalog');
+    }
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -82,6 +104,7 @@ class CatalogController extends Controller
      */
     public function destroy(Catalog $catalog)
     {
-        //
+        $catalog->delete();
+        return redirect('catalog');
     }
 }

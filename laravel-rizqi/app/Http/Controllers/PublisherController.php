@@ -14,7 +14,9 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        return view('admin.publisher.index');
+        $publisher = Publisher::with('books')->get();
+        
+        return view('admin.publisher.index', compact('publisher'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.publisher.create');
     }
 
     /**
@@ -35,7 +37,17 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedPublisher = $request->validate([
+            'nama' => ['required'],
+            'email' => ['required'],
+            'phone' => ['required'],
+            'address' => ['required'],
+        ]);
+        
+        // add data : buat di controller, Model, Route dan tampilan di View
+        Publisher::create($request->all());
+
+        return redirect('publisher');
     }
 
     /**
@@ -55,9 +67,12 @@ class PublisherController extends Controller
      * @param  \App\Models\Publisher  $publisher
      * @return \Illuminate\Http\Response
      */
+
+    //  update data : buat file edit.blade, buat routesnya diberi id dibelakangnya, dan isi method edit dgn menampilkan halaman dan mengambil data publisher
+    //  lalu untuk mengirim data ke databasenya tambahkan @method('PUT') di file edit didalam form, dengan  <form action="/publisher/{{ $publisher->id }}" method="post">, membuat route ke public funtion update, lalu isi dengan $publisher->update($request->all());
     public function edit(Publisher $publisher)
     {
-        //
+        return view('admin.publisher.edit', compact('publisher')); //menampilkan halaman dan mengambil data publisher
     }
 
     /**
@@ -69,7 +84,15 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher $publisher)
     {
-        //
+        $validatedPublisher = $request->validate([
+            'nama' => ['required'],
+            'email' => ['required'],
+            'phone' => ['required'],
+            'address' => ['required'],
+        ]);
+        $publisher->update($request->all());
+
+        return redirect('publisher');
     }
 
     /**
@@ -80,6 +103,7 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
-        //
+        $publisher->delete();
+        return redirect('publisher');
     }
 }
