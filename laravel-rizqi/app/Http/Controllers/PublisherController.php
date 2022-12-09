@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Publisher;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Unique;
 
 class PublisherController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,7 @@ class PublisherController extends Controller
     {
         $publisher = Publisher::with('books')->get();
         
-        return view('admin.publisher.index', compact('publisher'));
+        return view('admin.publisher', compact('publisher'));
     }
 
     /**
@@ -26,7 +30,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        return view('admin.publisher.create');
+        
     }
 
     /**
@@ -72,7 +76,7 @@ class PublisherController extends Controller
     //  lalu untuk mengirim data ke databasenya tambahkan @method('PUT') di file edit didalam form, dengan  <form action="/publisher/{{ $publisher->id }}" method="post">, membuat route ke public funtion update, lalu isi dengan $publisher->update($request->all());
     public function edit(Publisher $publisher)
     {
-        return view('admin.publisher.edit', compact('publisher')); //menampilkan halaman dan mengambil data publisher
+        // return view('admin.publisher.edit', compact('publisher')); //menampilkan halaman dan mengambil data publisher
     }
 
     /**

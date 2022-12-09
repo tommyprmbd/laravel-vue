@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="/assets/dist/css/adminlte.min.css">
+  @yield('css')
 </head>
 <!--
 `body` tag options:
@@ -168,13 +169,11 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <div class="content-header">
-      <div class="container">
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0">@yield('header')</h1>
           </div><!-- /.col -->
         </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
 
@@ -212,11 +211,16 @@
 <!-- AdminLTE -->
 <script src="/assets/dist/js/adminlte.js"></script>
 
-<!-- OPTIONAL SCRIPTS -->
+{{-- <!-- OPTIONAL SCRIPTS -->
 <script src="/assets/plugins/chart.js/Chart.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-{{-- <script src="/assets/dist/js/demo.js"></script> --}}
+<script src="/assets/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/assets/dist/js/pages/dashboard3.js"></script>
+<script src="/assets/dist/js/pages/dashboard3.js"></script> --}}
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+@yield('js')
 </body>
 </html>

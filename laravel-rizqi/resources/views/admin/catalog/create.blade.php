@@ -17,10 +17,13 @@
                     <label for="nama">Name</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-bookmark"></i></span>
+                            <span class="input-group-text"><i class="fas fa-bookmark "></i></span>
                         </div>
-                        <input type="text" class="form-control" id="nama" name="nama" placeholder="Enter Name Catalog" required>
-                    </div>
+                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" placeholder="Enter Name Catalog">
+                      </div>
+                      @error('nama')
+                          <span class="text-danger">{{ $message }}</span>
+                      @enderror
                     <!-- /.input group -->
                   </div>
                   <!-- /.form group -->

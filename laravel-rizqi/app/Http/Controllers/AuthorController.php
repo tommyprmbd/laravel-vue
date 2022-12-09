@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +20,7 @@ class AuthorController extends Controller
         // jika hanya 1 tabel tanpa relasi bisa pakai dibawah ini
         // $author = Author::all();
         $author = Author::with('books')->get();
-        return view('admin.author.index', compact('author'));
+        return view('admin.author', compact('author'));
     }
 
     /**
@@ -38,7 +41,15 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedAuthor = $request->validate([
+            'nama' => ['required'],
+            'email' => ['required'],
+            'phone' => ['required'],
+            'address' => ['required'],
+        ]);
+        Author::create($request->all());
+
+        return redirect('author');
     }
 
     /**
@@ -72,7 +83,15 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+        $validatedAuthor = $request->validate([
+            'nama' => ['required'],
+            'email' => ['required'],
+            'phone' => ['required'],
+            'address' => ['required'],
+        ]);
+        $author->update($request->all());
+
+        return redirect('author');
     }
 
     /**
@@ -83,6 +102,6 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
     }
 }

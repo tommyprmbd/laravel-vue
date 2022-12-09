@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,6 +39,7 @@ class CatalogController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    
     public function store(Request $request)
     {
         // add data : buat di controller, Model, Route dan tampilan di View
@@ -47,8 +51,9 @@ class CatalogController extends Controller
 
         // cara kedua
         $validatedCatalog = $request->validate([
-            'nama' => ['required'],
+            'nama' => 'required|unique:catalogs|max:255',
         ]);
+
         Catalog::create($request->all());
 
         return redirect('catalog');
