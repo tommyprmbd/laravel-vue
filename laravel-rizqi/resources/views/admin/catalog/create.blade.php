@@ -4,8 +4,7 @@
 @section('header', 'Catalog')
 
 @section('content')
-    <div class="container mt-3">
-        <div class="col-md-6">
+        <div class="col-md-6 mt-3">
            <form action="{{ route('catalog.store') }}" method="post">
             @csrf
             <div class="card card-primary">
@@ -37,6 +36,5 @@
               <!-- /.card -->
               
            </form>
-        </div>  
-    </div>
+        </div>
 @endsection

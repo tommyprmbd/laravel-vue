@@ -11,7 +11,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered">
+              <table id="dataTable" class="table table-bordered">
                 <thead>
                     <tr>
                         <th class="text-center" style="width: 15px">No.</th>
@@ -50,4 +50,14 @@
           </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+  <script type="text/javascript">
+    $(function () {
+      $("#dataTable").DataTable({
+
+      })
+    });
+  </script>
 @endsection

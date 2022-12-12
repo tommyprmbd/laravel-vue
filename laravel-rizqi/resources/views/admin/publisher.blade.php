@@ -12,7 +12,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table class="table table-bordered">
+                  <table id="datatable1" class="table table-bordered">
                     <thead>
                       <tr>
                         <th class="text-center">No.</th>
@@ -110,7 +110,6 @@
 @endsection
 
 @section('js')
-
 <script type="text/javascript">
     var publisher = new Vue({
         el : '#publisher',
@@ -153,4 +152,10 @@
     })
 </script>
 
+<script>
+  $(function () {
+    $("#datatable1").DataTable({
+    })
+  });
+</script>
 @endsection

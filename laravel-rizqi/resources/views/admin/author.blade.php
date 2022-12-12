@@ -16,7 +16,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table class="table table-bordered">
+              <table id="datatable" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th class="text-center">No.</th>
@@ -24,7 +24,7 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
-                    <th>Action</th>
+                    <th class="text-center">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,8 +36,8 @@
                         <td>{{ $item->phone }}</td>
                         <td>{{ $item->address }}</td>
                         <td class="text-center">
-                          <a href="#" class="btn btn-warning" @click="editData({{ $item }})">Edit</a>
-                          <a href="#" class="btn btn-danger" @click="deleteData({{ $item->id }})">Hapus</a>
+                          <a href="#" class="btn btn-sm btn-warning" @click="editData({{ $item }})">Edit</a>
+                          <a href="#" class="btn btn-sm btn-danger" @click="deleteData({{ $item->id }})">Hapus</a>
                         </td>
                      </tr>
                  @endforeach
@@ -150,4 +150,11 @@
         }
       });
     </script>
+
+<script>
+  $(function () {
+    $("#datatable").DataTable({
+    })
+  });
+</script>
 @endsection

@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('header', 'Edit Catalog')
 @section('title', 'Edit Catalog')
+
 @section('content')
-<div class="container mt-3">
-    <div class="col-md-6">
+    <div class="col-md-6 mt-3">
        <form action="{{ route('catalog.update', $catalog->id) }}" method="post">
         @csrf
         @method('PUT')
@@ -28,6 +28,5 @@
             </div>
           </div>
        </form>
-    </div>  
-</div>
+    </div>
 @endsection
