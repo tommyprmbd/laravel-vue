@@ -20,7 +20,6 @@ $data = json_decode($array, True);
             width: 100%;
             background-color: orange;
             padding: 15px 0 15px 0;
-            text-align: center;
         }
         .container{
             margin-top: 100px;
