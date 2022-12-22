@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Author;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class AuthorController extends Controller
 {
@@ -19,8 +20,19 @@ class AuthorController extends Controller
     {
         // jika hanya 1 tabel tanpa relasi bisa pakai dibawah ini
         // $author = Author::all();
-        $author = Author::with('books')->get();
-        return view('admin.author', compact('author'));
+        // $author = Author::with('books')->get();
+        // return view('admin.author', compact('author'));
+        return view('admin.author');
+    }
+
+    public function api()
+    {
+        $authors = Author::all();
+        $datatables = DataTables::of($authors)->addIndexColumn();
+
+        return $datatables->make(true);
+        // untuk menampilkan yajra datatables laraverl :
+        // composer -> route web -> controller -> vue js di viewnya
     }
 
     /**

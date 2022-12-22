@@ -23,21 +23,6 @@
                         <th class="text-center">Action</th>
                       </tr>
                     </thead>
-                    <tbody>
-                     @foreach ($publisher as $item)
-                         <tr>
-                            <td class="text-center">{{ $loop->iteration }}</td>
-                            <td>{{ $item->nama }}</td>
-                            <td>{{ $item->email }}</td>
-                            <td>{{ $item->phone }}</td>
-                            <td>{{ $item->address }}</td>
-                            <td class="text-center">
-                              <a href="#" class="btn btn-sm btn-warning" @click="editData({{ $item }})">Edit</a>
-                              <a href="#" class="btn btn-sm btn-danger" @click="deleteData({{ $item->id }})">Delete</a>
-                            </td>
-                         </tr>
-                     @endforeach
-                    </tbody>
                   </table>
                 </div>
               </div>
@@ -47,7 +32,7 @@
         <div class="modal fade" id="modal-lg">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
-              <form :action="actionurl" method="post">
+              <form :action="actionUrl" method="post" @submit="submitForm($event, data.id)">
                   @csrf
                   
                 <input type="hidden" name="_method" value="PUT" v-if="methodPUT">
@@ -111,6 +96,86 @@
 
 @section('js')
 <script type="text/javascript">
+      const actionUrl = '{{ url('publisher') }}';
+      const apiUrl = '{{ url('api/publisher') }}';
+
+      const column = [
+        {data: 'DT_RowIndex', class: 'text-center', orderable: true},
+        {data: 'nama', class: 'text-center', orderable: true},
+        {data: 'email', class: 'text-center', orderable: true},
+        {data: 'phone', class: 'text-center', orderable: true},
+        {data: 'address', class: 'text-center', orderable: true},
+        {render: function(index, row, data, meta){
+          return `
+            <a href="#" class="btn btn-sm btn-warning" onclick="modal.editData(event, ${meta.row})">Edit</a>
+            <a class="btn btn-sm btn-danger" onclick="modal.deleteData(event, ${data.id})">Delete</a>
+          `;
+        }, orderable: false, class: 'text-center'},
+        
+      ];
+
+      const modal = new Vue({
+        el: '#publisher',
+        data: {
+          datas: [],
+          data: {},
+          actionUrl,
+          apiUrl,
+          methodPUT: false,
+        },
+
+        mounted: function(){
+          this.datatable();
+        },
+
+        methods: {
+          datatable(){
+            const _this = this;
+            _this.table = $('#datatable1').DataTable({
+              ajax: {
+                url: this.apiUrl,
+                type: 'GET',
+              },
+              columns: column
+            }).on('xhr', function(){
+              _this.datas = _this.table.ajax.json().data;
+            });
+          },
+          addData(){
+                this.data = {};
+                this.methodPUT = false;
+                $('#modal-lg').modal();
+            },
+
+            editData(event, row){
+                this.data = this.datas[row];
+                this.methodPUT = true;
+                $('#modal-lg').modal();
+            },
+
+            deleteData(event, id){
+                if(confirm('Are You Sure Delete This Data?')){
+                  $(event.target).parents('tr').remove();
+                    axios.post(this.actionUrl + '/' +id, {_method : 'delete'}).then(respon => {
+                      alert('data terhapus');
+                    });
+                }
+            },
+            submitForm(event, id){
+            event.preventDefault();
+            const _this = this;
+            const actionUrl = ! this.methodPUT ? this.actionUrl : this.actionUrl + '/' + id;
+            axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
+                $('#modal-lg').modal("hide");
+                _this.table.ajax.reload();
+            });
+          },
+        }
+      });
+</script>
+
+
+{{-- <script type="text/javascript">
     var publisher = new Vue({
         el : '#publisher',
         data : {
@@ -157,5 +222,5 @@
     $("#datatable1").DataTable({
     })
   });
-</script>
+</script> --}}
 @endsection

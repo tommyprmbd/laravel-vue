@@ -29,6 +29,7 @@ Route::get('/author', [App\Http\Controllers\AuthorController::class, 'index']);
 Route::get('/member', [App\Http\Controllers\MemberController::class, 'index']);
 
 Route::resource('author', AuthorController::class); 
+Route::get('/api/author', [App\Http\Controllers\AuthorController::class, 'api']);
 
 // Route::get('/publisher', [App\Http\Controllers\PublisherController::class, 'index']);
 // Route::get('/publisher/create', [App\Http\Controllers\PublisherController::class, 'create']);
@@ -37,6 +38,8 @@ Route::resource('author', AuthorController::class);
 // Route::put('/publisher/{publisher}', [App\Http\Controllers\PublisherController::class, 'update']);
 // Route::delete('/publisher/{publisher}', [App\Http\Controllers\PublisherController::class, 'destroy']);
 Route::resource('publisher', PublisherController::class); 
+Route::get('/api/publisher', [App\Http\Controllers\PublisherController::class, 'api']); 
+// untuk yajra datatable
 
 
 // Route::get('/catalog', [App\Http\Controllers\CatalogController::class, 'index']);

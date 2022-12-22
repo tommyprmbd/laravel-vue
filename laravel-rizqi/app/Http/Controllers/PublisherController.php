@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Unique;
+use Yajra\DataTables\Facades\DataTables;
 
 class PublisherController extends Controller
 {
@@ -21,6 +22,14 @@ class PublisherController extends Controller
         $publisher = Publisher::with('books')->get();
         
         return view('admin.publisher', compact('publisher'));
+    }
+
+    public function api() 
+    {
+        $publisher = Publisher::all();
+
+        $datatable = DataTables::of($publisher)->addIndexColumn();
+        return $datatable->make(true);
     }
 
     /**

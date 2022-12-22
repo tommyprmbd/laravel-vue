@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('title', 'Halaman Author')
-@section('header', 'Author')
 
 @section('css')
     
@@ -16,7 +15,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="datatable" class="table table-bordered table-striped">
+              <table id="datatable" class="table table-sm table-bordered table-striped">
                 <thead>
                   <tr>
                     <th class="text-center">No.</th>
@@ -27,7 +26,7 @@
                     <th class="text-center">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                {{-- <tbody>
                  @foreach ($author as $item)
                      <tr>
                         <td class="text-center">{{ $loop->iteration }}</td>
@@ -41,7 +40,7 @@
                         </td>
                      </tr>
                  @endforeach
-                </tbody>
+                </tbody> --}}
               </table>
             </div>
           </div>
@@ -51,7 +50,8 @@
     <div class="modal fade" id="modal-lg">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
-            <form :action="actionUrl" method="post">
+            <form :action="actionUrl" method="post" autocomplete="off" @submit="submitForm($event, data.id)">
+                                                    {{-- @submit untuk membuat tanpa reload --}}
                 @csrf
 
                 <input type="hidden" name="_method" value="PUT" v-if="methodPUT">
@@ -100,7 +100,7 @@
                         </div>
                       </div> 
                   <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" name="submit" class="btn btn-primary">Save</button>
                   </div>
             </form>
           </div>
@@ -113,7 +113,86 @@
 @endsection
 
 @section('js')
+
     <script type="text/javascript">
+      const actionUrl = '{{ url('author') }}';
+      const apiUrl = '{{ url('api/author') }}';
+
+      const column = [
+        {data: 'DT_RowIndex', class: 'text-center', orderable: true},
+        {data: 'nama', class: 'text-center', orderable: true},
+        {data: 'email', class: 'text-center', orderable: true},
+        {data: 'phone', class: 'text-center', orderable: true},
+        {data: 'address', class: 'text-center', orderable: true},
+        {render: function(index, row, data, meta){
+          return `
+            <a href="#" class="btn btn-sm btn-warning" onclick="modal.editData(event, ${meta.row})">Edit</a>
+            <a class="btn btn-sm btn-danger" onclick="modal.deleteData(event, ${data.id})">Delete</a>
+          `;
+        }, orderable: false, class: 'text-center'},
+        
+      ];
+
+      const modal = new Vue({
+        el: '#modal',
+        data: {
+          datas: [],
+          data: {},
+          actionUrl,
+          apiUrl,
+          methodPUT: false,
+        },
+
+        mounted: function(){
+          this.datatable();
+        },
+
+        methods: {
+          datatable(){
+            const _this = this;
+            _this.table = $('#datatable').DataTable({
+              ajax: {
+                url: this.apiUrl,
+                type: 'GET',
+              },
+              columns: column
+            }).on('xhr', function(){
+              _this.datas = _this.table.ajax.json().data;
+            });
+          },
+          addData(){
+            this.data = {};
+            this.methodPUT = false;
+            $('#modal-lg').modal();
+          },
+          editData(event, row){
+            this.data = this.datas[row];
+            this.methodPUT = true;
+            $('#modal-lg').modal();
+          },
+          deleteData(event, id){
+            if(confirm("Are You Sure?")) {
+              $(event.target).parents('tr').remove();
+              axios.post(this.actionUrl+ '/' +id, {_method : 'delete'}).then(response => {
+                alert('data terhapus');
+              });
+            }
+          },
+          submitForm(event, id){
+            event.preventDefault();
+            const _this = this;
+            const actionUrl = ! this.methodPUT ? this.actionUrl : this.actionUrl + '/' + id;
+            axios.post(actionUrl, new FormData($(event.target)[0])).then(response => {
+                $('#modal-lg').modal("hide");
+                _this.table.ajax.reload();
+            });
+          },
+          // submitForm digunakan untuk membuat tanpa reload. caranya = membuat method submitForm -> memberi parameter di method editData(event, raw) dan deleteData(event, id). untuk delete data ada perubahan dan penambahan $(event.target).parents('tr').remove();
+        } 
+      });
+    </script>
+
+    {{-- <script type="text/javascript">
       var modal = new Vue({
         el : '#modal',
         data : {
@@ -156,5 +235,5 @@
     $("#datatable").DataTable({
     })
   });
-</script>
+</script> --}}
 @endsection
