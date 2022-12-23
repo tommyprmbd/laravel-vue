@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +30,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        return view('admin.author.create');
+        
     }
 
     /**
@@ -37,10 +41,12 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,['name' => ['required'] ]);
-        $this->validate($request,['email' => ['required'] ]);
-        $this->validate($request,['phone_number' => ['required','min:12'] ]);
-        $this->validate($request,['address' => ['required'] ]);
+        $this->validate($request,[
+            'name' => ['required'],
+            'email' => ['required'],
+            'phone_number' => ['required','min:12'],
+            'address' => ['required']
+        ]);
 
         Author::create($request->all());
 
@@ -66,7 +72,7 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        return view('admin.author.edit', compact('author'));
+        
     }
 
     /**
@@ -78,10 +84,12 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        $this->validate($request,['name' => ['required'] ]);
-        $this->validate($request,['email' => ['required'] ]);
-        $this->validate($request,['phone_number' => ['required'] ]);
-        $this->validate($request,['address' => ['required'] ]);
+        $this->validate($request,[
+            'name' => ['required'],
+            'email' => ['required'],
+            'phone_number' => ['required','min:12'],
+            'address' => ['required']
+        ]);
 
         $author->update($request->all());
 
@@ -97,7 +105,5 @@ class AuthorController extends Controller
     public function destroy(Author $author)
     {
         $author->delete();
-
-        return redirect('authors');
     }
 }
