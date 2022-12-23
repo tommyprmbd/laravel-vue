@@ -14,7 +14,7 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
@@ -32,7 +32,7 @@
                       <td class="text-center">{{ count($catalog->books) }}</td>
                       <td class="text-center">{{ date('H:i:s - d F Y',strtotime($catalog->created_at)) }}</td>
                       <td class="text-center">
-                        <a href="{{ url('catalogs/'.$catalog->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ url('catalogs/'.$catalog->id.'/edit') }}" class="btn btn-warning btn-sm mb-2">Edit</a>
                         <form action="{{ url('catalogs', ['id' => $catalog->id]) }}" method="POST">
                           <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
                           @method('delete')
