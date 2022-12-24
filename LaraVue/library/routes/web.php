@@ -50,3 +50,8 @@ Route::resource('/publishers', App\Http\Controllers\PublisherController::class);
 // Route::delete('/publishers/{publisher}', [App\Http\Controllers\PublisherController::class, 'destroy']);
 
 Route::resource('/authors', App\Http\Controllers\AuthorController::class);
+Route::resource('/members', App\Http\Controllers\MemberController::class);
+
+Route::get('/api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
+Route::get('/api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
+Route::get('/api/members', [App\Http\Controllers\MemberController::class, 'api']);
