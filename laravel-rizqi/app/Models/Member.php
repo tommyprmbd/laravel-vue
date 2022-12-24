@@ -9,6 +9,14 @@ class Member extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'nama',
+        'gender',
+        'phone',
+        'address',
+        'email'
+    ];
+
     public function user()
     {
         return $this->hasOne(User::class, 'member_id', 'id');

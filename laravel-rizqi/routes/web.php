@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthorController;
-use App\Http\Controllers\CatalogController;
-use App\Http\Controllers\PublisherController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\PublisherController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +26,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/book', [App\Http\Controllers\BookController::class, 'index']);
-Route::get('/author', [App\Http\Controllers\AuthorController::class, 'index']);
-Route::get('/member', [App\Http\Controllers\MemberController::class, 'index']);
+
+Route::resource('member', MemberController::class); 
+Route::get('/api/member', [App\Http\Controllers\MemberController::class, 'api']); 
 
 Route::resource('author', AuthorController::class); 
 Route::get('/api/author', [App\Http\Controllers\AuthorController::class, 'api']);
