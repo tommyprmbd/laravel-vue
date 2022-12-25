@@ -35,7 +35,7 @@
 ?>
  
 <body>
-	 <a class='btn btn-primary' href="index.php">Go to home</a>
+ <a class='btn btn-primary' href="index.php">Go to home</a>
 
  <div class="container d-flex justify-content-center">
  <div class="card shadow " style="height: 26rem; width: 25rem;">
@@ -113,7 +113,6 @@
 			<div class="md-2 row d-grid">
 				<button type="submit" class="btn btn-primary">update</button>	
 			</div>
-		</table>
 	</form>
 </div>
 	<?php
