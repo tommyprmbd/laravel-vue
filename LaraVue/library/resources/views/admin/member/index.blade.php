@@ -75,7 +75,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Gender</label>
-                                <input type="text" name="gender" class="form-control @error('gender') is-invalid @enderror" placeholder="Enter name" :value="data.gender">
+                                <input type="text" name="gender" class="form-control @error('gender') is-invalid @enderror" placeholder="Enter gender" :value="data.gender">
                                 @error('gender')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
