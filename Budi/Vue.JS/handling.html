@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>test handling</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS only -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+	<!-- JavaScript Bundle with Popper -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<h3>contoh 1 tambah nilai</h3>
+<div id="example-1">
+  <button v-on:click="counter += 1" class="btn btn-danger">tambah nilai 1</button>
+  <p>The button above has been clicked {{ counter }} times.</p>
+</div>
+<h3>contoh 2 greet</h3>
+<div id="example-2">
+  <!-- `greet` is the name of a method defined below -->
+  <button v-on:click="greet" class="btn btn-warning">Greet</button>
+</div><br>
+
+<h3>contoh 3 say</h3>
+<div id="example-3">
+  <button v-on:click="say('hi')" class="btn btn-primary">Say hi</button>
+  <button v-on:click="say('what')" class="btn btn-primary">Say what</button>
+  <button v-on:click="say('kalian luar Biasa', $event)" class="btn btn-warning">coba deh</button>
+</div>
+
+</body>
+</html>
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script type="text/javascript">
+	
+	var example1 = new Vue({
+  el: '#example-1',
+  data: {
+    counter: 0
+  }
+})
+
+
+	var example2 = new Vue({
+  el: '#example-2',
+  data: {
+    name: 'Bachtiar'
+  },
+  // define methods under the `methods` object
+  methods: {
+    greet: function (event) {
+      // `this` inside methods points to the Vue instance
+      alert('Hi kawan ' + this.name + '!')
+      // `event` is the native DOM event
+      if (event) {
+        alert(event.target.tagName)
+      }
+    }
+  }
+})
+
+	new Vue({
+  el: '#example-3',
+  methods: {
+	 say: function (message, event) {
+    // now we have access to the native event
+    if (event) {
+      event.preventDefault()
+    }
+    alert(message)
+  }
+}
+})
+</script>
