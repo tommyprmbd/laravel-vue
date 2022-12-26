@@ -30,6 +30,7 @@
                         <th class="text-center">Email</th>
                         <th class="text-center">Phone Number</th>
                         <th class="text-center">Address</th>
+                        <th class="text-center">Created At</th>
                         <th class="text-center">Actions</th>
                       </tr>
                     </thead>
@@ -66,28 +67,28 @@
               <input type="hidden" name="_method" value="PUT" v-if="editStatus">
 
               <div class="form-group">
-                    <label for="exampleInputEmail1">Name</label>
+                    <label>Name</label>
                     <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" placeholder="Enter name" :value="data.name">
                     @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Email</label>
+                    <label>Email</label>
                     <input type="text" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter email" :value="data.email">
                     @error('email')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Phone Number</label>
+                    <label>Phone Number</label>
                     <input type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror" placeholder="Enter phone number" :value="data.phone_number">
                     @error('phone_number')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Address</label>
+                    <label>Address</label>
                     <input type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Enter address" :value="data.address">
                     @error('address')
                     <div class="invalid-feedback">{{ $message }}</div>
@@ -131,6 +132,7 @@
         {data: 'email', class: 'text-center', orderable: true},
         {data: 'phone_number', class: 'text-center', orderable: true},
         {data: 'address', class: 'text-center', orderable: true},
+        {data: 'date', class: 'text-center', orderable: true},
         {render: function (index, row, data, meta){
           return `
             <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">

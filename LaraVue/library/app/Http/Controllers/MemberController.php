@@ -24,7 +24,10 @@ class MemberController extends Controller
     public function api()
     {
         $members = Member::all();
-        $datatables = datatables()->of($members)->addIndexColumn();
+        $datatables = datatables()->of($members)
+                            ->addColumn('date', function($member) {
+                                return convert_date($member->created_at);
+                            })->addIndexColumn();
 
         return $datatables->make(true);
     }
@@ -112,5 +115,7 @@ class MemberController extends Controller
     public function destroy(Member $member)
     {
         $member->delete();
+
+        return redirect('members');
     }
 }
