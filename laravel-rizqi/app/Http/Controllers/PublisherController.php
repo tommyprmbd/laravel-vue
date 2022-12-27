@@ -28,6 +28,10 @@ class PublisherController extends Controller
     {
         $publisher = Publisher::all();
 
+        foreach ($publisher as  $pub) {
+            $pub->tanggalBuat = FormatTanggal($pub->created_at);
+        } //untuk membuat fungsi helpers
+
         $datatable = DataTables::of($publisher)->addIndexColumn();
         return $datatable->make(true);
     }

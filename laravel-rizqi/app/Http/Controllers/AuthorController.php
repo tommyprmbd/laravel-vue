@@ -30,6 +30,10 @@ class AuthorController extends Controller
         $authors = Author::all();
         $datatables = DataTables::of($authors)->addIndexColumn();
 
+        foreach ($authors as  $author) {
+            $author->tanggalBuat = FormatTanggal($author->created_at);
+        } //untuk membuat fungsi helpers
+
         return $datatables->make(true);
         // untuk menampilkan yajra datatables laraverl :
         // composer -> route web -> controller -> vue js di viewnya

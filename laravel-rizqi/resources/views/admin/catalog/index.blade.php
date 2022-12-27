@@ -33,7 +33,7 @@
                             @endforeach
                         </td>
                         <td class="text-center">{{ count($catalog->books) }}</td>
-                        <td class="text-center">{{ date('d M Y', strtotime($catalog->created_at ))}}</td>
+                        <td class="text-center">{{ FormatTanggal($catalog->created_at ) }}</td>
                         <td class="text-center">
                             <a href="{{ route('catalog.edit', $catalog->id) }}" class="btn btn-sm btn-warning mb-1">Edit</a>
                             <form action="{{ route('catalog.destroy', $catalog->id) }}" method="post">
