@@ -123,8 +123,16 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="{{ url('book') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-book"></i>
+              <p>
+                Book
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="{{ url('catalog') }}" class="nav-link {{ request()->is('catalog') ? 'active' : '' }}">
-              <i class="nav-icon far fa-bookmark"></i>
+              <i class="nav-icon fas fa-table"></i>
               <p>
                 Catalog
               </p>
@@ -132,7 +140,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ url('publisher') }}" class="nav-link {{ request()->is('publisher') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-user-circle"></i>
               <p>
                 Publisher
               </p>
@@ -143,14 +151,6 @@
               <i class="nav-icon fas fa-user"></i>
               <p>
                 Author
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ url('book') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Book
               </p>
             </a>
           </li>
@@ -214,13 +214,13 @@
 <script src="/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE -->
 <script src="/assets/dist/js/adminlte.js"></script>
-
-{{-- <!-- OPTIONAL SCRIPTS -->
 <script src="/assets/plugins/chart.js/Chart.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="/assets/dist/js/demo.js"></script>
+
+<!-- OPTIONAL SCRIPTS -->
+{{-- <!-- AdminLTE for demo purposes -->
+<script src="/assets/dist/js/demo.js"></script> --}}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="/assets/dist/js/pages/dashboard3.js"></script> --}}
+<script src="/assets/dist/js/pages/dashboard3.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

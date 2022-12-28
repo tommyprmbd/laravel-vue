@@ -9,6 +9,7 @@ use App\Models\Catalog;
 use App\Models\Publisher;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -30,6 +31,34 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $books = Book::count();
+        $catalogs = Catalog::all();
+        $publishers = Publisher::count();
+        $authors = Author::count();
+
+        $data_donat = Book::select(DB::raw("COUNT(publisher_id) as total"))->groupBy("publisher_id")->orderBy("publisher_id", "asc")->pluck("total");
+        $label_donat = Publisher::orderBy('publishers.id', 'asc')->join('books', 'books.publisher_id', '=', 'publishers.id')->groupBy('nama')->pluck('nama');
+
+
+        $data_Adonat = Book::select(DB::raw("COUNT(catalog_id) as total"))->groupBy("catalog_id")->orderBy("catalog_id", "asc")->pluck("total");
+        $label_Adonat = Catalog::orderBy('catalogs.id', 'asc')->join('books', 'books.catalog_id', '=', 'catalogs.id')->groupBy('nama')->pluck('nama');
+
+        $labelBar = ['Peminjaman'];
+        $dataBar = [];
+
+        foreach ($labelBar as $key => $value) {
+            $dataBar[$key]['label'] = $labelBar[$key];
+            $dataBar[$key]['background'] = 'rgba(60,141,188,0.9';
+            $dataMonth = [];
+
+            foreach (range(1,12) as  $month) {
+                $dataMonth[] = Transaction::select(DB::raw("COUNT(*) as total"))->whereMonth('date_star', $month)->first()->total;
+            }
+            $dataBar[$key]['data'] = $dataMonth;
+        }
+
+        return view('admin.home', compact('books', 'catalogs', 'publishers', 'authors', 'data_donat', 'label_donat', 'data_Adonat', 'label_Adonat', 'dataBar'));
+
         // $members = Member::with('user')->get();
         // $publisher = Publisher::with('books')->get();
         // $catalog = Catalog::with('books')->get();
@@ -168,6 +197,6 @@ class HomeController extends Controller
 
 
         // return $data20;
-        return view('home');
+      
     }
 }
