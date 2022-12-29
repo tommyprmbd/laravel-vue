@@ -13,4 +13,9 @@ class TransactionDetail extends Model
     {
         return $this->belongsTo(Book::class, 'book_id');
     }
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class, 'transaction_id');
+    }
 }

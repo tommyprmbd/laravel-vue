@@ -11,6 +11,12 @@ class Book extends Model
 
     protected $fillable = ['isbn', 'title', 'year', 'publisher_id', 'author_id', 'catalog_id', 'qty', 'price'];
 
+    protected $table = 'books';
+
+    protected $primaryKey = 'book_id';
+
+    protected $keyType = 'string';
+
     public function publisher()
     {
         return $this->belongsTo('App\Models\Publisher', 'publisher_id');
@@ -24,5 +30,10 @@ class Book extends Model
     public function catalog()
     {
         return $this->belongsTo('App\Models\Catalog', 'catalog_id');
+    }
+
+    public function transactionDetails()
+    {
+        return $this->hasMany(TransactionDetail::class, 'book_id');
     }
 }

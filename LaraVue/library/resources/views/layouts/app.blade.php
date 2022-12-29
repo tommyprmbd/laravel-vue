@@ -140,6 +140,14 @@
             </a>
           </li>
           <li class="nav-item menu-open">
+            <a href="{{ url('datatable') }}" class="nav-link {{ request()->is('datatable') ? 'active' : ''}}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Datatable
+              </p>
+            </a>
+          </li>
+          <li class="nav-item menu-open">
             <a href="{{ url('catalogs') }}" class="nav-link {{ request()->is('catalogs') ? 'active' : ''}}">
               <i class="nav-icon fas fa-th"></i>
               <p>
