@@ -57,3 +57,4 @@ Route::get('/api/publishers', [App\Http\Controllers\PublisherController::class, 
 Route::get('/api/members', [App\Http\Controllers\MemberController::class, 'api']);
 Route::get('/api/books', [App\Http\Controllers\BookController::class, 'api']);
 Route::get('/api/transactions', [App\Http\Controllers\TransactionController::class, 'api']);
+Route::get('/transanctions/{transaction}/detail', [App\Http\Controllers\DatapeminjamanController::class, 'details']);

@@ -19,40 +19,89 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::with('member','transaction_detail')->join('transaction_details','transaction_details.transaction_id','=','transactions.id')->join('books','books.id','=','transaction_details.book_id')->get();
+        if (auth()->user()->can('index peminjaman')) {
+            $transactions = Transaction::get();
+
+            $active = [];
+            $nonActive = [];
+            foreach ($trans as $tran) {
+                if ($tran->status == 1) {
+                    $active[] = $tran->status;
+                } else {
+                    $nonActive[] = $tran->status;
+                }
+            }
+
+            $active = count($active);
+            $nonActive = count($nonActive);
         
-        return view('admin.transaction.index', compact('transactions'));
+        return view('admin.transaction.index', compact('transactions','active','nonActive'));
     }
 
     public function api()
     {
-        $transactions = Transaction::all();
-        $datatables = datatables()->of($transactions)
-                            ->addColumn('borrow_date', function($transaction) {
-                                return convert_date($transaction->date_start);
-                            })->addColumn('return_date', function($transaction) {
-                                return convert_date($transaction->date_end);
-                            })->addColumn('borrower_name', function($transaction) {
-                                return $transaction->member['name'];
-                            })->addColumn('long_term', function($transaction) {
-                                return subtract_date($transaction->date_start,$transaction->date_end);
-                            })->addColumn('book_total', function($transaction) {
-                                return $transaction->transaction_detail['qty'];
-                            })
-                            // ->addColumn('price_total', function($transaction) {
-                            //     $transactionDetail = $transaction->transaction_details;
-                            //     $priceTotal = 0;
-                            //     foreach ($transactionDetail as $key => $item) {
-                            //         $borrowPrice = $item->books->price;
-                            //         $longTerm = subtract_date($transaction->date_start,$transaction->date_end);
-                            //         $qty = $item->qty;
-                            //         $priceTotal += $borrowPrice * $longTerm * $qty;
-                            //     }
-                            //     return $priceTotal;
-                            // })
-                            ->addIndexColumn();
+        if ($request->active == '0') {
+            $datas = Transaction::with('firstMembers')->where('status', '=', $request->active)->get();
+        } elseif ($request->active == '1') {
+            $datas = Transaction::with('firstMembers')->where('status', '=', $request->active)->get();
+        } elseif ($request->tanggals) {
+            $datas = Transaction::with('firstMembers')->where('date_start', '=', $request->tanggals)->get();
+        } else {
+            $datas = Transaction::with('firstMembers')->get();
+        }
 
-        return $datatables->make(true);
+        $dataTables = datatables()->of($datas)
+            ->addColumn('nama_peminjam', function ($datas) {
+                return $datas->firstMembers[0]->name;
+            })
+            ->addColumn('lama_peminjam', function ($datas) {
+                $date_start =  $datas->date_start;
+                $date_end =  $datas->date_end;
+
+                $total_start = $date_start[8] . $date_start[9];
+                $total_end = $date_end[8] . $date_end[9];
+
+                $hari = $total_end - $total_start;
+                return $hari . " Hari";
+            })
+            ->addColumn('total_buku', function ($datas) {
+                $total_bukuu = $datas->transactiondetils;
+                $total_buku = [];
+                $total = [];
+                foreach ($total_bukuu as $index => $unit) {
+                    $total_buku[] = [
+                        'qty' => $total_bukuu[$index]->qty
+                    ];
+                }
+                return array_sum(array_column($total_buku, 'qty'));
+            })
+            ->addColumn('total_bayar', function ($datas) {
+                $total_buku = [];
+                foreach ($datas->transactiondetils as $tranDetail) {
+                    $harga = $tranDetail->books->price;
+                    $qty = $tranDetail->qty;
+                    $total_buku[] = $harga * $qty;
+                }
+                $totalHarga = array_sum($total_buku);
+
+                return array_sum($total_buku);
+            })
+            ->addColumn('action', function ($datas) {
+                return '
+                        <a href="' . url('transanctions/' . $datas->id . '/detail') . '" class="edit btn btn-primary btn-sm">Detail</a>
+                        <a href="' . url('transanctions/' . $datas->id . '/edit') . '" class="edit btn btn-success btn-sm">Edit</a>
+                        <form action="' . url('transanctions/' . $datas->id) . '" method="POST">
+                     ' . csrf_field() . '
+                    <input type="hidden" name="_method" value="DELETE" >
+                    <button type="submit" class="edit btn btn-success btn-sm"
+                        onclick="return confirm(\'Are You Sure Want to Delete?\')"
+                        >X</a>
+                    </form>';
+            })
+            ->rawColumns(['action'])
+            ->addIndexColumn();
+
+        return $dataTables->make(true);
     }
 
     /**
@@ -62,7 +111,13 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'id' => "",
+            'editStatus' => 'false'
+        ];
+        $members = Member::get();
+        $books = Book::where('qty', '!=', 0)->get();
+        return view('admin.transaction.create', compact('data', 'members', 'books'));
     }
 
     /**
@@ -73,7 +128,39 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = $this->validate($request, [
+            'member_id' => ['required', 'min:1', 'max:30'],
+            'date_start' => ['required'],
+            'date_end' => ['required'],
+            'buku' => ['required', 'min:1', 'max:300'],
+        ]);
+
+        $transaction = [
+            'member_id' => $validate['member_id'],
+            'date_start' => $validate['date_start'],
+            'date_end' => $validate['date_end'],
+            'status' => 1
+        ];
+
+        $dataTrans = Transaction::create($transaction);
+
+        $buku = $request->buku;
+        $total = [];
+        foreach ($buku as $index => $unit) {
+            $dataTransDetail = TransactionDetail::create([
+                'transaction_id' => $dataTrans['id'],
+                "book_id" => $buku[$index],
+                'qty' => 1
+            ]);
+            $total = Book::find($buku[$index]);
+
+            $updateBooks = Book::where('id', '=', $buku[$index])->update([
+                'qty' =>  $total['qty'] - '1'
+            ]);
+        }
+
+        // dd($dataTransDetail, $updateBooks, $total['qty'],  'created');
+        return redirect('transanctions');
     }
 
     /**
@@ -82,9 +169,22 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function show(Transaction $transaction)
+    public function details($id)
     {
-        //
+        $data = [
+            'id' => $id,
+            'editStatus' => 'true'
+        ];
+
+        $model = Transaction::find($id);
+        $books = Book::where('qty', '!=', 0)->get();
+        $id_member = Member::where('id', $model->member_id)->first();
+        $members = Members::get();
+        $trans = Transaction::with('member', 'transaction_details')->find($id);
+        $details = TransactionDetail::where('transaction_id', '=', $id)->with('transaction', 'books')->get();
+
+        // return $details;
+        return view('admin.transaction.show', compact('trans', 'details', 'books', 'data', 'members', 'id_member'));
     }
 
     /**
@@ -93,9 +193,23 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function edit(Transaction $transaction)
+    public function edit($id, Transaction $transaction)
     {
-        //
+        $data = [
+            'id' => $id,
+            'editStatus' => 'true'
+        ];
+
+        $model = Transaction::find($id);
+        $books = Book::where('qty', '!=', 0)->get();
+        $id_member = Member::where('id', $model->member_id)->first();
+        $members = Member::get();
+        $trans = Transaction::with('member', 'transactiondetails')->find($id);
+        $details = TransactionDetail::where('transaction_id', '=', $id)->with('transaction', 'books')->get();
+
+
+        // return $details;
+        return view('admin.transaction.edit', compact('trans', 'details', 'books', 'data', 'members', 'id_member'));
     }
 
     /**
@@ -105,9 +219,118 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Transaction $transaction)
+    public function update($id ,Request $request, Transaction $transaction)
     {
-        //
+        $data = [
+            'member_id' => $request->member_id,
+            'date_start' => $request->date_start,
+            'date_end' => $request->date_end,
+            'buku' => $request->buku,
+            'status' => $request->status
+        ];
+        $trans = [
+            'member_id' => $request->member_id,
+            'date_start' => $request->date_start,
+            'date_end' => $request->date_end,
+            'status' => '1'
+        ];
+        $datas = [];
+        $status = $data['status'];
+        if ($status == null) {
+            $books = $data['buku'];
+            if ($books == null) {
+                $transaction = Transaction::where('id',  $id)->update($trans);
+            } else {
+                $bukuu = $request->buku;
+
+                foreach ($bukuu as $buku) {
+                    $bookss[] = [
+                        'ids' => $buku,
+                    ];
+                    $getbook[] = [
+                        'id' => TransactionDetail::where([
+                            'transaction_id' => $id,
+                            'book_id' => $buku
+                        ])->get(),
+                    ];
+                    $datass = array_column($bookss, 'ids');
+                    $datas = array_column($getbook, 'id');
+                    $notNull = count($datas[0]);
+                }
+                $book_id = [];
+
+                if ($notNull > 0) {
+                    $datas = array_column($getbook, 'id');
+                    foreach ($bukuu as $index => $unit) {
+                        $idTrans = TransactionDetail::where([
+                            'transaction_id' => $id,
+                            "book_id" => $bukuu[$index],
+                        ])->first();
+
+                        $dataTransDetail = TransactionDetail::where([
+                            'transaction_id' => $id,
+                            "book_id" => $bukuu[$index],
+                        ])->update([
+                            'qty' => $idTrans['qty'] + 1
+                        ]);
+                        $total = Book::find($bukuu[$index]);
+
+                        $updateBooks = Book::where('id', '=', $bukuu[$index])->update([
+                            'qty' =>  $total['qty'] - '1'
+                        ]);
+                    }
+                } else {
+                    foreach ($bukuu as $index => $unit) {
+
+                        $dataTransDetail = TransactionDetail::create([
+                            'transaction_id' => $id,
+                            "book_id" => $bukuu[$index],
+                            'qty' => 1
+                        ]);
+                        $total = Book::find($bukuu[$index]);
+
+                        $updateBooks = Book::where('id', '=', $bukuu[$index])->update([
+                            'qty' =>  $total['qty'] - '1'
+                        ]);
+                    }
+                }
+                $return = [
+                    'detail' => $datas,
+
+                ];
+            }
+        } else {
+
+            $transactionActive = TransactionDetail::where([
+                'transaction_id' => $id,
+            ])->with('books')->get();
+
+            $getBook = [];
+            $getQtyBook = [];
+            $getQtyDetail = [];
+
+            foreach ($transactionActive as $trans) {
+                $getBook[] = $trans->books->id;
+                $getQtyBook[] = $trans->books->qty;
+                $getQtyDetail[] = $trans->qty;
+            }
+            foreach ($getBook as $index => $unit) {
+                foreach ($getQtyBook as $index => $unit) {
+                    foreach ($getQtyDetail as $index => $unit) {
+                        Book::where('id', '=', $getBook[$index])->update([
+                            'qty' =>  $getQtyBook[$index] + $getQtyDetail[$index]
+                        ]);
+                    }
+                }
+            }
+
+
+            $trans = [
+                'status' => $request->status
+            ];
+            Transaction::where('id', $id)->update($trans);
+        }
+        return redirect('transanctions');
     }
 
     /**
@@ -116,8 +339,9 @@ class TransactionController extends Controller
      * @param  \App\Models\Transaction  $transaction
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Transaction $transaction)
+    public function destroy($id, Transaction $transaction)
     {
-        //
+        $transaction->where('id', '=', $id)->delete();
+        return redirect('transanctions');
     }
 }

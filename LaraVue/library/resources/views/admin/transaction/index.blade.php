@@ -23,9 +23,9 @@
                         </div>
                         <div class="col-md-2">
                             <select class="form-control" name="status">
-                                <option value="0">All Status</option>
-                                <option value="r">Has Returned</option>
-                                <option value="nr">Not Yet Returned</option>
+                                <option value="">All Status</option>
+                                <option value="1">Has Returned</option>
+                                <option value="0">Not Yet Returned</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -79,29 +79,82 @@
             var actionUrl = "{{ url('transactions') }}";
             var apiUrl = "{{ url('api/transactions') }}";
 
-            var columns = [
-                {data: 'borrow_date', class: 'text-center', orderable: true},
-                {data: 'return_date', class: 'text-center', orderable: true},
-                {data: 'borrower_name', class: 'text-center', orderable: true},
-                {data: 'long_term', class: 'text-center', orderable: true},
-                {data: 'book_total', class: 'text-center', orderable: true},
-                {data: 'price_total', class: 'text-center', orderable: true},
-                {data: 'status', class: 'text-center', orderable: true},
-                {render: function (index, row, data, meta){
-                  return `
-                    <a class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
-                      Edit
-                    </a>
-                    <a class="btn btn-primary btn-sm" href="#">
-                      Detail
-                    </a>
-                    <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event, ${data.id})">
-                      Delete
-                    </a>`;
-                }, orderable: false, width: '200px', class: 'text-center'},
+             var columns = [
+                {
+                    data: 'date_start',
+                    class: 'text-center',
+                    orderable: true
+                },
+                {
+                    data: 'date_end',
+                    class: 'text-center',
+                    orderable: true
+                },
+                {
+                    data: 'nama_peminjam',
+                    class: 'text-center',
+                    orderable: true
+                },
+                {
+                    data: 'lama_peminjam',
+                    class: 'text-center',
+                    orderable: true
+                },
+                {
+                    data: 'total_buku',
+                    class: 'text-center',
+                    orderable: true
+                },
+                {
+                    data: 'total_bayar',
+                    class: 'text-center',
+                    orderable: true
+                },
+                {
+                    data: 'status',
+                    class: 'text-center',
+                    orderable: true
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                }
             ];
+            var controller = new Vue({
+                el: '#controller',
+                data: {
+                    datas: [], // menampung semua data author
+                    data: {}, // untuk bagian crud
+                    actionUrl, //
+                    apiUrl,
+                    editStatus: false, //
+                },
+                mounted: function() {
+                    this.datatables();
+                },
+                methods: {
+                    datatables() {
+                        const _this = this;
+                        _this.table = $('#example1').DataTable({
+                            ajax: {
+                                url: _this.apiUrl,
+                                type: 'GET',
+                            },
+                            columns: columns
+                        }).on('xhr', function() {
+                            _this.datas = _this.table.ajax.json().data;
+                        });
+                    },
+                    addData(data) {
+                        this.data = {};
+                        this.editStatus = false;
+                        window.location.href = "{{ url('transanction') }}" + '/create';
+                    }
+                },
+            });
         </script>
-        <script src="{{ asset('js/data.js') }}"></script>
         <script type="text/javascript">
         $('select[name=status]').on('change', function() {
             status = $('select[name=status]').val();
