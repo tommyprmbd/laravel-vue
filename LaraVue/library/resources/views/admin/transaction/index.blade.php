@@ -30,19 +30,10 @@
                         </div>
                         <div class="col-md-2">
                             <select class="form-control" name="date">
-                                <option value="0">Borrow Month</option>
-                                <option value="1">January</option>
-                                <option value="2">Febuary</option>
-                                <option value="3">March</option>
-                                <option value="4">April</option>
-                                <option value="5">May</option>
-                                <option value="6">June</option>
-                                <option value="7">July</option>
-                                <option value="8">August</option>
-                                <option value="9">September</option>
-                                <option value="10">October</option>
-                                <option value="11">November</option>
-                                <option value="12">December</option>
+                                <option value="0">Borrow date</option>
+                                 @foreach ($transactions as $transaction)
+                                    <option value="{{ $transaction->date_start }}">{{ $transaction->date_start }}</option>
+                                @endforeach
                             </select>
                         </div>
                       </div>
@@ -94,8 +85,8 @@
                 {data: 'borrower_name', class: 'text-center', orderable: true},
                 {data: 'long_term', class: 'text-center', orderable: true},
                 {data: 'book_total', class: 'text-center', orderable: true},
-                {data: '', class: 'text-center', orderable: true},
-                {data: '', class: 'text-center', orderable: true},
+                {data: 'price_total', class: 'text-center', orderable: true},
+                {data: 'status', class: 'text-center', orderable: true},
                 {render: function (index, row, data, meta){
                   return `
                     <a class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">
@@ -114,9 +105,9 @@
         <script type="text/javascript">
         $('select[name=status]').on('change', function() {
             status = $('select[name=status]').val();
-            if (status == 0) {
+            if (status == 'r') {
                 controller.table.ajax.url(apiUrl + '?status=' + active).load();
-            } else if (status == 1) {
+            } else if (status == 'nr') {
                 controller.table.ajax.url(apiUrl + '?status=' + active).load();
             } else {
                 controller.table.ajax.url(apiUrl).load();
