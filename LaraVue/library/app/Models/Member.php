@@ -11,10 +11,6 @@ class Member extends Model
 
     protected $fillable = ['name', 'gender', 'email', 'phone_number', 'address'];
 
-    protected $table = 'members';
-
-    protected $primaryKey = 'member_id';
-
     public function user()
     {
         return $this->hasOne('App\Models\User', 'member_id');
@@ -22,6 +18,6 @@ class Member extends Model
 
     public function transactions()
     {
-        return $this->hasMany(Transaction::class, 'member_id');
+        return $this->hasMany('App\Models\Transaction', 'member_id');
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,20 +9,15 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['member_id', 'date_start', 'date_end'];
+
     public function member()
     {
-        return $this->belongsTo(Member::class, 'member_id');
+        return $this->belongsTo('App\Models\Member', 'member_id');
     }
 
-    public function transactionDetails()
+    public function transaction_detail()
     {
-        return $this->hasMany(TransactionDetail::class, 'transaction_id');
-    }
-
-    public function getLamaPinjamAttribute()
-    {
-        $tglPinjam = Carbon::parse($this->date_start);
-        $tglKembali = Carbon::parse($this->date_end);
-        return $tglPinjam->diffInDays($tglKembali);
+        return $this->hasOne('App\Models\TransactionDetail', 'transaction_id');
     }
 }
