@@ -1,6 +1,6 @@
 <?php
 $servername = "localhost";
-$database = "perpus";
+$database = "perpus1";
 $username = "root";
 $password = "";
 

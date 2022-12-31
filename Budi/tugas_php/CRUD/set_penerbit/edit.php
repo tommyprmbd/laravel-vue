@@ -69,14 +69,14 @@
 
 			
 			<div class="mb-2 row"> 
-				<button type="submit" class="btn btn-primary">Update</button>	
+				<button name="submit" class="btn btn-primary">Update</button>	
 			</div>
 	</form>
 	</div>
 	<?php
 	 
 		// Check If form submitted, insert form data into users table.
-		if(isset($_POST['update'])) {
+		if(isset($_POST['submit'])) {
 
 			$id_penerbit = $_GET['id_penerbit'];
 			$nama_penerbit = $_POST['nama_penerbit'];

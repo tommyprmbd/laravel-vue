@@ -43,14 +43,14 @@
 			</div>
 			
 			<div class="mb-2 row d-grid"> 
-				<button type="submit" class="btn btn-primary">Add Data</button>	
+				<button name="submit" class="btn btn-primary">Add Data</button>	
 			</div>
 	</form>
 	</div>
 	<?php
 	 
 		// Check If form submitted, insert form data into users table.
-		if(isset($_POST['Submit'])) {
+		if(isset($_POST['submit'])) {
 			$id_katalog = $_POST['id_katalog'];
 			$nama = $_POST['nama'];
 			$email = $_POST['email'];

@@ -111,13 +111,13 @@
 			</div>
 
 			<div class="md-2 row d-grid">
-				<button type="submit" class="btn btn-primary">update</button>	
+				<button name="submit" class="btn btn-primary">update</button>	
 			</div>
 	</form>
 </div>
 	<?php
 		// Check If form submitted, insert form data into users table.
-		if(isset($_POST['update'])) {
+		if(isset($_POST['submit'])) {
 
 			$isbn = $_GET['isbn'];
 			$judul = $_POST['judul'];

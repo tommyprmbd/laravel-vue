@@ -104,14 +104,14 @@
 			</div>
 
 			<div class="mb-2 row d-grid">
-				<button type="submit" class="btn btn-primary">Add Data</button>	
+				<button name="submit" class="btn btn-primary">Add Data</button>	
 			</div>
 	</form>
 	</div>
 	<?php
 	 
 		// Check If form submitted, insert form data into users table.
-		if(isset($_POST['Submit'])) {
+		if(isset($_POST['submit'])) {
 			$isbn = $_POST['isbn'];
 			$judul = $_POST['judul'];
 			$tahun = $_POST['tahun'];
