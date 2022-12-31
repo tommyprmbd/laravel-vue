@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-     <div class="" id="controller">
+    <div class="" id="controller">
         <div class="modal-dialog" id="modal-default">
             <div class="modal-content">
 

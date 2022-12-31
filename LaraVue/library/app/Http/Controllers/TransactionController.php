@@ -19,7 +19,30 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->can('index peminjaman')) {
+        //pake can
+        // if (auth()->user()->can('index transaction')) {
+        //     $transactions = Transaction::get();
+
+        //     $active = [];
+        //     $nonActive = [];
+        //     foreach ($trans as $tran) {
+        //         if ($tran->status == 1) {
+        //             $active[] = $tran->status;
+        //         } else {
+        //             $nonActive[] = $tran->status;
+        //         }
+        //     }
+
+        //     $active = count($active);
+        //     $nonActive = count($nonActive);
+        
+        //     return view('admin.transaction.index', compact('transactions','active','nonActive'));
+        // } else {
+        //     return abort('403');
+        // }
+
+        //pake role
+        if (auth()->user()->role('index transaction')) {
             $transactions = Transaction::get();
 
             $active = [];
@@ -35,7 +58,10 @@ class TransactionController extends Controller
             $active = count($active);
             $nonActive = count($nonActive);
         
-        return view('admin.transaction.index', compact('transactions','active','nonActive'));
+            return view('admin.transaction.index', compact('transactions','active','nonActive'));
+        } else {
+            return abort('403');
+        }
     }
 
     public function api()
