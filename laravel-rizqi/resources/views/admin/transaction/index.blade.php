@@ -6,6 +6,8 @@
 @endsection
 
 @section('content')
+
+  @can('index peminjaman')
     <div id="transaction">
         <div class="row">
             <div class="col-12 mb-4">
@@ -83,6 +85,9 @@
             </div>
         </div>
     </div>
+  @endcan
+
+
 @endsection
 
 @section('js')

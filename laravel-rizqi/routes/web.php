@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthorController;
@@ -58,4 +59,6 @@ Route::resource('catalog', CatalogController::class);
 
 
 Route::resource('transaction', TransactionController::class);
-Route::get('/api/transaction', [App\Http\Controllers\TransactionController::class, 'api']); 
+Route::get('/api/transaction', [App\Http\Controllers\TransactionController::class, 'api']);
+
+Route::get('test_spatie', [AdminController::class, 'test_spatie']);

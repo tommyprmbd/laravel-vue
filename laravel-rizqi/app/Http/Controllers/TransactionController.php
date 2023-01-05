@@ -19,6 +19,24 @@ class TransactionController extends Controller
      */
     public function index(Request $request)
     {
+        // if (auth()->user()->can('index peminjaman')) {
+        //     $member = Transaction::with('members')->get();
+        //     $notif = Transaction::where('status', '=', '2')->get();
+           
+        //     // return $transaction;
+        //     return view('admin.transaction.index', compact('member', 'notif'));
+        // } else {
+        //     return abort('403');
+        // }
+        // if (auth()->user()->role('index peminjaman')) {
+        //     $member = Transaction::with('members')->get();
+        //     $notif = Transaction::where('status', '=', '2')->get();
+           
+        //     // return $transaction;
+        //     return view('admin.transaction.index', compact('member', 'notif'));
+        // } else {
+        //     return abort('403');
+        // }
         $member = Transaction::with('members')->get();
         $notif = Transaction::where('status', '=', '2')->get();
        
