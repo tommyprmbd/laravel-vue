@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="/assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <link rel="stylesheet" href="/assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet" href="/assets/plugins/select2/css/select2.min.css">
   @yield('css')
 </head>
 <!--
@@ -68,6 +69,20 @@
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link" data-toggle="dropdown" href="#">
+          <i class="far fa-bell"></i>
+          <span class="badge badge-warning navbar-badge"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-envelope mr-2"></i> 4 new messages
+            <span class="float-right text-muted text-sm">3 mins</span>
+          </a>
+          <div class="dropdown-divider"></div>
+        </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
@@ -162,6 +177,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('transaction') }}" class="nav-link {{ request()->is('transaction') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-shopping-cart"></i>
+              <p>
+                Transaction
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -215,7 +238,8 @@
 <!-- AdminLTE -->
 <script src="/assets/dist/js/adminlte.js"></script>
 <script src="/assets/plugins/chart.js/Chart.min.js"></script>
-
+<!-- Select2 -->
+<script src="/assets/plugins/select2/js/select2.full.min.js"></script>
 <!-- OPTIONAL SCRIPTS -->
 {{-- <!-- AdminLTE for demo purposes -->
 <script src="/assets/dist/js/demo.js"></script> --}}

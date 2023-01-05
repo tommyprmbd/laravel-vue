@@ -7,6 +7,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\PublisherController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,7 @@ Route::get('/api/publisher', [App\Http\Controllers\PublisherController::class, '
 // Route::put('/catalog/{catalog}', [App\Http\Controllers\CatalogController::class, 'update']);
 // Route::delete('/catalog/{catalog}', [App\Http\Controllers\CatalogController::class, 'destroy']);
 Route::resource('catalog', CatalogController::class); 
+
+
+Route::resource('transaction', TransactionController::class);
+Route::get('/api/transaction', [App\Http\Controllers\TransactionController::class, 'api']); 

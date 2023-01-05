@@ -34,4 +34,11 @@ class Book extends Model
     {
         return $this->belongsTo(Publisher::class, 'publisher_id', 'id');
     }
+
+    public function transaction_detail()
+    {
+        return $this->hasMany(TransactionDetail::class, 'book_id', 'id');
+    }
+
+    
 }

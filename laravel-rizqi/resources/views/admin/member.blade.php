@@ -11,7 +11,14 @@
     <div class="col-12 mb-4">
     <div class="card">
         <div class="card-header">
-            <a href="#" @click="addData()" class="btn btn-primary">Add Member</a>
+            <a href="#" @click="addData()" class="btn btn-primary">Add Member</a><br>
+            <div class="col-md-2">
+              {{-- <select class="form-control" name="gender">
+                <option value="0">Semua Gender</option>
+                <option value="p">Perem</option>
+                <option value="l">Laki</option>
+              </select> --}}
+            </div>
         </div>
         <div class="card-body">
             <table id="tablemember" class="table table-sm table table-sm table-bordered table-striped">
@@ -100,7 +107,7 @@
       </div>
     </div>
   </div>
-  
+</div>
 </div>
 @endsection
 
@@ -185,6 +192,18 @@
       });
 </script>
 
+{{-- <script type="text/javascript">
+
+  $('select[name=gender]').on('change', function(){
+    gender = $('select[name=gender]').val();
+
+    if (gender == 0){
+      member.table.ajax.url(apiUrl).load();
+    } else {
+      member.table.ajax.url(apiUrl+'?gender='+gender).load();
+    }
+  });
+</script> --}}
 
     {{-- <script>
       $(function () {

@@ -35,8 +35,8 @@
                         <td class="text-center">{{ count($catalog->books) }}</td>
                         <td class="text-center">{{ FormatTanggal($catalog->created_at ) }}</td>
                         <td class="text-center">
-                            <a href="{{ route('catalog.edit', $catalog->id) }}" class="btn btn-sm btn-warning mb-1">Edit</a>
-                            <form action="{{ route('catalog.destroy', $catalog->id) }}" method="post">
+                            <a href="{{ route('catalog.edit', $catalog->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <form class="d-inline" action="{{ route('catalog.destroy', $catalog->id) }}" method="post">
                               <input class="btn btn-sm btn-danger" type="submit" value="Delete" onclick="return confirm('Are You Sure Delete {{ $catalog->nama }} ?')">
                               @csrf
                               @method('delete')
