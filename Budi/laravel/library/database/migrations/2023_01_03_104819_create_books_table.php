@@ -25,7 +25,7 @@ class CreateBooksTable extends Migration
             $table->integer('price');
             $table->timestamps();
 
-            $table->foreign('publisher_id')->references('id')->on('publisher');
+            $table->foreign('publisher_id')->references('id')->on('publishers');
             $table->foreign('author_id')->references('id')->on('authors');
             $table->foreign('catalog_id')->references('id')->on('catalogs');
         });
