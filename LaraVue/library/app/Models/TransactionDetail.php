@@ -18,16 +18,16 @@ class TransactionDetail extends Model
 
     public function transaction()
     {
-        return $this->belongsTo('App\Models\transaction', 'transaction_id');
+        return $this->belongsTo('App\Models\Transaction', 'transaction_id');
     }
 
     public function onebooks()
     {
-        return $this->hasMany('App\Models\books', 'id');
+        return $this->hasMany('App\Models\Book', 'id');
     }
     
     public function transDetail()
     {
-        return $this->hasMany('App\Models\transaction', 'transaction_id');
+        return $this->hasMany('App\Models\Transaction', 'transaction_id');
     }
 }

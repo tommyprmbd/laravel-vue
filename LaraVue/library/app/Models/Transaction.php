@@ -27,6 +27,6 @@ class Transaction extends Model
     }
     public function id_detail()
     {
-        return $this->hasOne('App\Models\transactionDetail', 'id');
+        return $this->hasOne('App\Models\TransactionDetail', 'id');
     }
 }

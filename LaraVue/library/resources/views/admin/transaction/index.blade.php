@@ -14,49 +14,55 @@
 
     <!-- @can('index transaction') -->
     @role('worker')
-    <div id="controller">
-        <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="card">
-                      <div class="card-header row">
-                        <div class="col-md-8">
-                            <a href="#" @click="addData()" class="btn btn-sm btn-primary pull-right">Create New Transaction</a>
+    <div class="" id="controller">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-8"> <a href="#" @click="addData()" class="btn btn-default">
+                                Add Transaction
+                            </a>
                         </div>
                         <div class="col-md-2">
-                            <select class="form-control" name="status">
-                                <option value="">All Status</option>
-                                <option value="1">Has Returned</option>
-                                <option value="0">Not Yet Returned</option>
+                            <select class="form-control" name="active">
+                                <option value="">Status</option>
+                                <option value="1">Active</option>
+                                <option value="0">Non Active</option>
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <select class="form-control" name="date">
-                                <option value="0">Borrow date</option>
-                                 @foreach ($transactions as $transaction)
-                                    <option value="{{ $transaction->date_start }}">{{ $transaction->date_start }}</option>
+                            <select class="form-control" name="tanggals">
+
+                                <option value="">Tanngal Pinjam</option>
+                                @foreach ($trans as $t)
+                                    <option value="{{ $t->date_start }}">{{ $t->date_start }}</option>
                                 @endforeach
+
                             </select>
                         </div>
-                      </div>
-                      <!-- /.card-header -->
-                      <div class="card-body">
-                        <table id="datatable" class="table table-bordered table-striped">
-                          <thead>
-                            <tr>
-                              <th class="text-center">Borrow Date</th>
-                              <th class="text-center">Return Date</th>
-                              <th class="text-center">Borrower Name</th>
-                              <th class="text-center">Long-term Borrow (Day)</th>
-                              <th class="text-center">Book Total</th>
-                              <th class="text-center">Price Total</th>
-                              <th class="text-center">Status</th>
-                              <th class="text-center">Actions</th>
-                            </tr>
-                          </thead>
-                        </table>
-                      </div>
+
                     </div>
+
+                </div>
+                <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 10px">#</th>
+                                <th class="text-center">Tanggal Pinjam</th>
+                                <th class="text-center">Tanggal Kembali</th>
+                                <th class="text-center">Nama Peminjam</th>
+                                <th class="text-center">Lama Pinjam(Hari)</th>
+                                <th class="text-center">Total Buku</th>
+                                <th class="text-center">Total Bayar</th>
+                                <th class="text-center">Status</th>
+                                <th class="col-2">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -80,10 +86,13 @@
         <script src="{{ asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 
         <script type="text/javascript">
-            var actionUrl = "{{ url('transactions') }}";
-            var apiUrl = "{{ url('api/transactions') }}";
-
-             var columns = [
+            var actionUrl = '{{ url('transanction') }}';
+            var apiUrl = '{{ url('api/transanction') }}';
+            var columns = [{
+                    data: 'id',
+                    class: 'text-center',
+                    orderable: true
+                },
                 {
                     data: 'date_start',
                     class: 'text-center',
@@ -154,30 +163,30 @@
                     addData(data) {
                         this.data = {};
                         this.editStatus = false;
-                        window.location.href = "{{ url('transanction') }}" + '/create';
+                        window.location.href = "{{ url('transanctions') }}" + '/create';
                     }
                 },
             });
         </script>
         <script type="text/javascript">
-        $('select[name=status]').on('change', function() {
-            status = $('select[name=status]').val();
-            if (status == 'r') {
-                controller.table.ajax.url(apiUrl + '?status=' + active).load();
-            } else if (status == 'nr') {
-                controller.table.ajax.url(apiUrl + '?status=' + active).load();
-            } else {
-                controller.table.ajax.url(apiUrl).load();
-            }
-        });
-        $('select[name=date]').on('change', function() {
-            date = $('select[name=date]').val();
-            if (date) {
-                controller.table.ajax.url(apiUrl + '?date=' + tanggals).load();
-            } else {
-                controller.table.ajax.url(apiUrl).load();
-            }
-        });
-    </script>
+            $('select[name=active]').on('change', function() {
+                active = $('select[name=active]').val();
+                if (active == 0) {
+                    controller.table.ajax.url(apiUrl + '?active=' + active).load();
+                } else if (active == 1) {
+                    controller.table.ajax.url(apiUrl + '?active=' + active).load();
+                } else {
+                    controller.table.ajax.url(apiUrl).load();
+                }
+            });
+            $('select[name=tanggals]').on('change', function() {
+                tanggals = $('select[name=tanggals]').val();
+                if (tanggals) {
+                    controller.table.ajax.url(apiUrl + '?tanggals=' + tanggals).load();
+                } else {
+                    controller.table.ajax.url(apiUrl).load();
+                }
+            });
+        </script>
     @endsection
 </x-app-layout>

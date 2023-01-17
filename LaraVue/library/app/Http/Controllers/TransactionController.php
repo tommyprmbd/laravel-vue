@@ -3,8 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\TransactionDetail;
+use App\Models\Book;
+use App\Models\Member;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Laravel\Ui\Presets\React;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
+
 
 class TransactionController extends Controller
 {
@@ -47,7 +53,7 @@ class TransactionController extends Controller
 
             $active = [];
             $nonActive = [];
-            foreach ($trans as $tran) {
+            foreach ($transactions as $tran) {
                 if ($tran->status == 1) {
                     $active[] = $tran->status;
                 } else {
@@ -64,7 +70,7 @@ class TransactionController extends Controller
         }
     }
 
-    public function api()
+    public function api(Request $request)
     {
         if ($request->active == '0') {
             $datas = Transaction::with('firstMembers')->where('status', '=', $request->active)->get();
@@ -91,7 +97,7 @@ class TransactionController extends Controller
                 return $hari . " Hari";
             })
             ->addColumn('total_buku', function ($datas) {
-                $total_bukuu = $datas->transactiondetils;
+                $total_bukuu = $datas->transaction_details;
                 $total_buku = [];
                 $total = [];
                 foreach ($total_bukuu as $index => $unit) {
@@ -103,7 +109,7 @@ class TransactionController extends Controller
             })
             ->addColumn('total_bayar', function ($datas) {
                 $total_buku = [];
-                foreach ($datas->transactiondetils as $tranDetail) {
+                foreach ($datas->transactiondetails as $tranDetail) {
                     $harga = $tranDetail->books->price;
                     $qty = $tranDetail->qty;
                     $total_buku[] = $harga * $qty;
@@ -128,6 +134,13 @@ class TransactionController extends Controller
             ->addIndexColumn();
 
         return $dataTables->make(true);
+    }
+
+    public function apiEdit(Request $request)
+    {
+        dd('test');
+        $datas = transaction::first();
+        return $datas;
     }
 
     /**
