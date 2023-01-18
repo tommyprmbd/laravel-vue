@@ -24,6 +24,8 @@ Route::get('/catalogs', [App\Http\Controllers\CatalogController::class, 'index']
 Route::get('/catalogs/create', [App\Http\Controllers\CatalogController::class, 'create']);
 Route::post('/catalogs', [App\Http\Controllers\CatalogController::class, 'store']);
 Route::get('/catalogs/{catalog}/edit', [App\Http\Controllers\CatalogController::class, 'edit']);
+Route::put('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'update']);
+Route::delete('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'destroy']);
 
 Route::get('/publishers', [App\Http\Controllers\PublisherController::class, 'index']);
 Route::get('/authors', [App\Http\Controllers\AuthorController::class, 'index']);

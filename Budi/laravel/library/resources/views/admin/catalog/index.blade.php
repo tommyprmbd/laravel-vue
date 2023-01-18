@@ -40,7 +40,15 @@ Ini adalah halaman catalog
                       <td>{{ $catalog->name }}</td>
                       <td>{{ count($catalog->books) }}</td>
                       <td>{{ date('H:i:s - d M Y', strtotime($catalog->created_at)) }}</td>
-                      <td><a href="{{ url('catalogs/'.$catalog->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a></td>
+                      <td><a href="{{ url('catalogs/'.$catalog->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a>
+
+                        <form action="{{ url('catalogs', ['id' => $catalog->id]) }}" method="post">
+                          <input class="btn btn-danger btn-sm" type="submit" value="Delete" onclick="return
+                                confirm('Are you sure?')">    
+                          @method('delete')
+                          @csrf                      
+                        </form>
+                      </td>
                     </tr>
                     @endforeach
                   </tbody>

@@ -69,7 +69,8 @@ class CatalogController extends Controller
      */
     public function edit(Catalog $catalog)
     {
-        return view('admin.catalog.edit');
+        //return $catalog;
+        return view('admin.catalog.edit', compact('catalog'));
     }
 
     /**
@@ -81,7 +82,11 @@ class CatalogController extends Controller
      */
     public function update(Request $request, Catalog $catalog)
     {
-        //
+        $this->validate($request,['name' => ['required'],]);
+
+        $Catalog->update($request->all());
+
+        return redirect('catalogs');
     }
 
     /**
@@ -92,6 +97,7 @@ class CatalogController extends Controller
      */
     public function destroy(Catalog $catalog)
     {
-        //
+        $catalog->delete();
+        return redirect('catalogs');
     }
 }
