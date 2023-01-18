@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
+
 Route::get('/catalogs', [App\Http\Controllers\CatalogController::class, 'index']);
 Route::get('/catalogs/create', [App\Http\Controllers\CatalogController::class, 'create']);
 Route::post('/catalogs', [App\Http\Controllers\CatalogController::class, 'store']);
@@ -28,6 +29,12 @@ Route::put('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class
 Route::delete('/catalogs/{catalog}', [App\Http\Controllers\CatalogController::class, 'destroy']);
 
 Route::get('/publishers', [App\Http\Controllers\PublisherController::class, 'index']);
+Route::get('/publishers/create', [App\Http\Controllers\PublisherController::class, 'create']);
+Route::post('/publishers', [App\Http\Controllers\PublisherController::class, 'store']);
+Route::get('/publishers/{publisher}/edit', [App\Http\Controllers\PublisherController::class, 'edit']);
+Route::put('/publishers/{publisher}', [App\Http\Controllers\PublisherController::class, 'update']);
+Route::delete('/publishers/{publisher}', [App\Http\Controllers\PublisherController::class, 'destroy']);
+
 Route::get('/authors', [App\Http\Controllers\AuthorController::class, 'index']);
 Route::get('/members', [App\Http\Controllers\MemberController::class, 'index']);
 Route::get('/books', [App\Http\Controllers\BookController::class, 'index']);
