@@ -8,8 +8,7 @@ Ini adalah halaman catalog
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Table Catalog</h3>
-
+                <a href="{{ url('catalogs/create') }}" class="btn btn-sm btn-primary pull-right">Create New Catalog</a>
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
@@ -27,10 +26,11 @@ Ini adalah halaman catalog
                 <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
-                      <th>NO</th>
-                      <th>Name</th>
-                      <th>total books</th>
-                      <th>Created At</th>
+                      <th style="width: 10px">NO</th>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">total books</th>
+                      <th class="text-center">Created At</th>
+                      <th class="text-center">Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -38,12 +38,15 @@ Ini adalah halaman catalog
                     <tr>
                       <td>{{ $key+1 }}</td>
                       <td>{{ $catalog->name }}</td>
-                      <td>{{count($catalog->books) }}</td>
+                      <td>{{ count($catalog->books) }}</td>
                       <td>{{ date('H:i:s - d M Y', strtotime($catalog->created_at)) }}</td>
+                      <td><a href="{{ url('catalogs/'.$catalog->id.'/edit') }}" class="btn btn-warning btn-sm">Edit</a></td>
                     </tr>
                     @endforeach
-                    
                   </tbody>
                 </table>
               </div>
+            </div>
+          </div>
+        </div>
 @endsection
