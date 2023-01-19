@@ -34,7 +34,7 @@
                             <select class="form-control" name="tanggals">
 
                                 <option value="">Tanngal Pinjam</option>
-                                @foreach ($trans as $t)
+                                @foreach ($transactions as $t)
                                     <option value="{{ $t->date_start }}">{{ $t->date_start }}</option>
                                 @endforeach
 
@@ -163,7 +163,7 @@
                     addData(data) {
                         this.data = {};
                         this.editStatus = false;
-                        window.location.href = "{{ url('transanctions') }}" + '/create';
+                        window.location.href = "{{ url('/transanctions') }}" + '/create';
                     }
                 },
             });

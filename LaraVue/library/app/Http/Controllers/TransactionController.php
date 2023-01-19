@@ -48,7 +48,7 @@ class TransactionController extends Controller
         // }
 
         //pake role
-        if (auth()->user()->role('index transaction')) {
+        if (auth()->user()->role('worker')) {
             $transactions = Transaction::get();
 
             $active = [];
@@ -138,7 +138,7 @@ class TransactionController extends Controller
 
     public function apiEdit(Request $request)
     {
-        dd('test');
+        // dd('test');
         $datas = transaction::first();
         return $datas;
     }
