@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -84,7 +88,7 @@ class CatalogController extends Controller
     {
         $this->validate($request,['name' => ['required'],]);
 
-        $Catalog->update($request->all());
+        $catalog->update($request->all());
 
         return redirect('catalogs');
     }
