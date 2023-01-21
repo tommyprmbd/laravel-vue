@@ -1,21 +1,33 @@
 @extends('layouts.admin')
-@section('header', 'author')
+@section('header', 'publisher')
 
 @section('css')
 
 @endsection
 
 @section('content')
-<div id="controller">
- <div class="row">
-          <div class="col-md-12">
+ <!-- /.row -->
+  <div id="controller">
+        <div class="row">
+          <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <a href="#" @click="addData()" data-toggle="modal" data-target="#modal-default" class="btn btn-sm btn-primary pull-right">Create New Author</a>
+                <a href="#" @click="addData()" data-toggle="modal" data-target="#modal-default" class="btn btn-sm btn-primary pull-right">Create New Publisher</a>
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
+              <div class="card-body table-responsive p-0" style="height: 300px;">
+                <table class="table table-head-fixed text-nowrap">
                   <thead>
                     <tr>
                       <th style="width: 10px">NO</th>
@@ -27,32 +39,33 @@
                     </tr>
                   </thead>
                   <tbody>
-                  	@foreach($authors as $key => $author)
+                    @foreach($publishers as $key => $publisher)
                     <tr>
                       <td>{{ $key+1 }}</td>
-                      <td class="text-center">{{ $author->name }}</td>
-                      <td class="text-center">{{ $author->email }}</td>
-                      <td class="text-center">{{ $author->phone_number }}</td>
-                      <td class="text-center">{{ $author->address }}</td>
-                      <td><a href="#" @click="editData({{ $author }})" class="btn btn-warning btn-sm">Edit</a>
-                      <a href="#" @click="deleteData({{ $author->id }})" class="btn btn-danger btn-sm">Delete</a>
+                      <td class="text-center">{{ $publisher->name }}</td>
+                      <td class="text-center">{{ $publisher->email }}</td>
+                      <td class="text-center">{{ $publisher->phone_number }}</td>
+                      <td class="text-center">{{ $publisher->address }}</td>
+                      <td><a href="#" @click="editData({{ $publisher }})" class="btn btn-warning btn-sm">Edit</a>
+                      <a href="#" @click="deleteData({{ $publisher->id }})" class="btn btn-danger btn-sm">Delete</a>
                       </td>
                     </tr>
                     @endforeach
                   </tbody>
                 </table>
               </div>
-             </div>
             </div>
+          </div>
         </div>
-            <!-- /.card -->
-     <div class="modal fade" id="modal-default">
+
+        <!-- modal popup -->
+        <div class="modal fade" id="modal-default">
         <div class="modal-dialog">
           <div class="modal-content">
             <form method="post" :action="actionUrl" autocomplete="off">
             <div class="modal-header">
 
-              <h4 class="modal-title">Author</h4>
+              <h4 class="modal-title">Publisher</h4>
 
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -90,9 +103,7 @@
      </div>
         <!-- /.modal-dialog -->
    </div>
-</div>
-      <!-- /.modal -->
-      
+ </div>
 @endsection
 
 @section('js')
@@ -101,7 +112,7 @@
     el: '#controller',
     data: {
         data : {},
-        actionUrl : '{{ url('authors') }}',
+        actionUrl : '{{ url('publishers') }}',
         editStatus : false
     },
     mounted: function(){
@@ -110,18 +121,18 @@
     methods: {
         addData(){
           this.data = {};
-          this.actionUrl = '{{ url('authors') }}';
+          this.actionUrl = '{{ url('publishers') }}';
           this.editStatus = false;
           $('#modal-default').modal();
         },
         editData(data){
           this.data = data;
-          this.actionUrl = '{{ url('authors') }}'+'/'+data.id;
+          this.actionUrl = '{{ url('publishers') }}'+'/'+data.id;
           this.editStatus = true;
           $('#modal-default').modal();
         },
         deleteData(id){
-          this.actionUrl = '{{ url('authors') }}'+'/'+id;
+          this.actionUrl = '{{ url('publishers') }}'+'/'+id;
           if (confirm("are you sure ?")) {
               axios.post(this.actionUrl, {_method: 'DELETE'}).then(response => {
                   location.reload();
