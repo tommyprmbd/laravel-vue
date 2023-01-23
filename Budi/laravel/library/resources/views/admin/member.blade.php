@@ -62,8 +62,8 @@
               <div class="from-group">
                 <label>Gender</label>
                 <br>
-                <input type="radio" name="gender" id="P" :value="data.gender" value="P" checked><label>Perempuan</label> 
-                <input type="radio" name="gender" id="L" :value="data.gender" value="L"><label>Laki-Laki</label>
+                <input type="radio" name="gender" id="P" :value="!!data.gender==''?'P' : data.gender" checked><label>Perempuan</label> 
+                <input type="radio" name="gender" id="L" :value="!!data.gender==''?'L' : data.gender" ><label>Laki-Laki</label>
                 <br>
               </div>
 
