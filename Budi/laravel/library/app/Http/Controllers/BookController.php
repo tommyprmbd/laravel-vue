@@ -48,17 +48,18 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        
         $this->validate($request,[
             'isbn' => ['required'],
             'title' => ['required'],
             'year' => ['required'],
-            'publishers_name' => ['required'],
-            'authors_name' => ['required'],
-            'catalogs_name' => ['required'],
+            'publisher_id' => ['required'],
+            'author_id' => ['required'],
+            'catalog_id' => ['required'],
             'qty' => ['required'],
             'price' => ['required'],
         ]);
+        // dd($request->all());
         Book::create($request->all());
 
         return redirect('books');
