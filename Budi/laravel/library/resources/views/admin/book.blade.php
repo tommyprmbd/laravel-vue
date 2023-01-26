@@ -178,14 +178,14 @@
 					$('#modal-default').modal();
 				},
 				deleteData(id){
-          		
-          			this.actionUrl = '{{ url('books') }}'+'/'+id;
-          			if (confirm("are you sure ?")) {
-              		axios.post(this.actionUrl, {_method: 'DELETE'}).then(response => {
-                 	 location.reload();
-             		 });
-        		 }
-          		 },
+      
+          this.actionUrl = '{{ url('books') }}'+'/'+id;
+          if (confirm("are you sure ?")) {
+          axios.post(this.actionUrl, {_method: 'DELETE'}).then(response => {
+              location.reload();
+            });
+        	}
+        },
 				numberWithSpaces(x) {
    					 return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 				}
