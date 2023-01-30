@@ -12,14 +12,18 @@ class MemberController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('admin.member');
+    public function index() {
+     return view('admin.member');
     }
 
-    public function api()
-    {
-        $members = member::all();
+    public function api(Request $request)
+    { 
+        if ($request->gender) {
+            $members = member::where('gender', $request->gender)->get();
+        } else {
+            $members = member::all();
+        }
+
         $datatables = datatables()->of($members)->addIndexColumn();
 
         return $datatables->make(true);

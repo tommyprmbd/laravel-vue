@@ -16,6 +16,13 @@
               <div class="card-header">
                 <a href="#" @click="addData()" data-toggle="modal" data-target="#modal-default" class="btn btn-sm btn-primary pull-right">Create New Member</a>
               </div>
+              <div class="col-md-2">
+                <select class="form-control" name="gender">
+                  <option value="0">Semua Jenis Kelamin</option>
+                  <option value="P">Perempuan</option>
+                  <option value="L">Laki Laki</option>
+                </select> 
+              </div>
               <!-- /.card-header -->
               <div class="card-body">
                 <table id="datatable" class="table table-bordered">
@@ -133,14 +140,18 @@
         }, orderable: false, width: '200px', class: 'text-center'},
     ];
 </script>
+
 <script src="{{ asset('js/data.js') }}"></script>
-<!-- Page specific script -->
-<!-- <script>
-  $(function () {
-    $("#datatable").datatable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+<script type="text/javascript">
+    $('select[name=gender]').on('change', function() {
+        gender = $('select[name=gender]').val();
+
+        if (gender == 0) {
+            controller.table.ajax.url(apiUrl).load();
+        } else {
+            controller.table.ajax.url(apiUrl + '?gender=' + gender).load();
+        }
   });
-</script> -->
+</script>
 @endsection

@@ -9,6 +9,8 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['member_id','date_start','date_end','status'];
+
     public function members(){
     	return $this->hasOne('App\Models\Book','member_id');
     }
