@@ -43,7 +43,7 @@ class TransactionController extends Controller
         }
 
         // yajra data table
-        $datatables = datatables()->of($transactions)->addIndexColumn();
+        $datatables = datatables()->of($dataT)->addIndexColumn();
 
         return $datatables->make(true);
     }

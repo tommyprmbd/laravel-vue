@@ -18,7 +18,7 @@
                     url: _this.apiUrl,
                     type: 'GET',
                 },
-                columns
+                columns: columns
             }).on('xhr', function() {
               _this.datas = _this.table.ajax.json().data;
             });
