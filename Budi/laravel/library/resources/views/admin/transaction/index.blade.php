@@ -81,7 +81,7 @@
         {data: 'DT_RowIndex', class: 'text-center', orderable: true},
         {data: 'date_start', class: 'text-center', orderable: true},
         {data: 'date_end', class: 'text-center', orderable: true},
-        {data: 'member_id', class: 'text-center', orderable: true},
+        {data: 'nama_peminjam', class: 'text-center', orderable: true},
         {data: 'lama_minjam', class: 'text-center', orderable: true},
         {data: 'total_buku', class: 'text-center', orderable: true},
         {data: 'total_bayar', class: 'text-center', orderable: true},

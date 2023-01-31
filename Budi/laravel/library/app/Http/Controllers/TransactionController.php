@@ -45,17 +45,18 @@ class TransactionController extends Controller
         // yajra data table
         $datatables = datatables()->
             of($dataT)
+            ->addColumn('nama_peminjam', function($dataT){
+                // $dataT =  Transaction::where('member_id', '=', 'members.name');
+                return $dataT->members->name('member_id');
+            })
             ->addColumn('lama_minjam', function($dataT){
-                return 'lama minjam';
+                return 'lama_minjam';
             })
             ->addColumn('total_buku', function($dataT){
                 return 'total_buku';
             })
             ->addColumn('total_bayar', function($dataT){
                 return 'total_bayar';
-            })
-            ->addColumn('status', function($dataT){
-                return 'status';
             })
             ->addIndexColumn();
 
