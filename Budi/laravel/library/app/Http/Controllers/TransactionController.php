@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
-use App\Models\Books;
-use App\Models\Members;
+use App\Models\Book;
+use App\Models\Member;
 use App\Models\TransactionDetail;
 use Illuminate\Http\Request;
 use Laravel\Ui\Presets\React;
@@ -46,17 +46,41 @@ class TransactionController extends Controller
         $datatables = datatables()->
             of($dataT)
             ->addColumn('nama_peminjam', function($dataT){
-                // $dataT =  Transaction::where('member_id', '=', 'members.name');
-                return $dataT->members->name('member_id');
+                return $dataT->member->name;
             })
             ->addColumn('lama_minjam', function($dataT){
-                return 'lama_minjam';
+                $date_start =  $dataT->date_start;
+                $date_end =  $dataT->date_end;
+                $total_dstart = $date_start[8] . $date_start[9];
+                $total_dend = $date_end[8] . $date_end[9];
+
+                $hari = $total_dend - $total_dstart;
+                return $hari . " Hari";
             })
             ->addColumn('total_buku', function($dataT){
-                return 'total_buku';
+                $total_bukuA = $dataT->TransactionDetail;
+                $total_bukuB = [];
+                $total = [];
+                foreach ($total_bukuB as $index => $unit) {
+                    $total_bukuA[] = [
+                        'qty' => $total_bukuB[$index]->qty
+                    ];
+                }
+                return array_sum(array_column($total_bukuB, 'qty'));
+                
             })
             ->addColumn('total_bayar', function($dataT){
-                return 'total_bayar';
+                $grandTotal = [];
+                dd($dataT->TransactionsDetail);
+                foreach ($dataT->TransactionsDetail as $tranDetail) {
+                    $HargaBuku = $tranDetail->Book->price;
+                    $qty = $tranDetail->qty;
+                    $total = $harga * $qty;
+                }
+                $grandTotal = array_sum($total);
+
+                return array_sum($grandTotal);
+                // return 'total';
             })
             ->addIndexColumn();
 
@@ -88,9 +112,32 @@ class TransactionController extends Controller
             'status' => ['required'],
         ]);
 
-        transaction::create($request->all());
+        $transaction = [
+            'member_id' => $validate['member_id'],
+            'date_start' => $validate['date_start'],
+            'date_end' => $validate['date_end'],
+            'status' => 1
+        ];
+
+        // transaction::create($request->all());
+
+        $dataTrans = transaction::create($transaction);
+        $bukuB = $request->bukuB;
+        $total = [];
+        foreach ($bukuB as $index => $unit) {
+            $TransDetail = transactionDetail::create([
+                'transaction_id' => $dataTrans['id'],
+                "book_id" => $bukuB[$index],
+                'qty' => 1
+            ]);
+
+            $total = Book::find($bukuB[$index]);
+            $updateBooks = Book::where('id', '=', $bukuB[$index])->update([
+                'qty' =>  $total['qty'] - '1'
+            ]);
 
         return redirect('transactions');
+            }
     }
 
     /**
