@@ -12,7 +12,7 @@ class Transaction extends Model
     protected $fillable = ['member_id','date_start','date_end','status'];
 
     public function member(){
-    	return $this->belongsTo('App\Models\member','member_id');
+    	return $this->belongsTo('App\Models\Member','member_id');
     }
 
     public function TransactionDetail(){

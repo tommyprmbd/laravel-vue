@@ -31,11 +31,11 @@ class TransactionController extends Controller
     public function api(Request $request)
     {
         if ($request->status) {
-            $dataT = Transaction::where('status', $request->status)->get();
+            $dataT = Transaction::where('status', $request->status)->orderBy('id', 'desc')->get();
         } else if ($request->tanggal){
-            $dataT = Transaction::where('date_start', $request->tanggal)->get();
+            $dataT = Transaction::where('date_start', $request->tanggal)->orderBy('id', 'desc')->get();
         } else {
-            $dataT = Transaction::all();
+            $dataT = Transaction::orderBy('id', 'desc')->get();
         }
         // yajra data table
         $datatables = datatables()->
@@ -92,7 +92,7 @@ class TransactionController extends Controller
         ];
         $members = member::get();
         $books = Book::where('qty', '!=', 0)->get();
-        return view('Admin.transaction.create', compact('data', 'members', 'books'));
+        return view('admin.transaction.create', compact('data', 'members', 'books'));
     }
 
     /**
@@ -107,35 +107,58 @@ class TransactionController extends Controller
             'member_id' => ['required'],
             'date_start' => ['required'],
             'date_end' => ['required'],
-            'status' => ['required'],
+            'buku' => ['required','array'],
+            'buku.*' => ['required','int','min:1']
         ]);
 
-        $transaction = [
-            'member_id' => $validate['member_id'],
-            'date_start' => $validate['date_start'],
-            'date_end' => $validate['date_end'],
-            'status' => 1
+        $data = [
+            'member_id' => $request->get('member_id'),
+            'date_start' => $request->get('date_start'),
+            'date_end' => $request->get('date_end'),
+            'status' => 'belum'
         ];
 
+        DB::beginTransaction();
+        try {
+            $transaction = Transaction::create($data);
+
+            $books = $request->get('buku');
+            foreach ($books as $book) {
+                $dtl = TransactionDetail::create([
+                    'transaction_id' => $transaction->id,
+                    'book_id' => $book,
+                    'qty' => 1
+                ]);
+
+                if ($dtl) {
+                    $bookObj = Book::find($book);
+                    $bookObj->qty -= 1;
+                    $bookObj->save();
+                }
+            }
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+        DB::commit();
         // transaction::create($request->all());
 
-        $dataTrans = transaction::create($transaction);
-        $bukuB = $request->bukuB;
-        $total = [];
-        foreach ($bukuB as $index => $unit) {
-            $TransDetail = transactionDetail::create([
-                'transaction_id' => $dataTrans['id'],
-                "book_id" => $bukuB[$index],
-                'qty' => 1
-            ]);
+        // $dataTrans = transaction::create($transaction);
+        // $bukuB = $request->bukuB;
+        // $total = [];
+        // foreach ($bukuB as $index => $unit) {
+        //     $TransDetail = transactionDetail::create([
+        //         'transaction_id' => $dataTrans['id'],
+        //         "book_id" => $bukuB[$index],
+        //         'qty' => 1
+        //     ]);
 
-            $total = Book::find($bukuB[$index]);
-            $updateBooks = Book::where('id', '=', $bukuB[$index])->update([
-                'qty' =>  $total['qty'] - '1'
-            ]);
+        //     $total = Book::find($bukuB[$index]);
+        //     $updateBooks = Book::where('id', '=', $bukuB[$index])->update([
+        //         'qty' =>  $total['qty'] - '1'
+        //     ]);
 
-        return redirect('transactions');
-            }
+        // }
+        return redirect()->route('transactions.index');
     }
 
     /**

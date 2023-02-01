@@ -20,7 +20,7 @@
                     <label class="col-sm-3 col-form-label">Anggota</label>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <select class="custom-select">
+                            <select name="member_id" class="custom-select">
                               @foreach ($members as $m)
                                 <option value="{{ $m->id }}">{{ $m->name }}</option>
                               @endforeach
@@ -52,7 +52,7 @@
                     <label class="col-sm-3 col-form-label">Buku </label>
                         <div class="col-sm-9">
                           <div class="select2-blue">
-                          <select class="select2" multiple="multiple" data-placeholder="Select Books" data-dropdown-css-class="select2-blue"style="width: 100%;">
+                          <select class="select2" name="buku[]" multiple="multiple" data-placeholder="Select Books" data-dropdown-css-class="select2-blue"style="width: 100%;">
                                 @foreach ($books as $tb)
                           <option value="{{ $tb->id }}">{{ $tb->title }}</option>
                                 @endforeach
