@@ -32,16 +32,11 @@ class TransactionController extends Controller
     {
         if ($request->status) {
             $dataT = Transaction::where('status', $request->status)->get();
-        } else {
-            $dataT = Transaction::all();
-        }        
-        
-        if ($request->tanggal) {
-            $dataT = Transaction::where('date_start', $request->tanggals)->get();
+        } else if ($request->tanggal){
+            $dataT = Transaction::where('date_start', $request->tanggal)->get();
         } else {
             $dataT = Transaction::all();
         }
-
         // yajra data table
         $datatables = datatables()->
             of($dataT)
@@ -66,20 +61,17 @@ class TransactionController extends Controller
                         'qty' => $total_bukuB[$index]->qty
                     ];
                 }
-                return array_sum(array_column($total_bukuB, 'qty'));
+                return $dataT->TransactionDetail->sum('qty');
                 
             })
             ->addColumn('total_bayar', function($dataT){
-                $grandTotal = [];
-                dd($dataT->TransactionsDetail);
-                foreach ($dataT->TransactionsDetail as $tranDetail) {
+                $grandTotal = 0;
+                foreach ($dataT->TransactionDetail as $tranDetail) {
                     $HargaBuku = $tranDetail->Book->price;
                     $qty = $tranDetail->qty;
-                    $total = $harga * $qty;
+                    $grandTotal = $HargaBuku * $qty;
                 }
-                $grandTotal = array_sum($total);
-
-                return array_sum($grandTotal);
+                return $grandTotal;
                 // return 'total';
             })
             ->addIndexColumn();
@@ -94,7 +86,13 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'id' => "",
+            'editStatus' => 'false'
+        ];
+        $members = member::get();
+        $books = Book::where('qty', '!=', 0)->get();
+        return view('Admin.transaction.create', compact('data', 'members', 'books'));
     }
 
     /**

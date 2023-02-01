@@ -15,7 +15,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-8"> <a href="#" @click="addData()" class="btn btn-default">
+                        <div class="col-md-8"> <a href="{{ url('transactions/create') }}" class="btn btn-default">
                             Add Transaction</a>
                         </div>
                         <div class="col-md-2">
@@ -88,8 +88,7 @@
         {data: 'status', class: 'text-center', orderable: true},
         {render: function (index, row, data, meta){
             return `
-              <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event,
-              ${meta.row})">
+              <a href="{{ url('transactions/AddEdit') }}" class="btn btn-warning btn-sm">
               Edit
               </a>
               <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event,
@@ -119,8 +118,9 @@
                     controller.table.ajax.url(apiUrl + '?status=' + status).load();
                 }
             });
-
-            $('select[name=tanggal]').on('change', function() {
+</script>
+<script type="text/javascript">
+    $('select[name=tanggal]').on('change', function() {
                 tanggal = $('select[name=tanggal]').val();
                 if (tanggal) {
                     controller.table.ajax.url(apiUrl + '?tanggal=' + tanggal).load();
