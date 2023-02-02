@@ -29,8 +29,9 @@ class TransactionController extends Controller
     {
         if (auth()->user()->role('petugas')) {
             $dataT = Transaction::get();
+            $members = Member::get();
 
-            return view('admin.transaction.index', compact('dataT'));
+            return view('admin.transaction.index', compact('dataT', 'members'));
         } else {
             return abort('403');
         }

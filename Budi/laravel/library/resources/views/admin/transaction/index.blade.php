@@ -98,22 +98,23 @@
 
                <div class="from-group">
                 <label>Nama Peminjam</label>
-                <input type="text" class="form-control" name="email" :value="data.nama_peminjam" required="">
-              </div>
+                <div class="col-sm-4">
+                        <div class="form-group">
+                            <select name="nama_peminjam" class="custom-select" :value="data.nama_peminjam">
+                              @foreach ($members as $m)
+                                <option value="{{ $m->id }}">{{ $m->name }}</option>
+                              @endforeach
+                             </select>
+                        </div>
+                </div>
+               </div>
 
-               <div class="from-group">
-                <label>Lama Meminjam</label>
-                <input type="text" class="form-control" name="email" :value="data.lama_minjam" required="">
-              </div>
-
-               <div class="from-group">
-                <label>Total Buku</label>
-                <input type="text" class="form-control" name="email" :value="data.total_buku" required="">
-              </div>
-
-               <div class="from-group">
-                <label>TOtal Bayar</label>
-                <input type="text" class="form-control" name="email" :value="data.total_bayar" required="">
+              <div class="from-group">
+                <label>Status</label>
+                <br>
+                <input type="radio" name="status" id="sudah" :value="!!data.status==''?'P' : data.status" checked><label>Sudah Dikembalikan</label> 
+                <input type="radio" name="status" id="belum" :value="!!data.status==''?'L' : data.status" ><label>Belum dikembalikan</label>
+                <br>
               </div>
 
             </div>
