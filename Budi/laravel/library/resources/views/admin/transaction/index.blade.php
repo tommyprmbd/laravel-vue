@@ -56,6 +56,77 @@
             </div>
         </div>
     </div>
+
+               <!-- /.card -->
+     <div class="modal fade" id="modal-default">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <form method="post" :action="actionUrl" autocomplete="off" @submit="submitForm($event, data.id)">
+            <div class="modal-header">
+
+              <h4 class="modal-title">Transaction Edit</h4>
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              @csrf
+
+              <input type="hidden" name="_method" value="PUT" v-if="editStatus">
+                       
+                        <label>Tanggal Start/End</label>
+                    <div class="form-group row">
+                         <div class="col-sm-4 mr-5">
+                             <div class="input-group-prepend">
+                                 <input type="date" name="date_start" id="date_start" :value="data.date_start" class="form-control">
+                                 <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                  </span>
+                             </div>
+                         </div>
+                         
+                         <div class="col-sm-4">
+                             <div class="input-group-prepend">
+                                 <input type="date" name="date_end" id="date_end" class="form-control" :value="data.date_end">
+                                 <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                 </span>
+                             </div>
+                         </div>
+                    </div>
+
+               <div class="from-group">
+                <label>Nama Peminjam</label>
+                <input type="text" class="form-control" name="email" :value="data.nama_peminjam" required="">
+              </div>
+
+               <div class="from-group">
+                <label>Lama Meminjam</label>
+                <input type="text" class="form-control" name="email" :value="data.lama_minjam" required="">
+              </div>
+
+               <div class="from-group">
+                <label>Total Buku</label>
+                <input type="text" class="form-control" name="email" :value="data.total_buku" required="">
+              </div>
+
+               <div class="from-group">
+                <label>TOtal Bayar</label>
+                <input type="text" class="form-control" name="email" :value="data.total_bayar" required="">
+              </div>
+
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+          </form>
+        </div>
+          <!-- /.modal-content -->
+     </div>
+        <!-- /.modal-dialog -->
+   </div>
 </div>
 @endrole
 @endsection
@@ -90,7 +161,8 @@
         {data: 'status', class: 'text-center', orderable: true},
         {render: function (index, row, data, meta){
             return `
-             <a class="btn btn-warning btn-sm" href="{{ url('transactions/'.$transaction->id.'/edit') }}">
+             <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event,
+              ${meta.row})">
               Edit
               </a>
               <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event,
