@@ -41,9 +41,13 @@ Route::resource('/books', App\Http\Controllers\BookController::class);
 Route::resource('/home', App\Http\Controllers\HomeController::class);
 Route::resource('/transactions', App\Http\Controllers\TransactionController::class);
 
+
 Route::get('/api/authors',[App\Http\Controllers\AuthorController::class, 'api']);
 Route::get('/api/members',[App\Http\Controllers\MemberController::class, 'api']);
 Route::get('/api/books',[App\Http\Controllers\BookController::class, 'api']);
 Route::get('/api/publishers',[App\Http\Controllers\PublisherController::class, 'api']);
 Route::get('/api/catalogs',[App\Http\Controllers\CatalogController::class, 'api']);
 Route::get('/api/transactions',[App\Http\Controllers\TransactionController::class, 'api']);
+
+// Route::get('test_spatie', 'TransactionController@test_spatie');
+Route::get('test_spatie', [App\Http\Controllers\TransactionController::class, 'test_spatie']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaction;
+use App\Models\User;
 use App\Models\Book;
 use App\Models\Member;
 use App\Models\TransactionDetail;
@@ -10,6 +11,8 @@ use Illuminate\Http\Request;
 use Laravel\Ui\Presets\React;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class TransactionController extends Controller
 {
@@ -24,10 +27,19 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        $dataT = Transaction::get();
-        return view('admin.transaction.index', compact('dataT'));
-    }
+        if (auth()->user()->role('petugas')) {
+            $dataT = Transaction::get();
 
+            return view('admin.transaction.index', compact('dataT'));
+        } else {
+            return abort('403');
+        }
+
+        // $dataT = Transaction::get();
+
+        //     return view('admin.transaction.index', compact('dataT'));
+
+    }
     public function api(Request $request)
     {
         if ($request->status) {
@@ -180,7 +192,7 @@ class TransactionController extends Controller
      */
     public function edit(transaction $transaction)
     {
-        //
+        return view('admin.transaction.edit', compact('transaction'));
     }
 
     /**
@@ -213,5 +225,28 @@ class TransactionController extends Controller
     public function destroy(transaction $transaction)
     {
         // $transaction->delete();
+    }
+
+    public function test_spatie()
+    {
+        // $role = Role::create(['name' => 'petugas']);
+        // $permission = permission::create(['name' => 'index transaction']);
+
+        // $role->givePermissionTo($permission);
+        // $permission->assignRole($role);
+
+        // $user = User::where('id',2)->first();
+
+        // $user = auth()->user();
+        // $user->assignRole('petugas');
+        // return $user;    
+
+        // $user = auth()->user();
+        // $user = User::with('roles')->get();
+        // return $user;
+
+        // $user = auth()->user();
+        // $user->removeRole('petugas');
+
     }
 }

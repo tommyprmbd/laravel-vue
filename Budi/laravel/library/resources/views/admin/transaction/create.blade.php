@@ -8,7 +8,7 @@
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Create Transaction</h3>
+                <h3 class="card-title">Create/</h3><a class="" href="{{ url('transactions/edit') }}">Edit Transaction</a>
               </div>
               <!-- /.card-header -->
               <!-- form start -->

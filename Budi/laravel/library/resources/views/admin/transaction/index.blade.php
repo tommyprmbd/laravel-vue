@@ -9,10 +9,11 @@
 @endsection
 
 @section('content')
+@role('petugas')
 <div id="controller">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card" >
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-8"> <a href="{{ url('transactions/create') }}" class="btn btn-default">
@@ -56,6 +57,7 @@
         </div>
     </div>
 </div>
+@endrole
 @endsection
 
 @section('js')
@@ -88,7 +90,7 @@
         {data: 'status', class: 'text-center', orderable: true},
         {render: function (index, row, data, meta){
             return `
-              <a href="{{ url('transactions/AddEdit') }}" class="btn btn-warning btn-sm">
+             <a class="btn btn-warning btn-sm" href="{{ url('transactions/'.$transaction->id.'/edit') }}">
               Edit
               </a>
               <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event,
