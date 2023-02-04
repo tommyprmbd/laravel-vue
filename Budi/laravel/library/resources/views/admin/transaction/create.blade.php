@@ -1,134 +1,94 @@
 @extends('layouts.admin')
-@section('header', 'transaction')
+@section('header', 'Transaction')
 
 @section('content')
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-6">
-            <!-- general form elements -->
-            <div class="card card-primary">
-              <div class="card-header">
-                <h3 class="card-title">Create/</h3><a class="" href="{{ url('transactions/edit') }}">Edit Transaction</a>
-              </div>
-              <!-- /.card-header -->
-              <!-- form start -->
-              <form action="{{ url('transactions') }}" method="post">
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Create</h3>
+            </div>
+            <form action="{{ url('transactions') }}" method="post">
                 @csrf
                 <div class="card-body">
 
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Anggota</label>
-                    <div class="col-sm-4">
-                        <div class="form-group">
+                    <div class="row mb-3">
+                        <label for="member" class="col-sm-2 col-form-label">Member</label>
+                        <div class="col-sm-10">
                             <select name="member_id" class="custom-select">
-                              @foreach ($members as $m)
-                                <option value="{{ $m->id }}">{{ $m->name }}</option>
-                              @endforeach
-                             </select>
-                        </div>
-                     </div>
-
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Tanggal Start/End</label>
-                         <div class="col-sm-4">
-                             <div class="input-group-prepend">
-                                 <input type="date" name="date_start" id="date_start" value="" class="form-control">
-                                 <span class="input-group-text">
-                                    <i class="far fa-calendar-alt"></i>
-                                  </span>
-                             </div>
-                         </div>
-                         <div class="col-sm-4">
-                             <div class="input-group-prepend">
-                                 <input type="date" name="date_end" id="date_end" class="form-control" value="">
-                                 <span class="input-group-text">
-                                    <i class="far fa-calendar-alt"></i>
-                                 </span>
-                             </div>
-                         </div>
-                    </div>
-
-                  <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Buku </label>
-                        <div class="col-sm-9">
-                          <div class="select2-blue">
-                          <select class="select2" name="buku[]" multiple="multiple" data-placeholder="Select Books" data-dropdown-css-class="select2-blue"style="width: 100%;">
-                                @foreach ($books as $tb)
-                          <option value="{{ $tb->id }}">{{ $tb->title }}</option>
+                                <option value="" selected disabled>Pilih</option>
+                                @foreach ($members as $m)
+                                    @if (old('member_id') == $m->id)
+                                        <option value="{{ $m->id }}" selected>{{ $m->name }}</option>
+                                    @else
+                                        <option value="{{ $m->id }}">{{ $m->name }}</option>
+                                    @endif
                                 @endforeach
-                         </select>
+                            </select>
+                            @error('member_id')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-                <!-- /.card-body -->
 
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="row mb-3">
+                        <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
+                        <div class="col-sm-4">
+                            <input type="date" name="date_start" id="date_start" value="{{ old('date_start') ?? $transaction->date_start }}" class="form-control">
+                            @error('date_start')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            s/d
+                        </div>
+                        <div class="col-sm-4">
+                            <input type="date" name="date_end" id="date_end" value="{{ old('date_end') ?? $transaction->date_end }}" class="form-control">
+                            @error('date_end')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="buku" class="col-sm-2 col-form-label">Buku</label>
+                        <div class="col-sm-10">
+                            <select class="form-select w-100" name="buku[]" size="6" multiple aria-label="multiple select example">
+                                <option selected disabled>Pilih</option>
+                                @foreach ($books as $tb)
+                                    <option value="{{ $tb->id }}">{{ $tb->title }}</option>
+                                @endforeach
+                            </select>
+                            @error('buku')
+                                <small class="text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label for="status" class="col-sm-2 col-form-label">Status</label>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" value="BELUM" checked>
+                                <label class="form-check-label">
+                                    Belum Dikembalikan
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="status" value="SUDAH">
+                                <label class="form-check-label">
+                                    Sudah Dikembalikan
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </form>
-            </div>
-          </div>
+                <div class="card-footer text-right">
+                    <button type="reset" class="btn btn-secondary text-white">Reset</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
         </div>
-            <!-- /.card -->
-@endsection
-
-@section('js')
-    <script type="text/javascript">
-        $(function() {
-            //Initialize Select2 Elements
-            $('.select2').select2()
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            })
-            //Date picker
-            $('#reservationdate').datetimepicker({
-                format: 'L'
-            });
-            //Date and time picker
-            $('#reservationdatetime').datetimepicker({
-                icons: {
-                    time: 'far fa-clock'
-                }
-            });
-            //Date range picker
-            $('#reservation').daterangepicker()
-            //Date range picker with time picker
-            $('#reservationtime').daterangepicker({
-                timePicker: true,
-                timePickerIncrement: 30,
-                locale: {
-                    format: 'MM/DD/YYYY hh:mm A'
-                }
-            })
-            //Date range as a button
-            $('#daterange-btn').daterangepicker({
-                    ranges: {
-                        'Today': [moment(), moment()],
-                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                        'This Month': [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1,
-                            'month').endOf('month')]
-                    },
-                    startDate: moment().subtract(29, 'days'),
-                    endDate: moment()
-                },
-                function(start, end) {
-                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format(
-                        'MMMM D, YYYY'))
-                }
-            )
-            //Timepicker
-            $('#timepicker').datetimepicker({
-                format: 'LT'
-            })
-            $("input[data-bootstrap-switch]").each(function() {
-                $(this).bootstrapSwitch('state', $(this).prop('checked'));
-            })
-        });
-    </script>
+    </div>
+</div>
 @endsection

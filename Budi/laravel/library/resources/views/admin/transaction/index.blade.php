@@ -162,8 +162,7 @@
         {data: 'status', class: 'text-center', orderable: true},
         {render: function (index, row, data, meta){
             return `
-             <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event,
-              ${meta.row})">
+             <a href="/transactions/${data.id}/edit" class="btn btn-warning btn-sm">
               Edit
               </a>
               <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event,
