@@ -100,7 +100,7 @@
                 <label>Nama Peminjam</label>
                 <div class="col-sm-4">
                         <div class="form-group">
-                            <select name="nama_peminjam" class="custom-select" :value="data.nama_peminjam">
+                            <select name="nama_peminjam" id="nama_peminjam" class="custom-select" >
                               @foreach ($members as $m)
                                 <option value="{{ $m->id }}">{{ $m->name }}</option>
                               @endforeach
@@ -112,7 +112,7 @@
               <div class="from-group">
                 <label>Status</label>
                 <br>
-                <input type="radio" name="status" id="sudah" :value="!!data.status==''?'P' : data.status" checked><label>Sudah Dikembalikan</label> 
+                <input type="radio" name="status" id="sudah" :value="!!data.status==''?'P' : data.status" checked><label>Sudah Dikembalikan</label><br>
                 <input type="radio" name="status" id="belum" :value="!!data.status==''?'L' : data.status" ><label>Belum dikembalikan</label>
                 <br>
               </div>

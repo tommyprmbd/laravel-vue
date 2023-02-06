@@ -193,7 +193,7 @@ class TransactionController extends Controller
      */
     public function edit(transaction $transaction)
     {
-        return view('admin.transaction.edit', compact('transaction'));
+        // return view('admin.transaction.edit', compact('transaction'));
     }
 
     /**
@@ -205,16 +205,16 @@ class TransactionController extends Controller
      */
     public function update(Request $request, transaction $transaction)
     {
-        // $this->validate($request,[
-        //     'name' => ['required'],
-        //     'email' => ['required'],
-        //     'phone_number' => ['required'],
-        //     'address' => ['required'],
-        // ]);
+        $this->validate($request,[
+            'date_start' => ['required'],
+            'date_end' => ['required'],
+            'member_id' => ['required'],
+            'status' => ['required'],
+        ]);
 
-        // $transaction->update($request->all());
+        $transaction->update($request->all());
 
-        // return redirect('transactions');
+        return redirect('transactions');
     }
 
     /**
