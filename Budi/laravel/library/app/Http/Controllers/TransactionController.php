@@ -193,7 +193,13 @@ class TransactionController extends Controller
      */
     public function edit(transaction $transaction)
     {
+<<<<<<< HEAD
         // return view('admin.transaction.edit', compact('transaction'));
+=======
+        $members = member::get();
+        $books = Book::where('qty', '!=', 0)->get();
+        return view('admin.transaction.edit', compact('transaction','members','books'));
+>>>>>>> c94494238092aa9d1f69ce84752e03867cf979f5
     }
 
     /**
@@ -206,15 +212,80 @@ class TransactionController extends Controller
     public function update(Request $request, transaction $transaction)
     {
         $this->validate($request,[
+<<<<<<< HEAD
             'date_start' => ['required'],
             'date_end' => ['required'],
             'member_id' => ['required'],
             'status' => ['required'],
         ]);
+=======
+            'member_id' => ['required'],
+            'date_start' => ['required'],
+            'date_end' => ['required'],
+            'buku' => ['required','array'],
+            'buku.*' => ['required','int','min:1']
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $transaction->member_id = $request->get('member_id');
+            $transaction->date_start = $request->get('date_start');
+            $transaction->date_end = $request->get('date_end');
+            $transaction->status = $request->get('status');
+            $transaction->update();
+
+            $current = TransactionDetail::where('transaction_id','=',$transaction->id)->get();
+            $books = $request->get('buku');
+
+            foreach ($current as $tranDtl) {
+                if (!in_array($tranDtl->book_id, $books)) {
+                    $bookId = $tranDtl->book_id;
+                    $delete = $tranDtl->delete();
+
+                    if ($delete) {
+                        $bookObj = Book::find($bookId);
+                        $bookObj->qty += 1;
+                        $bookObj->save();
+                    }
+                }
+            }
+
+            $currentBook = TransactionDetail::where('transaction_id','=',$transaction->id)->pluck('book_id')->toArray();
+            foreach ($books as $book) {
+                if (!in_array($book, $currentBook)) {
+                    $dtl = TransactionDetail::create([
+                        'transaction_id' => $transaction->id,
+                        'book_id' => $book,
+                        'qty' => 1
+                    ]);
+
+                    if ($dtl) {
+                        $bookObj = Book::find($book);
+                        $bookObj->qty -= 1;
+                        $bookObj->save();
+                    }
+                }
+            }
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+        }
+        DB::commit();
+        // $this->validate($request,[
+        //     'name' => ['required'],
+        //     'email' => ['required'],
+        //     'phone_number' => ['required'],
+        //     'address' => ['required'],
+        // ]);
+>>>>>>> c94494238092aa9d1f69ce84752e03867cf979f5
 
         $transaction->update($request->all());
 
+<<<<<<< HEAD
         return redirect('transactions');
+=======
+        return redirect()->route('transactions.index')->with('success', 'Data berhasil diperbarui');
+>>>>>>> c94494238092aa9d1f69ce84752e03867cf979f5
     }
 
     /**
@@ -225,7 +296,16 @@ class TransactionController extends Controller
      */
     public function destroy(transaction $transaction)
     {
-        // $transaction->delete();
+        DB::beginTransaction();
+        try {
+            foreach ($transaction->TransactionDetail as $dtl) {
+                $dtl->delete();
+            }
+            $transaction->delete();
+        } catch (\Throwable $th) {
+            DB::rollBack();
+        }
+        DB::commit();
     }
 
     public function test_spatie()
