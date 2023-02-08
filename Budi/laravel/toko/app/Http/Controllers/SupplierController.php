@@ -14,7 +14,16 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.supplier');
+    }
+
+    public function api(Request $request)
+    { 
+        $suppliers = supplier::all();
+
+        $datatables = datatables()->of($suppliers)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -35,7 +44,9 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Supplier::create($request->all());
+
+         return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
@@ -69,7 +80,15 @@ class SupplierController extends Controller
      */
     public function update(Request $request, Supplier $supplier)
     {
-        //
+        $this->validate($request,[
+            'name' => ['required'],
+            'address' => ['required'],
+            'phone_number' => ['required'],
+        ]);
+
+        $supplier->update($request->all());
+
+        return redirect('suppliers');
     }
 
     /**
@@ -80,6 +99,6 @@ class SupplierController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        //
+         $supplier->delete();
     }
 }

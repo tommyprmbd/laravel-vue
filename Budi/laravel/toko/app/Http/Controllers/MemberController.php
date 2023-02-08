@@ -14,7 +14,17 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        
+        return view('admin.member');
+    }
+
+     public function api(Request $request)
+    { 
+        $members = member::all();
+
+        $datatables = datatables()->of($members)->addIndexColumn();
+
+        return $datatables->make(true);
     }
 
     /**
@@ -35,7 +45,9 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         member::create($request->all());
+
+         return response()->json('Data berhasil disimpan', 200);
     }
 
     /**
@@ -69,7 +81,17 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+        $this->validate($request,[
+            'name' => ['required'],
+            'member_code' => ['required'],
+            'phone_number' => ['required'],
+            'address' => ['required'],
+            'email' => ['required'],
+        ]);
+
+        $member->update($request->all());
+
+        return redirect('members');
     }
 
     /**
@@ -80,6 +102,6 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
     }
 }

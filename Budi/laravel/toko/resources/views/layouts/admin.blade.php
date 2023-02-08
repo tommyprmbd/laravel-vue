@@ -14,6 +14,9 @@
   <link rel="stylesheet" href="{{ asset('assets/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
+  <!-- bootstrap -->
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous"> -->
+
   @yield('css')
 
 </head>
@@ -160,16 +163,17 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
               <li class="nav-item">
                 <a href="{{ url('home') }}" class="nav-link {{ request()->is('home') ? 'active' : '' }}">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="nav-icon fas fa-home"></i>
                   <p>Home</p>
                 </a>
               </li>
 
           <li class="nav-item">
             <a href="{{ url('categories') }}" class="nav-link {{ request()->is('categories') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-book-open"></i>
               <p>
                 Category
                 <span class="right badge badge-danger">New</span>
@@ -178,9 +182,73 @@
           </li>
           <li class="nav-item">
             <a href="{{ url('products') }}" class="nav-link {{ request()->is('products') ? 'active' : '' }}">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-shopping-cart"></i>
               <p>
                 Product
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('members') }}" class="nav-link {{ request()->is('members') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                Member
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('suppliers') }}" class="nav-link {{ request()->is('suppliers') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-truck"></i>
+              <p>
+                Supplier
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('pengeluarans') }}" class="nav-link {{ request()->is('pengeluarans') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-paper-plane"></i>
+              <p>
+                Pengeluaran
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{{ url('sales') }}" class="nav-link {{ request()->is('sales') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-clipboard"></i>
+              <p>
+                Sales
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('sale_details') }}" class="nav-link {{ request()->is('sale_details') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+                Sale Detail
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('purchases') }}" class="nav-link {{ request()->is('purchases') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-money-bill"></i>
+              <p>
+                Purchase
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('purchase_details') }}" class="nav-link {{ request()->is('purchase_details') ? 'active' : '' }}">
+              <i class="nav-icon fas fa-list"></i>
+              <p>
+                Purchase Detail
                 <span class="right badge badge-danger">New</span>
               </p>
             </a>
@@ -255,6 +323,9 @@
 {{-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> --}}
 <!-- Select2 -->
 <script src="{{ asset('assets/plugins/select2/js/select2.full.min.js') }}"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script> -->
 @yield('js')
 
 </body>

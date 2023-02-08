@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id');
+            $table->string('product_kode')->unique();
             $table->string('name', 64);
             $table->string('brand', 64);
             $table->integer('harga_beli');

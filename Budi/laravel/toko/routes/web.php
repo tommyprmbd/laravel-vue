@@ -23,4 +23,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/products', App\Http\Controllers\ProductController::class);
 Route::resource('/categories', App\Http\Controllers\CategoryController::class);
+Route::resource('/members', App\Http\Controllers\MemberController::class);
+Route::resource('/suppliers', App\Http\Controllers\SupplierController::class);
+Route::resource('/pengeluarans', App\Http\Controllers\PengeluaranController::class);
+
 Route::get('/api/categories',[App\Http\Controllers\CategoryController::class, 'api']);
+Route::get('/api/products',[App\Http\Controllers\ProductController::class, 'api']);
+Route::get('/api/members',[App\Http\Controllers\MemberController::class, 'api']);
+Route::get('/api/suppliers',[App\Http\Controllers\SupplierController::class, 'api']);
+Route::get('/api/pengeluarans',[App\Http\Controllers\PengeluaranController::class, 'api']);
